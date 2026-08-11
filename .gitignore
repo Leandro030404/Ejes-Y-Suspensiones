@@ -1,0 +1,11 @@
+# Paquetes generados para subir a hostings (se regeneran)
+*.zip
+
+# Configuración local del editor/entorno
+.claude/
+
+# Basura del sistema
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
