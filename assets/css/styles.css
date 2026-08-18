@@ -721,6 +721,8 @@ p:last-child{ margin-bottom:0; }
 .info-card:hover .info-card__icon{ background:var(--red); color:#fff; transform:rotate(-8deg); }
 .info-card__icon--wsp{ background:rgba(37,211,102,.14); color:#128c40; }
 .info-card:hover .info-card__icon--wsp{ background:var(--wsp); color:#fff; }
+.info-card__icon--google{ background:rgba(245,166,35,.16); color:#c47d00; }
+.info-card:hover .info-card__icon--google{ background:#f5a623; color:#fff; }
 .info-card__body{ display:flex; flex-direction:column; gap:.15rem; min-width:0; }
 .info-card__body strong{
   font-size:.72rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--txt-soft);
