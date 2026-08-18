@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página no encontrada | EyS Ejes y Suspensiones</title>
+<meta name="description" content="La página que buscás no existe. Volvé al inicio de EyS - Ejes y Suspensiones o escribinos por WhatsApp.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0e1319">
+<link rel="icon" type="image/png" href="/assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+  .e404{
+    min-height:100svh; display:grid; place-items:center; text-align:center;
+    padding:3rem 0; background:var(--ink); color:var(--txt-invert);
+    position:relative; overflow:hidden;
+  }
+  .e404__bg{ position:absolute; inset:0; z-index:0; }
+  .e404__bg img{ width:100%; height:100%; object-fit:cover; filter:saturate(.5) brightness(.28); }
+  .e404__bg::after{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center, transparent, var(--ink) 78%); }
+  .e404__inner{ position:relative; z-index:2; max-width:620px; padding-inline:1.5rem; }
+  .e404__num{
+    font-family:var(--font-head); font-size:clamp(6rem,22vw,13rem); line-height:.85;
+    color:var(--red); margin-bottom:.6rem; letter-spacing:-.02em;
+  }
+  .e404 h1{ font-size:clamp(1.6rem,4.5vw,2.6rem); text-transform:uppercase; color:#fff; margin-bottom:.9rem; }
+  .e404 p{ color:var(--txt-invert-soft); line-height:1.75; margin-bottom:2rem; }
+  .e404__actions{ display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center; margin-bottom:2.5rem; }
+  .e404__links{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; }
+  .e404__links a{
+    padding:.5rem 1.05rem; border-radius:99px; font-size:.85rem;
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.13);
+    color:var(--txt-invert-soft); transition:all .3s var(--ease-out);
+  }
+  .e404__links a:hover{ background:var(--red); border-color:var(--red); color:#fff; transform:translateY(-3px); }
+  @media (max-width:640px){ .e404__actions .btn{ flex:1 1 100%; } }
+</style>
+</head>
+<body>
+
+<main class="e404">
+  <div class="e404__bg" aria-hidden="true">
+    <img src="/assets/img/taller-interior.jpg" width="1600" height="1201" decoding="async" alt="">
+  </div>
+
+  <div class="e404__inner">
+    <p class="e404__num">404</p>
+    <h1>Esta página no existe</h1>
+    <p>
+      Puede que el enlace esté mal escrito o que la página se haya movido.
+      Si buscabas algo puntual, escribinos y te ayudamos.
+    </p>
+
+    <div class="e404__actions">
+      <a href="/" class="btn btn--primary btn--lg">Ir al inicio</a>
+      <a href="https://wa.me/5493416855469?text=Hola%2C%20quisiera%20hacer%20una%20consulta" target="_blank" rel="noopener" class="btn btn--wsp btn--lg">Escribir por WhatsApp</a>
+    </div>
+
+    <div class="e404__links">
+      <a href="/tercer-eje/">Tercer eje neumático</a>
+      <a href="/escalabilidad/">Escalabilidad</a>
+      <a href="/ejes-autodireccionales/">Ejes autodireccionales</a>
+      <a href="/ejes-trunnion/">Ejes trunnion</a>
+      <a href="/freno-abs/">Sistema de freno ABS</a>
+      <a href="/#contacto">Contacto</a>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

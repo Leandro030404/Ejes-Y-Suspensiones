@@ -853,6 +853,15 @@ p:last-child{ margin-bottom:0; }
 .lightbox__nav:hover{ transform:translateY(-50%) scale(1.1); }
 body.no-scroll{ overflow:hidden; }
 
+/* ── Fotos panorámicas ────────────────────────────────
+   Algunas fotos son mucho más anchas que su contenedor (la del trunnion
+   es 3,6:1 dentro de una caja 4:3). Con "cover" se recortarían casi por
+   completo, así que se muestran enteras sobre fondo oscuro. */
+img.is-wide{
+  object-fit:contain !important;
+  background:#0f141a;
+}
+
 /* ── 23. Animaciones de aparición ─────────────────── */
 /* Sólo se ocultan si JS está activo: sin JS el contenido se ve siempre. */
 .js .reveal{
