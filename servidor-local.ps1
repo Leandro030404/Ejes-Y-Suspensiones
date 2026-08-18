@@ -42,6 +42,11 @@ while ($listener.IsListening) {
     if ($path -eq '/' -or $path -eq '') { $path = '/index.html' }
     $file = Join-Path $Root ($path.TrimStart('/') -replace '/', '\')
 
+    # Igual que GitHub Pages: si la ruta es una carpeta, servir su index.html
+    if (Test-Path -LiteralPath $file -PathType Container) {
+      $file = Join-Path $file 'index.html'
+    }
+
     if (Test-Path -LiteralPath $file -PathType Leaf) {
       $ext   = [System.IO.Path]::GetExtension($file).ToLower()
       $ct    = $types[$ext]; if (-not $ct) { $ct = 'application/octet-stream' }

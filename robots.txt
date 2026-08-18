@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ejesysuspensiones.com.ar/sitemap.xml
