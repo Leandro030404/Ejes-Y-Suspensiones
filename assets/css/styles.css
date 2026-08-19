@@ -430,6 +430,8 @@ p:last-child{ margin-bottom:0; }
   content:''; position:absolute; inset:0; /* toda la tarjeta queda clickeable */
 }
 .product__cta{ margin-top:1.4rem; }
+.components__links{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.6rem; }
+@media (max-width:640px){ .components__links .btn{ flex:1 1 100%; } }
 
 /* ── 12. Franja de certificaciones ────────────────── */
 .certs{ position:relative; padding:clamp(4rem,8vw,6.5rem) 0; overflow:hidden; color:#fff; }
