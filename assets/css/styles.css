@@ -918,10 +918,26 @@ body.no-scroll{ overflow:hidden; }
 /* ── Fotos panorámicas ────────────────────────────────
    Algunas fotos son mucho más anchas que su contenedor (la del trunnion
    es 3,6:1 dentro de una caja 4:3). Con "cover" se recortarían casi por
-   completo, así que se muestran enteras sobre fondo oscuro. */
+   completo, así que se muestran enteras. Para que las bandas sobrantes
+   no queden vacías, detrás va la misma foto ampliada y desenfocada. */
 img.is-wide{
   object-fit:contain !important;
-  background:#0f141a;
+  background:transparent;
+}
+/* Se usa ::before porque ::after ya está ocupado en estos contenedores
+   (el degradado del hover en los productos, el borde en la mini galería). */
+.media--wide{ position:relative; isolation:isolate; background:var(--ink-3); }
+.media--wide::before{
+  content:''; position:absolute; inset:0; z-index:0;
+  background-image:var(--foto);
+  background-size:cover;
+  background-position:center;
+  filter:blur(26px) saturate(1.25) brightness(.5);
+  transform:scale(1.2);          /* evita que el desenfoque deje bordes claros */
+}
+.media--wide > img.is-wide{
+  position:relative; z-index:1;
+  padding:6px;                   /* un respiro entre la foto y el borde */
 }
 
 /* ── 23. Animaciones de aparición ─────────────────── */
