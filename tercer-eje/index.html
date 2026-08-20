@@ -21,9 +21,8 @@
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/BarlowCondensed-700-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/styles.css">
 <script>document.documentElement.className += ' js';</script>
 
@@ -123,7 +122,7 @@
 
 <section class="subhero">
   <div class="subhero__bg" aria-hidden="true">
-    <img src="../assets/img/trabajo-3er-eje-tractor.jpg" width="1280" height="960" decoding="async" alt="">
+    <img src="../assets/img/trabajo-3er-eje-tractor.jpg" srcset="../assets/img/trabajo-3er-eje-tractor-800.jpg 800w, ../assets/img/trabajo-3er-eje-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="">
   </div>
   <div class="container">
     <div class="subhero__inner">
@@ -204,10 +203,10 @@
 
       <div class="page-gallery">
         <button data-lightbox data-img="../assets/img/trabajo-3er-eje-tractor.jpg" data-caption="3er eje neumático en unidad tractora — Cliente Rivosecchi" aria-label="Ampliar foto del tercer eje en tractor">
-          <img src="../assets/img/trabajo-3er-eje-tractor.jpg" width="1280" height="960" decoding="async" alt="Unidad tractora con tercer eje neumático colocado" loading="lazy">
+          <img src="../assets/img/trabajo-3er-eje-tractor.jpg" srcset="../assets/img/trabajo-3er-eje-tractor-800.jpg 800w, ../assets/img/trabajo-3er-eje-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Unidad tractora con tercer eje neumático colocado" loading="lazy">
         </button>
         <button data-lightbox data-img="../assets/img/trabajo-3er-eje-chasis.jpg" data-caption="3er eje neumático en chasis con envainado — Cliente Germat S.R.L." aria-label="Ampliar foto del tercer eje en chasis">
-          <img src="../assets/img/trabajo-3er-eje-chasis.jpg" width="1600" height="1201" decoding="async" alt="Chasis con tercer eje neumático y refuerzo envainado" loading="lazy">
+          <img src="../assets/img/trabajo-3er-eje-chasis.jpg" srcset="../assets/img/trabajo-3er-eje-chasis-800.jpg 800w, ../assets/img/trabajo-3er-eje-chasis.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Chasis con tercer eje neumático y refuerzo envainado" loading="lazy">
         </button>
         <button data-lightbox data-img="../assets/img/conjunto-suspension.jpg" data-caption="Conjunto de suspensión neumática completo" aria-label="Ampliar foto del conjunto de suspensión">
           <img src="../assets/img/conjunto-suspension.jpg" width="590" height="546" decoding="async" alt="Conjunto de suspensión neumática" loading="lazy">

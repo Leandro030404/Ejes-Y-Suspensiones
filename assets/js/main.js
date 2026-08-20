@@ -34,17 +34,26 @@
   var wspFloat  = $('#wspFloat');
   var ticking   = false;
 
+  // El alto de la página y del viewport se guardan en cache.
+  // Leerlos dentro del scroll, después de haber movido el hero, obligaba al
+  // navegador a recalcular la maquetación en cada cuadro (redistribución forzada).
+  var maxScroll = 0;
+  var altoVista = 0;
+
+  function medir() {
+    altoVista = window.innerHeight;
+    maxScroll = document.documentElement.scrollHeight - altoVista;
+  }
+
   function onScroll() {
-    var y   = window.scrollY || window.pageYOffset;
-    var doc = document.documentElement;
-    var max = doc.scrollHeight - window.innerHeight;
+    var y = window.scrollY || window.pageYOffset;
 
     if (header) header.classList.toggle('is-stuck', y > 40);
-    if (progress) progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    if (progress) progress.style.width = (maxScroll > 0 ? (y / maxScroll) * 100 : 0) + '%';
     if (wspFloat) wspFloat.classList.toggle('is-visible', y > 420);
 
     // Parallax suave del hero (sólo cuando está a la vista)
-    if (heroImg && !reduced && y < window.innerHeight * 1.2) {
+    if (heroImg && !reduced && y < altoVista * 1.2) {
       heroImg.style.transform = 'translate3d(0,' + (y * 0.28) + 'px,0)';
     }
     ticking = false;
@@ -53,6 +62,20 @@
   window.addEventListener('scroll', function () {
     if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
   }, { passive: true });
+
+  window.addEventListener('resize', function () { medir(); onScroll(); }, { passive: true });
+
+  // El alto de la página cambia al aparecer las imágenes diferidas o al
+  // desplegarse las preguntas frecuentes. Un ResizeObserver vuelve a medir
+  // sólo cuando eso pasa, en vez de hacerlo en cada cuadro del scroll.
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(function () { medir(); });
+    ro.observe(document.body);
+  } else {
+    window.addEventListener('load', medir);
+  }
+
+  medir();
   onScroll();
 
   /* ── 4. Menú móvil ─────────────────────────────── */
