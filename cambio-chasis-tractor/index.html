@@ -21,9 +21,8 @@
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/BarlowCondensed-700-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/styles.css">
 <script>document.documentElement.className += ' js';</script>
 
@@ -104,7 +103,7 @@
 
 <section class="subhero">
   <div class="subhero__bg" aria-hidden="true">
-    <img src="../assets/img/trabajo-cambio-chasis-tractor.jpg" width="1280" height="960" decoding="async" alt="">
+    <img src="../assets/img/trabajo-cambio-chasis-tractor.jpg" srcset="../assets/img/trabajo-cambio-chasis-tractor-800.jpg 800w, ../assets/img/trabajo-cambio-chasis-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="">
   </div>
   <div class="container">
     <div class="subhero__inner">
@@ -175,13 +174,13 @@
       <h2>Fotos</h2>
       <div class="page-gallery">
         <button data-lightbox data-img="../assets/img/trabajo-cambio-chasis-tractor.jpg" data-caption="Unidad convertida de chasis a tractor — Cliente SL Natural S.R.L." aria-label="Ampliar foto">
-          <img src="../assets/img/trabajo-cambio-chasis-tractor.jpg" width="1280" height="960" decoding="async" alt="Unidad convertida de chasis a tractor" loading="lazy">
+          <img src="../assets/img/trabajo-cambio-chasis-tractor.jpg" srcset="../assets/img/trabajo-cambio-chasis-tractor-800.jpg 800w, ../assets/img/trabajo-cambio-chasis-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Unidad convertida de chasis a tractor" loading="lazy">
         </button>
         <button data-lightbox data-img="../assets/img/plato-arrastre.jpg" data-caption="Plato de arrastre homologado montado sobre el chasis" aria-label="Ampliar foto">
-          <img src="../assets/img/plato-arrastre.jpg" width="1600" height="1201" decoding="async" alt="Plato de arrastre homologado" loading="lazy">
+          <img src="../assets/img/plato-arrastre.jpg" srcset="../assets/img/plato-arrastre-800.jpg 800w, ../assets/img/plato-arrastre.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Plato de arrastre homologado" loading="lazy">
         </button>
         <button data-lightbox data-img="../assets/img/taller-interior.jpg" data-caption="Taller de EyS con unidades en proceso" aria-label="Ampliar foto">
-          <img src="../assets/img/taller-interior.jpg" width="1600" height="1201" decoding="async" alt="Interior del taller de EyS" loading="lazy">
+          <img src="../assets/img/taller-interior.jpg" srcset="../assets/img/taller-interior-800.jpg 800w, ../assets/img/taller-interior.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Interior del taller de EyS" loading="lazy">
         </button>
       </div>
 

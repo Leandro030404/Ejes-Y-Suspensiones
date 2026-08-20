@@ -21,9 +21,8 @@
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/BarlowCondensed-700-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/styles.css">
 <script>document.documentElement.className += ' js';</script>
 
@@ -104,7 +103,7 @@
 
 <section class="subhero">
   <div class="subhero__bg" aria-hidden="true">
-    <img src="../assets/img/trabajo-carroceria.jpg" width="1156" height="868" decoding="async" alt="">
+    <img src="../assets/img/trabajo-carroceria.jpg" srcset="../assets/img/trabajo-carroceria-800.jpg 800w, ../assets/img/trabajo-carroceria.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="">
   </div>
   <div class="container">
     <div class="subhero__inner">
@@ -171,13 +170,13 @@
       <h2>Fotos</h2>
       <div class="page-gallery">
         <button data-lightbox data-img="../assets/img/trabajo-carroceria.jpg" data-caption="Carrocería adaptada y colocada — Cliente particular" aria-label="Ampliar foto">
-          <img src="../assets/img/trabajo-carroceria.jpg" width="1156" height="868" decoding="async" alt="Carrocería adaptada y colocada sobre chasis" loading="lazy">
+          <img src="../assets/img/trabajo-carroceria.jpg" srcset="../assets/img/trabajo-carroceria-800.jpg 800w, ../assets/img/trabajo-carroceria.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Carrocería adaptada y colocada sobre chasis" loading="lazy">
         </button>
         <button data-lightbox data-img="../assets/img/trabajo-semirremolque.jpg" data-caption="Semirremolque con suspensión neumática direccional — Cliente Guagliano" aria-label="Ampliar foto">
-          <img src="../assets/img/trabajo-semirremolque.jpg" width="1280" height="960" decoding="async" alt="Semirremolque con suspensión neumática direccional" loading="lazy">
+          <img src="../assets/img/trabajo-semirremolque.jpg" srcset="../assets/img/trabajo-semirremolque-800.jpg 800w, ../assets/img/trabajo-semirremolque.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Semirremolque con suspensión neumática direccional" loading="lazy">
         </button>
         <button data-lightbox data-img="../assets/img/taller-chasis.jpg" data-caption="Chasis en proceso en el taller" aria-label="Ampliar foto">
-          <img src="../assets/img/taller-chasis.jpg" width="1280" height="960" decoding="async" alt="Chasis en proceso de modificación" loading="lazy">
+          <img src="../assets/img/taller-chasis.jpg" srcset="../assets/img/taller-chasis-800.jpg 800w, ../assets/img/taller-chasis.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Chasis en proceso de modificación" loading="lazy">
         </button>
       </div>
 
