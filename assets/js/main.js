@@ -360,7 +360,7 @@
 
       var url = 'https://wa.me/' + WSP_NUMBER + '?text=' + encodeURIComponent(buildMessage());
       window.open(url, '_blank', 'noopener');
-      if (window.eysConversion) window.eysConversion('whatsapp');
+      if (window.eysConversion) window.eysConversion('formulario');
       if (status) { status.style.color = '#12813f'; status.textContent = '¡Listo! Se abrió WhatsApp con tu consulta. Confirmá el envío allí.'; }
     });
 
@@ -403,8 +403,9 @@
 
 /* ---------- Medicion de conversiones (Google Ads) ---------- */
 (function () {
-  var WSP = 'AW-18384322870/Ce0DCLWOyeYcELaCqr5E';   // Contacto
-  var TEL = 'AW-18384322870/qlJcCLiOyeYcELaCqr5E';   // Contacto (1)
+  var WSP  = 'AW-18384322870/Ce0DCLWOyeYcELaCqr5E';   // Clic en WhatsApp
+  var TEL  = 'AW-18384322870/qlJcCLiOyeYcELaCqr5E';   // Clic en telefono
+  var FORM = 'AW-18384322870/KAwDCPnq1-YcELaCqr5E';   // Envio del formulario
 
   function enviar(destino, extra) {
     if (typeof window.gtag !== 'function') return;
@@ -416,6 +417,7 @@
   // Lo usa el formulario, que abre WhatsApp sin pasar por un enlace
   window.eysConversion = function (tipo) {
     if (tipo === 'telefono') enviar(TEL, { value: 1.0, currency: 'ARS' });
+    else if (tipo === 'formulario') enviar(FORM, { value: 1.0, currency: 'ARS' });
     else enviar(WSP);
   };
 
