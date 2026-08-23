@@ -69,7 +69,10 @@ _originales/                  NO versionado (gitignore). Fotos en alta,
 ## Reglas del proyecto
 
 1. **Sin frameworks, sin build.** HTML/CSS/JS plano. No agregar dependencias.
-2. **Cero recursos externos.** Las tipografías se sirven localmente. No volver a Google Fonts.
+2. **Cero recursos externos, con UNA excepción.** Las tipografías se sirven localmente;
+   no volver a Google Fonts. La única excepción autorizada es la etiqueta de Google Ads
+   (`googletagmanager.com`), que se sumó el 23/08/2026 para medir conversiones. Es
+   inevitable: sin ese script no hay medición posible.
 3. **No inventar datos.** Todo el contenido sale del sitio original. Nunca inventar
    plazos de entrega, precios ni especificaciones técnicas. Si falta un dato, pedirlo.
 4. **Verificar antes de decir que está hecho.** Levantar el servidor local, medir, y
@@ -141,6 +144,37 @@ Referencia: 11 al 20 de agosto de 2026, ~ARS 38.000, 450+ clics, **1 sola consul
 (cotización de USD 10.000, sin cerrar). Ojo: durante esos días la ficha decía
 "Taller de automóviles", así que esos números están contaminados.
 
+### Medición de conversiones (instalada el 23/08/2026)
+
+Etiqueta de Google: **AW-18384322870** (también figura como GT-WF7L533N).
+Va en el `<head>` de las 11 páginas.
+
+Dos acciones de conversión, las dos de tipo "evento manual" y marcadas como
+**principales** (sirven para optimizar, no solo para mirar):
+
+| Acción en Google Ads | Qué mide | Etiqueta |
+|---|---|---|
+| `Contacto` | clic en cualquier botón de WhatsApp + envío del formulario | `Ce0DCLWOyeYcELaCqr5E` |
+| `Contacto (1)` | clic en cualquier botón de teléfono | `qlJcCLiOyeYcELaCqr5E` |
+
+El código vive al final de `assets/js/main.js`. Es **un solo oyente delegado**:
+cubre los 66 enlaces de WhatsApp y los 3 de teléfono sin tocar el HTML botón por
+botón. El formulario llama a `window.eysConversion('whatsapp')` a mano, porque
+abre WhatsApp con `window.open` y no pasa por un enlace.
+
+**Trampa:** las etiquetas se leen mal a ojo — la `l` minúscula y la `I` mayúscula
+son idénticas en la tipografía de Google Ads, y el `0` con la `O` también. Si hay
+que volver a sacarlas, usar el botón "Copiar" de Google Ads, nunca transcribirlas.
+
+**Ojo con el número de teléfono:** Google ofrece medir las llamadas de verdad,
+pero eso reemplaza el número del sitio por uno de reenvío de Google. El usuario
+lo rechazó explícitamente. Medimos el clic, no la llamada.
+
+**No se pudo:** el objetivo "Contacto" no se podía marcar como predeterminado de
+la cuenta mientras su única acción venía del Perfil de Empresa (fuente "Otros",
+que Google no deja usar para optimizar). Se destrabó solo al crear estas dos
+acciones del sitio.
+
 ### Search Console
 Verificado con `google6f4817e7bc103d04.html` en la raíz. **No borrar ese archivo.**
 Sitemap enviado. Falta reenviarlo tras sumar las 5 páginas nuevas.
@@ -157,9 +191,6 @@ Sitemap enviado. Falta reenviarlo tras sumar las 5 páginas nuevas.
 - [ ] Reenviar el sitemap en Search Console
 
 **Ofrecido y no hecho:**
-- [ ] Instrumentar el sitio para medir conversiones (clics en WhatsApp, teléfono,
-      envío del formulario). Es lo que más falta: hoy no se sabe de dónde vienen
-      las consultas.
 - [ ] Artículos sobre homologación y normativa. El usuario tiene que validar la
       parte normativa; no inventarla.
 
