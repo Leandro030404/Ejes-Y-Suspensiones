@@ -154,7 +154,7 @@ Tres acciones de conversión, todas de tipo "evento manual" y marcadas como
 
 | Acción en Google Ads | Qué mide | Etiqueta |
 |---|---|---|
-| `Contacto` | clic en cualquier botón de WhatsApp | `Ce0DCLWOyeYcELaCqr5E` |
+| `Clic en WhatsApp` | clic en cualquier botón de WhatsApp | `Ce0DCLWOyeYcELaCqr5E` |
 | `Clic en telefono` | clic en cualquier botón de teléfono | `qlJcCLiOyeYcELaCqr5E` |
 | `Enviar formulario de clientes potenciales` | envío del formulario de la portada | `KAwDCPnq1-YcELaCqr5E` |
 
