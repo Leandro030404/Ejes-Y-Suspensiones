@@ -149,13 +149,17 @@ Referencia: 11 al 20 de agosto de 2026, ~ARS 38.000, 450+ clics, **1 sola consul
 Etiqueta de Google: **AW-18384322870** (también figura como GT-WF7L533N).
 Va en el `<head>` de las 11 páginas.
 
-Dos acciones de conversión, las dos de tipo "evento manual" y marcadas como
+Tres acciones de conversión, todas de tipo "evento manual" y marcadas como
 **principales** (sirven para optimizar, no solo para mirar):
 
 | Acción en Google Ads | Qué mide | Etiqueta |
 |---|---|---|
-| `Contacto` | clic en cualquier botón de WhatsApp + envío del formulario | `Ce0DCLWOyeYcELaCqr5E` |
-| `Contacto (1)` | clic en cualquier botón de teléfono | `qlJcCLiOyeYcELaCqr5E` |
+| `Contacto` | clic en cualquier botón de WhatsApp | `Ce0DCLWOyeYcELaCqr5E` |
+| `Clic en telefono` | clic en cualquier botón de teléfono | `qlJcCLiOyeYcELaCqr5E` |
+| `Enviar formulario de clientes potenciales` | envío del formulario de la portada | `KAwDCPnq1-YcELaCqr5E` |
+
+El envío del formulario cuenta **solo** como formulario, no también como WhatsApp,
+aunque termine abriendo WhatsApp: sería contar dos veces a la misma persona.
 
 El código vive al final de `assets/js/main.js`. Es **un solo oyente delegado**:
 cubre los 66 enlaces de WhatsApp y los 3 de teléfono sin tocar el HTML botón por
