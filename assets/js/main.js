@@ -360,6 +360,7 @@
 
       var url = 'https://wa.me/' + WSP_NUMBER + '?text=' + encodeURIComponent(buildMessage());
       window.open(url, '_blank', 'noopener');
+      if (window.eysConversion) window.eysConversion('whatsapp');
       if (status) { status.style.color = '#12813f'; status.textContent = '¡Listo! Se abrió WhatsApp con tu consulta. Confirmá el envío allí.'; }
     });
 
@@ -398,4 +399,32 @@
     });
   });
 
+})();
+
+/* ---------- Medicion de conversiones (Google Ads) ---------- */
+(function () {
+  var WSP = 'AW-18384322870/Ce0DCLWOyeYcELaCqr5E';   // Contacto
+  var TEL = 'AW-18384322870/qlJcCLiOyeYcELaCqr5E';   // Contacto (1)
+
+  function enviar(destino, extra) {
+    if (typeof window.gtag !== 'function') return;
+    var datos = { send_to: destino };
+    if (extra) { for (var k in extra) datos[k] = extra[k]; }
+    window.gtag('event', 'conversion', datos);
+  }
+
+  // Lo usa el formulario, que abre WhatsApp sin pasar por un enlace
+  window.eysConversion = function (tipo) {
+    if (tipo === 'telefono') enviar(TEL, { value: 1.0, currency: 'ARS' });
+    else enviar(WSP);
+  };
+
+  // Un solo oyente cubre los 66 botones de WhatsApp y los 3 de telefono
+  document.addEventListener('click', function (e) {
+    var a = (e.target && e.target.closest) ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('wa.me') !== -1) window.eysConversion('whatsapp');
+    else if (href.lastIndexOf('tel:', 0) === 0) window.eysConversion('telefono');
+  }, true);
 })();
