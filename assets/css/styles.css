@@ -1277,3 +1277,26 @@ html:not(.js) .preloader{ display:none; }
   }
   .rating__text{ justify-items:center; }
 }
+
+/* Tarjetas de resenas. El texto es de los clientes: se muestra tal cual esta
+   publicado en Google. Ojo, NO marcarlas como Review/aggregateRating en los
+   datos estructurados: Google no permite republicar como propias las resenas
+   de su propia ficha. */
+.reviews{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1.1rem; margin-top:1.3rem;
+}
+.review{
+  display:flex; flex-direction:column; gap:.85rem; margin:0;
+  padding:1.6rem; border-radius:var(--radius);
+  background:var(--paper-2); border:1px solid var(--line);
+}
+.review__stars{ color:#f5a623; font-size:.95rem; letter-spacing:.12em; }
+.review__text{
+  flex:1; margin:0; font-size:.94rem; line-height:1.75; color:var(--txt);
+}
+.review footer{ display:grid; gap:.15rem; }
+.review__author{
+  font-style:normal; font-weight:700; font-size:.88rem; color:var(--ink);
+}
+.review__meta{ font-size:.76rem; color:var(--txt-soft); line-height:1.45; }
