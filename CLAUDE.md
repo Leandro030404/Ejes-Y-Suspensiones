@@ -116,6 +116,12 @@ de hover y degradado). Para capas nuevas usar `::before`.
 - **Portada one-page + 10 páginas de servicio.** La portada convierte; las páginas
   internas posicionan en Google.
 - **Formulario sin backend**: valida y abre WhatsApp o el cliente de correo.
+- **Los enlaces de WhatsApp piden datos** (24/08/2026). El mensaje precargado ya no es
+  solo "Hola, quisiera consultar por X": suma una linea `Unidad (marca, modelo y año):`
+  para que el primer mensaje ya sirva. Los genericos ademas piden `Trabajo que necesito:`.
+  **No volver a los saludos vacios** — el taller perdia tiempo preguntando lo basico.
+  El formulario de la portada tiene el campo `unidad` (opcional) con el mismo fin.
+  Son 55 enlaces; se editan con un script, no a mano.
 - **4 fotos son panorámicas** (hasta 3,6:1) y no entran en los recuadros. Se muestran
   completas con un fondo desenfocado de la propia foto (clase `media--wide` + `--foto`).
 - **Sin `latin-ext`** en las tipografías: el español entra completo en `latin`.

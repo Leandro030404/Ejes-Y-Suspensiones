@@ -339,6 +339,7 @@
     ];
     if (v('telefono')) lines.push('Teléfono: ' + v('telefono'));
     lines.push('Motivo: ' + v('motivo'));
+    if (v('unidad')) lines.push('Unidad: ' + v('unidad'));
     lines.push('');
     lines.push('Mensaje:');
     lines.push(v('mensaje'));
