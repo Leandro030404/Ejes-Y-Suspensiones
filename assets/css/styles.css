@@ -125,6 +125,8 @@ p:last-child{ margin-bottom:0; }
 ::selection{ background:var(--red); color:#fff; }
 
 .container{ width:min(100% - 2.5rem, var(--container)); margin-inline:auto; }
+/* Para bloques de lectura larga (preguntas frecuentes): renglones mas cortos. */
+.container--narrow{ width:min(100% - 2.5rem, 860px); margin-inline:auto; }
 .accent{ color:var(--red); }
 
 .skip-link{
@@ -418,6 +420,8 @@ p:last-child{ margin-bottom:0; }
 .section--light{ background:var(--paper); }
 .section--dark{ background:var(--ink); color:var(--txt-invert); }
 .section--map{ background:var(--paper-2); }
+/* Gris suave: separa las preguntas frecuentes del formulario, que es blanco. */
+.section--soft{ background:var(--paper-2); }
 
 .section--dark::before{
   content:''; position:absolute; inset:0; pointer-events:none; opacity:.45;
@@ -733,6 +737,9 @@ p:last-child{ margin-bottom:0; }
   padding:2.4rem; border-radius:var(--radius);
   background:var(--paper); border:1px solid var(--line); box-shadow:var(--sh-sm);
 }
+/* El formulario tambien vive en las 10 paginas de servicio, ahi sin la
+   columna de datos al costado: va solo y centrado. */
+.form-single{ max-width:760px; margin-inline:auto; }
 .field{ margin-bottom:1.25rem; }
 .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
 .field label{
@@ -935,7 +942,7 @@ img.is-wide{
   filter:blur(26px) saturate(1.25) brightness(.5);
   transform:scale(1.2);          /* evita que el desenfoque deje bordes claros */
 }
-.media--wide > img.is-wide{
+.media--wide img.is-wide{
   position:relative; z-index:1;
   padding:6px;                   /* un respiro entre la foto y el borde */
 }
@@ -1235,4 +1242,38 @@ html:not(.js) .preloader{ display:none; }
   .header,.wsp-float,.hero__scroll,.scroll-progress,.preloader,.lightbox,.filters,.marquee{ display:none !important; }
   .section--dark,.certs,.cta-final,.footer{ background:#fff !important; color:#000 !important; }
   .js .reveal{ opacity:1 !important; transform:none !important; }
+}
+
+
+/* ── 30. Puntuacion de Google ──────────────────────
+   Las resenas viven en la ficha de Google, no en el sitio. Aca se muestra
+   la puntuacion y se enlaza a la ficha, que es donde el visitante las cree.
+   NO marcar esto como aggregateRating en los datos estructurados: Google
+   penaliza publicar como propias las resenas de su propia ficha. */
+.rating{
+  display:grid; grid-template-columns:auto 1fr; gap:2.5rem; align-items:center;
+  padding:2.4rem; border-radius:var(--radius);
+  background:var(--paper-2); border:1px solid var(--line);
+}
+.rating__score{
+  display:grid; justify-items:center; gap:.15rem;
+  padding-right:2.5rem; border-right:1px solid var(--line);
+}
+.rating__score strong{
+  font-family:var(--font-head); font-size:clamp(3.2rem,8vw,4.6rem);
+  line-height:1; color:var(--ink);
+}
+.rating__stars{ font-size:1.35rem; letter-spacing:.15em; color:#f5a623; }
+.rating__count{ font-size:.82rem; font-weight:600; color:var(--txt-soft); white-space:nowrap; }
+.rating__text .sec-head__kicker{ margin-bottom:.6rem; }
+.rating__text .sec-head__title{ font-size:clamp(1.6rem,3.6vw,2.3rem); }
+.rating__text .sec-head__sub{ margin-bottom:1.4rem; }
+
+@media (max-width:760px){
+  .rating{ grid-template-columns:1fr; gap:1.6rem; padding:1.8rem; text-align:center; }
+  .rating__score{
+    padding-right:0; border-right:0; padding-bottom:1.4rem;
+    border-bottom:1px solid var(--line);
+  }
+  .rating__text{ justify-items:center; }
 }

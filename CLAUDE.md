@@ -46,7 +46,8 @@ CLAUDE.md                     este archivo
 assets/css/styles.css         todo el CSS, con @font-face al inicio
 assets/js/main.js             sin dependencias
 assets/fonts/                 6 woff2 propios (Barlow Condensed + Inter, subset latin)
-assets/img/                   fotos + versiones -800.jpg para móvil
+assets/img/                   fotos + versiones -800 para móvil, cada una en
+                              .jpg (respaldo) y .webp (lo que baja el navegador)
 
 tercer-eje/                   \
 escalabilidad/                 |
@@ -106,6 +107,21 @@ los nombres de las imágenes una vez. Usar array de hashtables.
 IntersectionObserver, animaciones ni scroll. Para medir hay que anular transiciones
 o forzar los estados a mano. Las capturas de pantalla no funcionan.
 
+**Envolver un `<img>` en `<picture>` rompe los selectores de hijo directo.** Al pasar
+a WebP se metió un `<picture>` entre el contenedor y la foto, y `.media--wide > img.is-wide`
+dejó de aplicar (las 4 panorámicas quedaban recortadas). Se cambió a selector de
+descendiente. Era el único `>` sobre `img` en toda la hoja — si se agrega otro, ojo.
+
+**El panel de previsualización no decodifica las imágenes.** Corre en segundo plano,
+así que `naturalWidth` da **0** aunque la foto esté perfecta. No es un error del
+sitio: para comprobar de verdad hay que cargarlas a mano con `new Image()`, o pedir
+el archivo con `fetch` y decodificarlo con `createImageBitmap`.
+
+**`servidor-local.ps1` atiende de a una petición por vez.** Con 21 fotos en la
+portada se satura y las peticiones quedan colgadas. Para medir conviene levantar un
+servidor de Node en la carpeta temporal; el `.ps1` sigue sirviendo para que el
+usuario mire el sitio.
+
 **`.mini-gallery__item::after` y `.product__media::after` ya están ocupados** (borde
 de hover y degradado). Para capas nuevas usar `::before`.
 
@@ -122,6 +138,23 @@ de hover y degradado). Para capas nuevas usar `::before`.
   **No volver a los saludos vacios** — el taller perdia tiempo preguntando lo basico.
   El formulario de la portada tiene el campo `unidad` (opcional) con el mismo fin.
   Son 55 enlaces; se editan con un script, no a mano.
+- **Fotos en WebP** (24/08/2026). Las 41 imágenes están duplicadas en `.webp` y se
+  sirven con `<picture>`: el navegador baja la webp y, si es muy viejo y no la
+  entiende, cae sola en el `.jpg`. Son 28% menos de bytes (4,67 → 3,36 MB en la
+  portada) sin diferencia visible. Las webp se generan con `sharp` (calidad 80),
+  que **no** es dependencia del sitio: se usa una sola vez desde una carpeta aparte.
+  El visor de fotos ampliadas usa webp con respaldo por `onerror` en `main.js`.
+- **El formulario está en las 11 páginas** (24/08/2026), no solo en la portada. El
+  que llega desde un anuncio a una página de servicio ya no tiene que volver al
+  inicio para escribir. En cada página el desplegable "Motivo" viene con su trabajo
+  ya elegido. El JS es el mismo (`#contactForm`), no hubo que tocarlo.
+  El desplegable pasó de 8 a **11 motivos**: uno por página de servicio, más
+  "Consulta general". Antes tres trabajos no tenían opción propia.
+- **Portada: bloque de opiniones + preguntas frecuentes** (24/08/2026). El bloque de
+  opiniones muestra la puntuación y enlaza a la ficha; la puntuación y la cantidad
+  **están escritas a mano en el HTML**, hay que actualizarlas cuando cambien.
+  Las preguntas frecuentes de la portada llevan su `FAQPage` en datos estructurados,
+  igual que las 10 internas.
 - **4 fotos son panorámicas** (hasta 3,6:1) y no entran en los recuadros. Se muestran
   completas con un fondo desenfocado de la propia foto (clase `media--wide` + `--foto`).
 - **Sin `latin-ext`** en las tipografías: el español entra completo en `latin`.
@@ -214,6 +247,10 @@ Sitemap enviado. Falta reenviarlo tras sumar las 5 páginas nuevas.
 - [x] ~~Plazo del tercer eje~~ → **10 a 15 días hábiles** (dato del 24/08/2026).
       Ya está en /tercer-eje/ y en los textos de Ads.
 - [ ] Plazos de entrega de los otros 9 trabajos → para sumarlos a sus páginas
+- [ ] **3 o 4 textos de reseñas de Google** (nombre + comentario) → el bloque de
+      opiniones ya está en la portada, pero solo con la puntuación y el enlace.
+      Con los textos se suman las tarjetas. **No inventarlos**: tienen que ser
+      los de la ficha, copiados tal cual.
 - [ ] Fotos antes/después de la misma unidad → para armar un deslizador
 - [ ] Llegar a 30 reseñas en Google (**hoy 20, con 5,0** — subieron desde 15)
 - [x] ~~Llamar a soporte por el destino de la campaña~~ → resuelto creando una campaña nueva (24/08/2026)
