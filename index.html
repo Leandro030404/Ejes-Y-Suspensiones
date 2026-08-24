@@ -29,8 +29,8 @@
 
 <!-- La foto del hero es el elemento más grande de la portada: precargarla
      adelanta el momento en que la página se ve completa (métrica LCP). -->
-<link rel="preload" as="image" href="assets/img/taller-interior.jpg"
-      imagesrcset="assets/img/taller-interior-800.jpg 800w, assets/img/taller-interior.jpg 1600w"
+<link rel="preload" as="image" type="image/webp" href="assets/img/taller-interior.webp"
+      imagesrcset="assets/img/taller-interior-800.webp 800w, assets/img/taller-interior.webp 1600w"
       imagesizes="(max-width: 900px) 100vw, 1200px" fetchpriority="high">
 
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/BarlowCondensed-700-latin.woff2" crossorigin>
@@ -38,6 +38,20 @@
 <link rel="stylesheet" href="assets/css/styles.css">
 <script>document.documentElement.className += ' js';</script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"¿Los trabajos quedan homologados?","acceptedAnswer":{"@type":"Answer","text":"Sí. El taller cuenta con las habilitaciones y certificaciones de CENT, CNTSV y AITA. La unidad se entrega con la documentación correspondiente para el registro."}},
+    {"@type":"Question","name":"¿Reciben unidades de otras provincias?","acceptedAnswer":{"@type":"Answer","text":"Sí. El taller está en Av. San Diego 2103, Villa Gobernador Gálvez, Santa Fe, y recibimos unidades de todo el país."}},
+    {"@type":"Question","name":"¿Cuánto tarda la colocación de un tercer eje?","acceptedAnswer":{"@type":"Answer","text":"Aproximadamente entre 10 y 15 días hábiles, según el estado de la unidad y el alcance de la modificación. El plazo se confirma al presupuestar."}},
+    {"@type":"Question","name":"¿Los ejes y las suspensiones los fabrican ustedes?","acceptedAnswer":{"@type":"Answer","text":"Sí, son de fabricación propia. Somos continuadores de la fabricación de ejes autodireccionales y suspensiones neumáticas de Tafor S.A., y desarrollamos conjuntos para carretones con ejes de hasta 2.580 mm de trocha."}},
+    {"@type":"Question","name":"¿Fabrican también repuestos sueltos?","acceptedAnswer":{"@type":"Answer","text":"Sí. Fabricamos manotas, balancines fundidos y de chapa, tensores fijos y regulables, y pernos de balancín con temple por inducción."}},
+    {"@type":"Question","name":"¿Qué datos necesitan para pasarme un presupuesto?","acceptedAnswer":{"@type":"Answer","text":"La marca, el modelo y el año de la unidad, y el trabajo que necesitás. Se pueden enviar por el formulario del sitio, por WhatsApp o por teléfono, de lunes a viernes de 8 a 15."}}
+  ]
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -102,7 +116,10 @@
 <header class="header" id="header">
   <div class="header__inner container">
     <a href="#inicio" class="brand" aria-label="EyS Ejes y Suspensiones - Inicio">
-      <img src="assets/img/logo.png" width="88" height="88" decoding="async" alt="Logo EyS" class="brand__logo">
+      <picture>
+        <source type="image/webp" srcset="assets/img/logo.webp">
+        <img src="assets/img/logo.png" width="88" height="88" decoding="async" alt="Logo EyS" class="brand__logo">
+      </picture>
       <span class="brand__text">
         <strong>Ejes y Suspensiones</strong>
         <em>Trabajos certificados</em>
@@ -135,7 +152,10 @@
 <!-- ══════════ HERO ══════════ -->
 <section class="hero" id="inicio">
   <div class="hero__bg">
-    <img src="assets/img/taller-interior.jpg" srcset="assets/img/taller-interior-800.jpg 800w, assets/img/taller-interior.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Taller de EyS con unidades en proceso de modificación" class="hero__img" id="heroImg" fetchpriority="high">
+    <picture>
+      <source type="image/webp" srcset="assets/img/taller-interior-800.webp 800w, assets/img/taller-interior.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px">
+      <img src="assets/img/taller-interior.jpg" srcset="assets/img/taller-interior-800.jpg 800w, assets/img/taller-interior.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Taller de EyS con unidades en proceso de modificación" class="hero__img" id="heroImg" fetchpriority="high">
+    </picture>
     <div class="hero__scrim"></div>
     <div class="hero__grid-overlay" aria-hidden="true"></div>
   </div>
@@ -300,8 +320,11 @@
 
     <div class="products">
       <article class="product reveal">
-        <button class="product__media" data-lightbox data-img="assets/img/eje-carreton.jpg" data-caption="Eje autodireccional para carretones — trocha variable hasta 2.500 mm" aria-label="Ampliar foto de eje autodireccional para carretones">
-          <img src="assets/img/eje-carreton.jpg" srcset="assets/img/eje-carreton-800.jpg 800w, assets/img/eje-carreton.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Eje autodireccional para carretones con suspensión neumática" loading="lazy">
+        <button class="product__media" data-lightbox data-img="assets/img/eje-carreton.webp" data-caption="Eje autodireccional para carretones — trocha variable hasta 2.500 mm" aria-label="Ampliar foto de eje autodireccional para carretones">
+          <picture>
+            <source type="image/webp" srcset="assets/img/eje-carreton-800.webp 800w, assets/img/eje-carreton.webp 1280w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/eje-carreton.jpg" srcset="assets/img/eje-carreton-800.jpg 800w, assets/img/eje-carreton.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Eje autodireccional para carretones con suspensión neumática" loading="lazy">
+          </picture>
           <span class="product__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="product__body">
@@ -317,8 +340,11 @@
       </article>
 
       <article class="product product--rev reveal">
-        <button class="product__media" data-lightbox data-img="assets/img/eje-autodireccional-semi.jpg" data-caption="Eje autodireccional para semirremolques — puntas móviles, giro hasta 19°" aria-label="Ampliar foto de eje autodireccional para semirremolques">
-          <img src="assets/img/eje-autodireccional-semi.jpg" srcset="assets/img/eje-autodireccional-semi-800.jpg 800w, assets/img/eje-autodireccional-semi.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1200" decoding="async" alt="Eje autodireccional para semirremolques fabricado en el taller" loading="lazy">
+        <button class="product__media" data-lightbox data-img="assets/img/eje-autodireccional-semi.webp" data-caption="Eje autodireccional para semirremolques — puntas móviles, giro hasta 19°" aria-label="Ampliar foto de eje autodireccional para semirremolques">
+          <picture>
+            <source type="image/webp" srcset="assets/img/eje-autodireccional-semi-800.webp 800w, assets/img/eje-autodireccional-semi.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/eje-autodireccional-semi.jpg" srcset="assets/img/eje-autodireccional-semi-800.jpg 800w, assets/img/eje-autodireccional-semi.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1200" decoding="async" alt="Eje autodireccional para semirremolques fabricado en el taller" loading="lazy">
+          </picture>
           <span class="product__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="product__body">
@@ -334,8 +360,11 @@
       </article>
 
       <article class="product reveal">
-        <button class="product__media" data-lightbox data-img="assets/img/eje-en-fabricacion.jpg" data-caption="Eje autodireccional con centrado mecánico — aplicación agrícola" aria-label="Ampliar foto de eje con centrado mecánico">
-          <img src="assets/img/eje-en-fabricacion.jpg" srcset="assets/img/eje-en-fabricacion-800.jpg 800w, assets/img/eje-en-fabricacion.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Eje autodireccional con centrado mecánico en proceso de fabricación" loading="lazy">
+        <button class="product__media" data-lightbox data-img="assets/img/eje-en-fabricacion.webp" data-caption="Eje autodireccional con centrado mecánico — aplicación agrícola" aria-label="Ampliar foto de eje con centrado mecánico">
+          <picture>
+            <source type="image/webp" srcset="assets/img/eje-en-fabricacion-800.webp 800w, assets/img/eje-en-fabricacion.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/eje-en-fabricacion.jpg" srcset="assets/img/eje-en-fabricacion-800.jpg 800w, assets/img/eje-en-fabricacion.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Eje autodireccional con centrado mecánico en proceso de fabricación" loading="lazy">
+          </picture>
           <span class="product__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="product__body">
@@ -352,8 +381,11 @@
       </article>
 
       <article class="product product--rev reveal">
-        <button class="media--wide product__media" data-lightbox data-img="assets/img/trunnion-balancin-doble.jpg" data-caption="Trunnion balancín doble — carretones de capacidad de carga elevada" aria-label="Ampliar foto de trunnion balancín doble" style="--foto:url('/assets/img/trunnion-balancin-doble-800.jpg')">
-          <img src="assets/img/trunnion-balancin-doble.jpg" srcset="assets/img/trunnion-balancin-doble-800.jpg 800w, assets/img/trunnion-balancin-doble.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" class="is-wide" width="1600" height="442" decoding="async" alt="Eje trunnion balancín doble fabricado por EyS" loading="lazy">
+        <button class="media--wide product__media" data-lightbox data-img="assets/img/trunnion-balancin-doble.webp" data-caption="Trunnion balancín doble — carretones de capacidad de carga elevada" aria-label="Ampliar foto de trunnion balancín doble" style="--foto:url('/assets/img/trunnion-balancin-doble-800.webp')">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trunnion-balancin-doble-800.webp 800w, assets/img/trunnion-balancin-doble.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trunnion-balancin-doble.jpg" srcset="assets/img/trunnion-balancin-doble-800.jpg 800w, assets/img/trunnion-balancin-doble.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" class="is-wide" width="1600" height="442" decoding="async" alt="Eje trunnion balancín doble fabricado por EyS" loading="lazy">
+          </picture>
           <span class="product__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="product__body">
@@ -391,23 +423,41 @@
 
     <!-- Mini galería -->
     <div class="mini-gallery">
-      <button class="mini-gallery__item reveal" data-lightbox data-img="assets/img/manguetas.jpg" data-caption="Manguetas y puntas de eje mecanizadas" aria-label="Ampliar foto de manguetas">
-        <img src="assets/img/manguetas.jpg" srcset="assets/img/manguetas-800.jpg 800w, assets/img/manguetas.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1200" decoding="async" alt="Manguetas mecanizadas" loading="lazy">
+      <button class="mini-gallery__item reveal" data-lightbox data-img="assets/img/manguetas.webp" data-caption="Manguetas y puntas de eje mecanizadas" aria-label="Ampliar foto de manguetas">
+        <picture>
+          <source type="image/webp" srcset="assets/img/manguetas-800.webp 800w, assets/img/manguetas.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px">
+          <img src="assets/img/manguetas.jpg" srcset="assets/img/manguetas-800.jpg 800w, assets/img/manguetas.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1200" decoding="async" alt="Manguetas mecanizadas" loading="lazy">
+        </picture>
       </button>
-      <button class="mini-gallery__item reveal" style="--d:.08s" data-lightbox data-img="assets/img/trunnion-viga.jpg" data-caption="Viga trunnion terminada y pintada" aria-label="Ampliar foto de viga trunnion">
-        <img src="assets/img/trunnion-viga.jpg" srcset="assets/img/trunnion-viga-800.jpg 800w, assets/img/trunnion-viga.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Viga trunnion terminada" loading="lazy">
+      <button class="mini-gallery__item reveal" style="--d:.08s" data-lightbox data-img="assets/img/trunnion-viga.webp" data-caption="Viga trunnion terminada y pintada" aria-label="Ampliar foto de viga trunnion">
+        <picture>
+          <source type="image/webp" srcset="assets/img/trunnion-viga-800.webp 800w, assets/img/trunnion-viga.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px">
+          <img src="assets/img/trunnion-viga.jpg" srcset="assets/img/trunnion-viga-800.jpg 800w, assets/img/trunnion-viga.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Viga trunnion terminada" loading="lazy">
+        </picture>
       </button>
-      <button class="mini-gallery__item reveal" style="--d:.16s" data-lightbox data-img="assets/img/conjunto-suspension.jpg" data-caption="Conjunto de suspensión neumática completo" aria-label="Ampliar foto de conjunto de suspensión">
-        <img src="assets/img/conjunto-suspension.jpg" width="590" height="546" decoding="async" alt="Conjunto de suspensión neumática" loading="lazy">
+      <button class="mini-gallery__item reveal" style="--d:.16s" data-lightbox data-img="assets/img/conjunto-suspension.webp" data-caption="Conjunto de suspensión neumática completo" aria-label="Ampliar foto de conjunto de suspensión">
+        <picture>
+          <source type="image/webp" srcset="assets/img/conjunto-suspension.webp">
+          <img src="assets/img/conjunto-suspension.jpg" width="590" height="546" decoding="async" alt="Conjunto de suspensión neumática" loading="lazy">
+        </picture>
       </button>
-      <button class="media--wide mini-gallery__item reveal" data-lightbox data-img="assets/img/suspension-neumatica-eys.jpg" data-caption="Suspensión neumática EyS montada sobre caballete" aria-label="Ampliar foto de suspensión neumática EyS" style="--d:.24s; --foto:url('/assets/img/suspension-neumatica-eys-800.jpg')">
-        <img src="assets/img/suspension-neumatica-eys.jpg" srcset="assets/img/suspension-neumatica-eys-800.jpg 800w, assets/img/suspension-neumatica-eys.jpg 1009w" sizes="(max-width: 900px) 100vw, 1200px" class="is-wide" width="1009" height="523" decoding="async" alt="Suspensión neumática marca EyS" loading="lazy">
+      <button class="media--wide mini-gallery__item reveal" data-lightbox data-img="assets/img/suspension-neumatica-eys.webp" data-caption="Suspensión neumática EyS montada sobre caballete" aria-label="Ampliar foto de suspensión neumática EyS" style="--d:.24s; --foto:url('/assets/img/suspension-neumatica-eys-800.webp')">
+        <picture>
+          <source type="image/webp" srcset="assets/img/suspension-neumatica-eys-800.webp 800w, assets/img/suspension-neumatica-eys.webp 1009w" sizes="(max-width: 900px) 100vw, 1200px">
+          <img src="assets/img/suspension-neumatica-eys.jpg" srcset="assets/img/suspension-neumatica-eys-800.jpg 800w, assets/img/suspension-neumatica-eys.jpg 1009w" sizes="(max-width: 900px) 100vw, 1200px" class="is-wide" width="1009" height="523" decoding="async" alt="Suspensión neumática marca EyS" loading="lazy">
+        </picture>
       </button>
-      <button class="media--wide mini-gallery__item reveal" data-lightbox data-img="assets/img/trunnion-neumatico-simple.jpg" data-caption="Trunnion neumático simple para carretones" aria-label="Ampliar foto de trunnion neumático simple" style="--d:.32s; --foto:url('/assets/img/trunnion-neumatico-simple-800.jpg')">
-        <img src="assets/img/trunnion-neumatico-simple.jpg" srcset="assets/img/trunnion-neumatico-simple-800.jpg 800w, assets/img/trunnion-neumatico-simple.jpg 1045w" sizes="(max-width: 900px) 100vw, 1200px" class="is-wide" width="1045" height="412" decoding="async" alt="Trunnion neumático simple" loading="lazy">
+      <button class="media--wide mini-gallery__item reveal" data-lightbox data-img="assets/img/trunnion-neumatico-simple.webp" data-caption="Trunnion neumático simple para carretones" aria-label="Ampliar foto de trunnion neumático simple" style="--d:.32s; --foto:url('/assets/img/trunnion-neumatico-simple-800.webp')">
+        <picture>
+          <source type="image/webp" srcset="assets/img/trunnion-neumatico-simple-800.webp 800w, assets/img/trunnion-neumatico-simple.webp 1045w" sizes="(max-width: 900px) 100vw, 1200px">
+          <img src="assets/img/trunnion-neumatico-simple.jpg" srcset="assets/img/trunnion-neumatico-simple-800.jpg 800w, assets/img/trunnion-neumatico-simple.jpg 1045w" sizes="(max-width: 900px) 100vw, 1200px" class="is-wide" width="1045" height="412" decoding="async" alt="Trunnion neumático simple" loading="lazy">
+        </picture>
       </button>
-      <button class="mini-gallery__item reveal" style="--d:.4s" data-lightbox data-img="assets/img/plato-arrastre.jpg" data-caption="Plato de arrastre homologado montado sobre chasis" aria-label="Ampliar foto de plato de arrastre">
-        <img src="assets/img/plato-arrastre.jpg" srcset="assets/img/plato-arrastre-800.jpg 800w, assets/img/plato-arrastre.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Plato de arrastre homologado" loading="lazy">
+      <button class="mini-gallery__item reveal" style="--d:.4s" data-lightbox data-img="assets/img/plato-arrastre.webp" data-caption="Plato de arrastre homologado montado sobre chasis" aria-label="Ampliar foto de plato de arrastre">
+        <picture>
+          <source type="image/webp" srcset="assets/img/plato-arrastre-800.webp 800w, assets/img/plato-arrastre.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px">
+          <img src="assets/img/plato-arrastre.jpg" srcset="assets/img/plato-arrastre-800.jpg 800w, assets/img/plato-arrastre.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Plato de arrastre homologado" loading="lazy">
+        </picture>
       </button>
     </div>
   </div>
@@ -431,8 +481,11 @@
 
     <div class="works" id="works">
       <article class="work reveal" data-cat="chasis">
-        <button class="media--wide work__media" data-lightbox data-img="assets/img/trabajo-escalabilidad.jpg" data-caption="Escalabilidad — Cliente Katerynicz" aria-label="Ampliar foto del trabajo de escalabilidad" style="--foto:url('/assets/img/trabajo-escalabilidad.jpg')">
-          <img src="assets/img/trabajo-escalabilidad.jpg" class="is-wide" width="700" height="345" decoding="async" alt="Semirremolque tanque con chasis alargado" loading="lazy">
+        <button class="media--wide work__media" data-lightbox data-img="assets/img/trabajo-escalabilidad.webp" data-caption="Escalabilidad — Cliente Katerynicz" aria-label="Ampliar foto del trabajo de escalabilidad" style="--foto:url('/assets/img/trabajo-escalabilidad.webp')">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-escalabilidad.webp">
+            <img src="assets/img/trabajo-escalabilidad.jpg" class="is-wide" width="700" height="345" decoding="async" alt="Semirremolque tanque con chasis alargado" loading="lazy">
+          </picture>
           <span class="work__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="work__body">
@@ -443,8 +496,11 @@
       </article>
 
       <article class="work reveal" style="--d:.08s" data-cat="eje">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-3er-eje-tractor.jpg" data-caption="3er eje neumático en unidad tractora — Cliente Rivosecchi" aria-label="Ampliar foto del 3er eje en tractor">
-          <img src="assets/img/trabajo-3er-eje-tractor.jpg" srcset="assets/img/trabajo-3er-eje-tractor-800.jpg 800w, assets/img/trabajo-3er-eje-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Unidad tractora con tercer eje neumático colocado" loading="lazy">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-3er-eje-tractor.webp" data-caption="3er eje neumático en unidad tractora — Cliente Rivosecchi" aria-label="Ampliar foto del 3er eje en tractor">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-3er-eje-tractor-800.webp 800w, assets/img/trabajo-3er-eje-tractor.webp 1280w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-3er-eje-tractor.jpg" srcset="assets/img/trabajo-3er-eje-tractor-800.jpg 800w, assets/img/trabajo-3er-eje-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Unidad tractora con tercer eje neumático colocado" loading="lazy">
+          </picture>
           <span class="work__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="work__body">
@@ -455,8 +511,11 @@
       </article>
 
       <article class="work reveal" style="--d:.16s" data-cat="eje">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-3er-eje-chasis.jpg" data-caption="3er eje neumático en chasis — Cliente Germat S.R.L." aria-label="Ampliar foto del 3er eje en chasis">
-          <img src="assets/img/trabajo-3er-eje-chasis.jpg" srcset="assets/img/trabajo-3er-eje-chasis-800.jpg 800w, assets/img/trabajo-3er-eje-chasis.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Chasis con tercer eje neumático y refuerzo envainado" loading="lazy">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-3er-eje-chasis.webp" data-caption="3er eje neumático en chasis — Cliente Germat S.R.L." aria-label="Ampliar foto del 3er eje en chasis">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-3er-eje-chasis-800.webp 800w, assets/img/trabajo-3er-eje-chasis.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-3er-eje-chasis.jpg" srcset="assets/img/trabajo-3er-eje-chasis-800.jpg 800w, assets/img/trabajo-3er-eje-chasis.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Chasis con tercer eje neumático y refuerzo envainado" loading="lazy">
+          </picture>
           <span class="work__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="work__body">
@@ -467,8 +526,11 @@
       </article>
 
       <article class="work reveal" style="--d:.24s" data-cat="chasis">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-cambio-chasis-tractor.jpg" data-caption="Cambio de chasis a tractor — Cliente SL Natural S.R.L." aria-label="Ampliar foto de cambio de chasis a tractor">
-          <img src="assets/img/trabajo-cambio-chasis-tractor.jpg" srcset="assets/img/trabajo-cambio-chasis-tractor-800.jpg 800w, assets/img/trabajo-cambio-chasis-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Unidad convertida de chasis a tractor" loading="lazy">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-cambio-chasis-tractor.webp" data-caption="Cambio de chasis a tractor — Cliente SL Natural S.R.L." aria-label="Ampliar foto de cambio de chasis a tractor">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-cambio-chasis-tractor-800.webp 800w, assets/img/trabajo-cambio-chasis-tractor.webp 1280w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-cambio-chasis-tractor.jpg" srcset="assets/img/trabajo-cambio-chasis-tractor-800.jpg 800w, assets/img/trabajo-cambio-chasis-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Unidad convertida de chasis a tractor" loading="lazy">
+          </picture>
           <span class="work__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="work__body">
@@ -479,8 +541,11 @@
       </article>
 
       <article class="work reveal" style="--d:.32s" data-cat="chasis">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-carroceria.jpg" data-caption="Colocación de carrocería — Cliente particular" aria-label="Ampliar foto de colocación de carrocería">
-          <img src="assets/img/trabajo-carroceria.jpg" srcset="assets/img/trabajo-carroceria-800.jpg 800w, assets/img/trabajo-carroceria.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Carrocería adaptada y colocada sobre chasis" loading="lazy">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-carroceria.webp" data-caption="Colocación de carrocería — Cliente particular" aria-label="Ampliar foto de colocación de carrocería">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-carroceria-800.webp 800w, assets/img/trabajo-carroceria.webp 1156w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-carroceria.jpg" srcset="assets/img/trabajo-carroceria-800.jpg 800w, assets/img/trabajo-carroceria.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Carrocería adaptada y colocada sobre chasis" loading="lazy">
+          </picture>
           <span class="work__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="work__body">
@@ -491,8 +556,11 @@
       </article>
 
       <article class="work reveal" style="--d:.4s" data-cat="susp">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-semirremolque.jpg" data-caption="Modificación de semirremolque — Cliente Guagliano" aria-label="Ampliar foto de modificación de semirremolque">
-          <img src="assets/img/trabajo-semirremolque.jpg" srcset="assets/img/trabajo-semirremolque-800.jpg 800w, assets/img/trabajo-semirremolque.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Semirremolque con suspensión neumática direccional" loading="lazy">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-semirremolque.webp" data-caption="Modificación de semirremolque — Cliente Guagliano" aria-label="Ampliar foto de modificación de semirremolque">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-semirremolque-800.webp 800w, assets/img/trabajo-semirremolque.webp 1280w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-semirremolque.jpg" srcset="assets/img/trabajo-semirremolque-800.jpg 800w, assets/img/trabajo-semirremolque.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Semirremolque con suspensión neumática direccional" loading="lazy">
+          </picture>
           <span class="work__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="work__body">
@@ -503,8 +571,11 @@
       </article>
 
       <article class="work reveal" style="--d:.48s" data-cat="susp">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-freno-abs.jpg" data-caption="Sistema de freno ABS — Cliente Katerynicz" aria-label="Ampliar foto del sistema de freno ABS">
-          <img src="assets/img/trabajo-freno-abs.jpg" srcset="assets/img/trabajo-freno-abs-800.jpg 800w, assets/img/trabajo-freno-abs.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Sistema de freno ABS instalado con registros automáticos" loading="lazy">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-freno-abs.webp" data-caption="Sistema de freno ABS — Cliente Katerynicz" aria-label="Ampliar foto del sistema de freno ABS">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-freno-abs-800.webp 800w, assets/img/trabajo-freno-abs.webp 1156w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-freno-abs.jpg" srcset="assets/img/trabajo-freno-abs-800.jpg 800w, assets/img/trabajo-freno-abs.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Sistema de freno ABS instalado con registros automáticos" loading="lazy">
+          </picture>
           <span class="work__zoom" aria-hidden="true">＋</span>
         </button>
         <div class="work__body">
@@ -527,7 +598,10 @@
 
     <div class="about">
       <div class="about__media reveal">
-        <img src="assets/img/taller-frente.jpg" srcset="assets/img/taller-frente-800.jpg 800w, assets/img/taller-frente.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Frente del taller EyS en Av. San Diego 2103, Villa Gobernador Gálvez" loading="lazy">
+        <picture>
+          <source type="image/webp" srcset="assets/img/taller-frente-800.webp 800w, assets/img/taller-frente.webp 1156w" sizes="(max-width: 900px) 100vw, 1200px">
+          <img src="assets/img/taller-frente.jpg" srcset="assets/img/taller-frente-800.jpg 800w, assets/img/taller-frente.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Frente del taller EyS en Av. San Diego 2103, Villa Gobernador Gálvez" loading="lazy">
+        </picture>
         <div class="about__badge">
           <strong>2005</strong>
           <span>en Av. San Diego 2103</span>
@@ -603,6 +677,65 @@
 </section>
 
 <!-- ══════════ CONTACTO ══════════ -->
+<!-- ══════════ OPINIONES ══════════ -->
+<!-- OJO: la puntuación y la cantidad de reseñas están escritas a mano.
+     Si cambian en Google, hay que actualizarlas acá también. -->
+<section class="section section--light" id="opiniones">
+  <div class="container">
+    <div class="rating reveal">
+      <div class="rating__score">
+        <strong>5,0</strong>
+        <span class="rating__stars" aria-hidden="true">★★★★★</span>
+        <span class="rating__count">20 reseñas en Google</span>
+      </div>
+      <div class="rating__text">
+        <p class="sec-head__kicker">Opiniones</p>
+        <h2 class="sec-head__title">Lo que dicen <span class="accent">nuestros clientes</span></h2>
+        <p class="sec-head__sub">Transportistas y empresas califican el trabajo del taller en nuestra ficha de Google. Están publicadas tal como las escribieron, sin filtro.</p>
+        <a class="btn btn--primary btn--lg" href="https://maps.app.goo.gl/zkaP3enqU7rfY4Uk7" target="_blank" rel="noopener">Ver las reseñas en Google</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PREGUNTAS FRECUENTES ══════════ -->
+<section class="section section--soft" id="preguntas">
+  <div class="container container--narrow">
+    <header class="sec-head reveal">
+      <p class="sec-head__kicker">Preguntas frecuentes</p>
+      <h2 class="sec-head__title">Antes de <span class="accent">consultar</span></h2>
+      <p class="sec-head__sub">Las dudas que más nos llegan por WhatsApp, respondidas.</p>
+    </header>
+
+    <div class="faq reveal">
+      <details>
+        <summary>¿Los trabajos quedan homologados?</summary>
+        <div class="faq__body"><p>Sí. El taller cuenta con las habilitaciones y certificaciones de CENT (Consultora Ejecutiva Nacional del Transporte), CNTSV (Comisión Nacional del Tránsito y la Seguridad Vial) y AITA (Asociación de Ingenieros y Técnicos del Automotor). La unidad se entrega con la documentación correspondiente para el registro.</p></div>
+      </details>
+      <details>
+        <summary>¿Reciben unidades de otras provincias?</summary>
+        <div class="faq__body"><p>Sí. El taller está en Av. San Diego 2103, Villa Gobernador Gálvez, Santa Fe, y recibimos unidades de todo el país. Escribinos por WhatsApp para coordinar la entrada.</p></div>
+      </details>
+      <details>
+        <summary>¿Cuánto tarda la colocación de un tercer eje?</summary>
+        <div class="faq__body"><p>Aproximadamente <strong>entre 10 y 15 días hábiles</strong>, según el estado de la unidad y el alcance de la modificación. El plazo se confirma al presupuestar, una vez vista la unidad.</p></div>
+      </details>
+      <details>
+        <summary>¿Los ejes y las suspensiones los fabrican ustedes?</summary>
+        <div class="faq__body"><p>Sí, son de fabricación propia. Somos continuadores de la fabricación de ejes autodireccionales y suspensiones neumáticas que llevaba a cabo Tafor S.A., y desarrollamos conjuntos para carretones con ejes de hasta 2.580 mm de trocha.</p></div>
+      </details>
+      <details>
+        <summary>¿Fabrican también repuestos sueltos?</summary>
+        <div class="faq__body"><p>Sí. Fabricamos manotas, balancines fundidos y de chapa, tensores fijos y regulables, y pernos de balancín con temple por inducción, en una extensa variedad de opciones.</p></div>
+      </details>
+      <details>
+        <summary>¿Qué datos necesitan para pasarme un presupuesto?</summary>
+        <div class="faq__body"><p>La marca, el modelo y el año de la unidad, y el trabajo que necesitás. Con eso ya podemos orientarte. Podés mandarlos por el formulario de acá abajo, por WhatsApp o por teléfono, de lunes a viernes de 8 a 15.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section class="section section--light" id="contacto">
   <div class="container">
     <header class="sec-head reveal">
@@ -635,13 +768,16 @@
         <div class="field">
           <label for="motivo">Motivo de la consulta</label>
           <select id="motivo" name="motivo">
-            <option value="Consulta general">Consulta general</option>
+            <option value="Consulta general" selected>Consulta general</option>
             <option value="Colocación de 3er eje">Colocación de 3er eje</option>
             <option value="Escalabilidad / modificación de chasis">Escalabilidad / modificación de chasis</option>
+            <option value="Cambio de chasis a tractor">Cambio de chasis a tractor</option>
+            <option value="Carrocerías y semirremolques">Carrocerías y semirremolques</option>
+            <option value="Sistema de freno ABS">Sistema de freno ABS</option>
             <option value="Fabricación de ejes autodireccionales">Fabricación de ejes autodireccionales</option>
             <option value="Ejes trunnion / carretones">Ejes trunnion / carretones</option>
+            <option value="Suspensiones neumáticas">Suspensiones neumáticas</option>
             <option value="Trenes rodantes agrícolas">Trenes rodantes agrícolas</option>
-            <option value="Sistema de freno ABS">Sistema de freno ABS</option>
             <option value="Repuestos y componentes">Repuestos y componentes</option>
           </select>
         </div>
@@ -777,7 +913,10 @@
   <div class="container footer__grid">
     <div class="footer__col">
       <a href="#inicio" class="brand brand--footer">
-        <img src="assets/img/logo.png" width="88" height="88" decoding="async" alt="Logo EyS">
+        <picture>
+          <source type="image/webp" srcset="assets/img/logo.webp">
+          <img src="assets/img/logo.png" width="88" height="88" decoding="async" alt="Logo EyS">
+        </picture>
         <span class="brand__text">
           <strong>Ejes y Suspensiones</strong>
           <em>Trabajos certificados</em>

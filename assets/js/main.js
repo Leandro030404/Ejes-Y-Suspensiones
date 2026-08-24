@@ -244,6 +244,8 @@
     if (!list.length) return;
     current = (index + list.length) % list.length;
     var t = list[current];
+    // Los navegadores viejos que no entienden webp vuelven al jpg original.
+    lbImg.onerror = function () { this.onerror = null; this.src = this.src.replace(/.webp$/, '.jpg'); };
     lbImg.src = t.dataset.img;
     lbImg.alt = t.dataset.caption || '';
     lbCaption.textContent = t.dataset.caption || '';
