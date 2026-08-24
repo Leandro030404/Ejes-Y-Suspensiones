@@ -138,13 +138,30 @@ Nombre "EyS Ejes y Suspensiones", categoría "Taller de camiones", 4,9 con 15 re
 El perfil lo administra la cuenta personal (`leandrobertainariver@gmail.com`).
 Textos preparados en `_originales/perfil-google.txt`.
 
-### Google Ads (cuenta 158-004-2792)
-Dos campañas:
-1. **"Ejes Y Suspensiones"** — Máximo rendimiento, ARS 3.000/día.
-   ⚠️ Su grupo de recursos **no tiene campo "URL final"**: apunta a `business.google.com`
-   en vez del sitio. No se puede cambiar desde la interfaz — hay que llamar a soporte.
-2. **"Búsqueda - Sitio Web"** — en armado, ARS 1.000/día, hacia el sitio.
-   Todos los textos, palabras clave y negativas en `_originales/campana-google-ads.txt`.
+### Google Ads (cuenta 158-004-2792) — reordenada el 24/08/2026
+
+Estado actual, **ARS 4.000/día en total**:
+
+1. **"Maximo rendimiento - Sitio Web"** — ARS 2.500/día. Creada el 24/08 apuntando
+   a `https://ejesysuspensiones.com.ar/`. Maximizar conversiones, Argentina con
+   "Presencia". En aprendizaje: **no tocarla los primeros 14 días.**
+2. **"Búsqueda - Sitio Web"** — ARS 1.500/día. **Gasta casi cero** (3 impresiones en
+   dos semanas): el mercado de búsqueda es chico, no le falta presupuesto.
+   Ver [[eys-mercado-busqueda-chico]].
+3. **"Ejes Y Suspensiones"** — **DETENIDA**. Era la vieja de Máximo rendimiento que
+   apuntaba a `business.google.com` sin campo "URL final". Gastó ARS 32.066 en
+   14 días con 0 conversiones. No se eliminó, quedó pausada.
+
+**Lo que se aprendió:** una campaña de Máximo rendimiento creada normalmente **sí**
+tiene campo "URL final". La vieja no lo tenía porque Google la había armado desde el
+Perfil de Empresa. No hizo falta llamar a soporte: se resolvió creando una nueva.
+
+**Trampa:** Google autogenera los textos del anuncio a partir del sitio y **inventa
+términos**. Había puesto "Ejes de pivote de alta calidad" — expresión que EyS no usa.
+Revisar título por título antes de publicar.
+
+Todos los textos, palabras clave, negativas y el detalle de lo hecho están en
+`_originales/campana-google-ads.txt` (Partes 9 y 10).
 
 Referencia: 11 al 20 de agosto de 2026, ~ARS 38.000, 450+ clics, **1 sola consulta**
 (cotización de USD 10.000, sin cerrar). Ojo: durante esos días la ficha decía
@@ -198,8 +215,10 @@ Sitemap enviado. Falta reenviarlo tras sumar las 5 páginas nuevas.
       Ya está en /tercer-eje/ y en los textos de Ads.
 - [ ] Plazos de entrega de los otros 9 trabajos → para sumarlos a sus páginas
 - [ ] Fotos antes/después de la misma unidad → para armar un deslizador
-- [ ] Llegar a 30 reseñas en Google (hoy 15)
-- [ ] Llamar a soporte de Google Ads por el destino de la campaña
+- [ ] Llegar a 30 reseñas en Google (**hoy 20, con 5,0** — subieron desde 15)
+- [x] ~~Llamar a soporte por el destino de la campaña~~ → resuelto creando una campaña nueva (24/08/2026)
+- [ ] Agregar "reparaciones" como palabra clave negativa de cuenta
+- [ ] A los 14 días (7 de septiembre): mirar conversiones de la campaña nueva
 - [ ] Reenviar el sitemap en Search Console
 
 **Ofrecido y no hecho:**
