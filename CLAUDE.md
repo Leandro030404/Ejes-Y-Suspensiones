@@ -155,6 +155,17 @@ de hover y degradado). Para capas nuevas usar `::before`.
   **están escritas a mano en el HTML**, hay que actualizarlas cuando cambien.
   Las preguntas frecuentes de la portada llevan su `FAQPage` en datos estructurados,
   igual que las 10 internas.
+- **Las 4 reseñas de la portada son textuales** (copiadas de la ficha el 24/08/2026):
+  Fernando Ferreyra, Compras Marcelini, Guillermo Bagneres y Jorgelina T. Están
+  **tal cual las escribieron**, erratas incluidas. No corregirles la redacción:
+  el texto es de los clientes, no del sitio. Se descartó a propósito la reseña de
+  Gonzalo Bertaina (mismo apellido que el titular de la cuenta: resta credibilidad).
+  Para sacar más reseñas: Google Maps → pestaña "Opiniones". La vista pública sin
+  cuenta sale recortada y **no** muestra esa pestaña; hay que usar el navegador del
+  usuario, donde la sesión ya está iniciada.
+- **NO marcar las reseñas como `Review` ni `aggregateRating`** en los datos
+  estructurados. Google no permite republicar como propias las reseñas de su
+  propia ficha, y lo penaliza. Se muestran como texto y se enlaza a la ficha.
 - **4 fotos son panorámicas** (hasta 3,6:1) y no entran en los recuadros. Se muestran
   completas con un fondo desenfocado de la propia foto (clase `media--wide` + `--foto`).
 - **Sin `latin-ext`** en las tipografías: el español entra completo en `latin`.
@@ -247,10 +258,6 @@ Sitemap enviado. Falta reenviarlo tras sumar las 5 páginas nuevas.
 - [x] ~~Plazo del tercer eje~~ → **10 a 15 días hábiles** (dato del 24/08/2026).
       Ya está en /tercer-eje/ y en los textos de Ads.
 - [ ] Plazos de entrega de los otros 9 trabajos → para sumarlos a sus páginas
-- [ ] **3 o 4 textos de reseñas de Google** (nombre + comentario) → el bloque de
-      opiniones ya está en la portada, pero solo con la puntuación y el enlace.
-      Con los textos se suman las tarjetas. **No inventarlos**: tienen que ser
-      los de la ficha, copiados tal cual.
 - [ ] Fotos antes/después de la misma unidad → para armar un deslizador
 - [ ] Llegar a 30 reseñas en Google (**hoy 20, con 5,0** — subieron desde 15)
 - [x] ~~Llamar a soporte por el destino de la campaña~~ → resuelto creando una campaña nueva (24/08/2026)
