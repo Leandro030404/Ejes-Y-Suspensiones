@@ -188,7 +188,9 @@ Sitemap enviado. Falta reenviarlo tras sumar las 5 páginas nuevas.
 ## Pendientes
 
 **Del usuario:**
-- [ ] Plazos de entrega de cada trabajo → para sumarlos a las 10 páginas de servicio
+- [x] ~~Plazo del tercer eje~~ → **10 a 15 días hábiles** (dato del 24/08/2026).
+      Ya está en /tercer-eje/ y en los textos de Ads.
+- [ ] Plazos de entrega de los otros 9 trabajos → para sumarlos a sus páginas
 - [ ] Fotos antes/después de la misma unidad → para armar un deslizador
 - [ ] Llegar a 30 reseñas en Google (hoy 15)
 - [ ] Llamar a soporte de Google Ads por el destino de la campaña
