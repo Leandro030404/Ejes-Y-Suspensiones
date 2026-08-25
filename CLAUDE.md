@@ -287,7 +287,17 @@ acciones del sitio.
 
 ### Search Console
 Verificado con `google6f4817e7bc103d04.html` en la raíz. **No borrar ese archivo.**
-Sitemap enviado. Falta reenviarlo tras sumar las 5 páginas nuevas.
+
+La propiedad es de tipo **prefijo de URL** (`https://ejesysuspensiones.com.ar/`),
+**no** de dominio. El enlace directo a los sitemaps es:
+`search.google.com/search-console/sitemaps?resource_id=https%3A%2F%2Fejesysuspensiones.com.ar%2F`
+Si se entra con `resource_id=sc-domain:...` da "no puedes acceder a esta propiedad".
+
+**Sitemap: al día.** Ya tenía las 11 páginas y Google lo había leído bien el
+23/08 (estado "Correcto", 11 páginas descubiertas) — el pendiente que decía
+"falta reenviarlo tras sumar las 5 páginas nuevas" estaba viejo. El 24/08 se
+actualizó el `lastmod` de las 11 URLs a 2026-08-24 (cambiaron todas ese día) y
+se reenvió para que Google lo relea.
 
 ---
 
@@ -301,7 +311,6 @@ Sitemap enviado. Falta reenviarlo tras sumar las 5 páginas nuevas.
 - [ ] Llegar a 30 reseñas en Google (**hoy 20, con 5,0** — subieron desde 15)
 - [x] ~~Llamar a soporte por el destino de la campaña~~ → resuelto creando una campaña nueva (24/08/2026)
 - [ ] A los 14 días (7 de septiembre): mirar conversiones de la campaña nueva
-- [ ] Reenviar el sitemap en Search Console
 
 **Ofrecido y no hecho:**
 - [ ] Artículos sobre homologación y normativa. El usuario tiene que validar la
