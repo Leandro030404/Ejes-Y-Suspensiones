@@ -200,6 +200,45 @@ Estado actual, **ARS 4.000/día en total**:
 tiene campo "URL final". La vieja no lo tenía porque Google la había armado desde el
 Perfil de Empresa. No hizo falta llamar a soporte: se resolvió creando una nueva.
 
+### Palabras clave negativas — revisado el 24/08/2026
+
+Existe una lista compartida **"Negativas EyS"** (Herramientas → Biblioteca
+compartida → Listas de exclusiones). Hoy tiene **30 palabras**, todas en
+concordancia amplia, y está aplicada a **las 3 campañas**.
+
+**Lo que estaba mal y se arregló el 24/08:**
+
+1. La lista **no estaba en "Máximo rendimiento - Sitio Web"**, la campaña que
+   gasta ARS 2.500/día. Estaba solo en la de Búsqueda y en la vieja, que está
+   detenida. O sea: la que más gastaba era la única sin filtro. Ya está aplicada.
+2. Una palabra había quedado pegada al nombre de la lista: **`cubiertasNegativas EyS`**.
+   Nunca podía coincidir con nada, y "cubiertas" quedaba sin negar. Se quitó esa
+   entrada y se cargó `cubiertas` sola.
+
+**Al pegar una lista larga, revisar la última línea.** Ese error nace de pegar
+texto que se lleva puesto el renglón siguiente.
+
+**Diferencias con las 35 de la Parte 4 del archivo de campaña — son a propósito:**
+
+- `trabajo` se reemplazó por `bolsa de trabajo` y `busco trabajo`. La palabra
+  suelta bloqueaba "trabajos de modificación de chasis", que es un cliente bueno.
+- `venta` y `comprar` **no** están, y conviene que sigan así: negarlas taparía
+  "venta de ejes autodireccionales" o "comprar eje trunnion", que es justo lo que
+  EyS quiere vender. La basura de autos ya la cortan `auto`, `autos`,
+  `automovil`, `camioneta`, `usado` y `usados`.
+- `reparaciones` **no se agregó, a propósito**, aunque figuraba como pendiente.
+  EyS sí hace reparaciones ("modificación y reparación de vehículos de carga"),
+  así que la palabra suelta bloquearía "reparación de suspensión de camión".
+  El tráfico malo que se quería cortar ya lo cortan las negativas de auto.
+  Si aparece basura con esa palabra, negar la frase completa que moleste
+  (`reparacion de autos`), nunca la palabra sola.
+
+**Trampa de la interfaz:** la tabla de Ads no se lee bien por captura de pantalla
+(el navegador se traba) ni por el árbol de accesibilidad. Y la ventana cambia de
+tamaño entre una captura y el clic siguiente, así que **hacer clic por coordenadas
+sale mal**: una vez abrió el desplegable de concordancia de `gomeria` en lugar de
+pasar de página. Usar `find` y hacer clic por referencia.
+
 **Trampa:** Google autogenera los textos del anuncio a partir del sitio y **inventa
 términos**. Había puesto "Ejes de pivote de alta calidad" — expresión que EyS no usa.
 Revisar título por título antes de publicar.
@@ -261,7 +300,6 @@ Sitemap enviado. Falta reenviarlo tras sumar las 5 páginas nuevas.
 - [ ] Fotos antes/después de la misma unidad → para armar un deslizador
 - [ ] Llegar a 30 reseñas en Google (**hoy 20, con 5,0** — subieron desde 15)
 - [x] ~~Llamar a soporte por el destino de la campaña~~ → resuelto creando una campaña nueva (24/08/2026)
-- [ ] Agregar "reparaciones" como palabra clave negativa de cuenta
 - [ ] A los 14 días (7 de septiembre): mirar conversiones de la campaña nueva
 - [ ] Reenviar el sitemap en Search Console
 
