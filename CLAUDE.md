@@ -131,6 +131,18 @@ de hover y degradado). Para capas nuevas usar `::before`.
 
 - **Portada one-page + 10 páginas de servicio.** La portada convierte; las páginas
   internas posicionan en Google.
+- **Orden de la portada** (25/08/2026): hero -> números -> **Servicios** -> **Trabajos**
+  -> **Fabricación** -> certificaciones -> Empresa. Antes Fabricación iba antes que
+  Trabajos. El menú (portada y las 10 internas) y el pie siguen ese mismo orden.
+  **Dos trampas al mover estos bloques:**
+  1. Fabricación tiene los colores del fondo oscuro escritos a mano (`.product__body h3`
+     en blanco, `.specs` y `.components` con bordes blancos), así que la clase
+     `section--dark` **tiene que viajar con el bloque**; mover solo el HTML deja texto
+     blanco sobre blanco.
+  2. Todas las secciones oscuras usan el mismo negro (`--ink`), así que dos seguidas se
+     ven como un solo bloque. Por eso la franja de certificaciones bajó a separar
+     Fabricación de Empresa, y Trabajos pasó de `section--light` a `section--soft`
+     para no quedar pegado a Servicios (los dos blancos).
 - **Formulario sin backend**: valida y abre WhatsApp o el cliente de correo.
 - **Los enlaces de WhatsApp piden datos** (24/08/2026). El mensaje precargado ya no es
   solo "Hola, quisiera consultar por X": suma una linea `Unidad (marca, modelo y año):`
