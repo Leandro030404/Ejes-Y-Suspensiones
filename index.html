@@ -130,8 +130,8 @@
       <ul class="nav__list">
         <li><a href="#inicio" class="nav__link is-active">Inicio</a></li>
         <li><a href="#servicios" class="nav__link">Servicios</a></li>
-        <li><a href="#fabricacion" class="nav__link">Fabricación</a></li>
         <li><a href="#trabajos" class="nav__link">Trabajos</a></li>
+        <li><a href="#fabricacion" class="nav__link">Fabricación</a></li>
         <li><a href="#empresa" class="nav__link">Empresa</a></li>
         <li><a href="#contacto" class="nav__link">Contacto</a></li>
       </ul>
@@ -292,19 +292,127 @@
   </div>
 </section>
 
-<!-- ══════════ FRANJA CERTIFICACIONES ══════════ -->
-<section class="certs" aria-label="Certificaciones">
-  <div class="certs__bg" style="background-image:url('assets/img/taller-chasis.jpg')" aria-hidden="true"></div>
-  <div class="container certs__inner">
-    <div class="certs__text reveal">
-      <h2>Trabajos <span class="accent">certificados</span> y habilitados</h2>
-      <p>Nuestro taller cuenta con las habilitaciones y certificaciones necesarias por parte de CENT, CNTSV y AITA, lo que garantiza la calidad y seguridad de nuestros trabajos de reparación y modificación en unidades de carga.</p>
-      <a href="#contacto" class="btn btn--primary">Consultar por su unidad</a>
+<!-- ══════════ TRABAJOS ══════════ -->
+<section class="section section--soft" id="trabajos">
+  <div class="container">
+    <header class="sec-head reveal">
+      <p class="sec-head__kicker">Portfolio</p>
+      <h2 class="sec-head__title">Trabajos <span class="accent">realizados</span></h2>
+      <p class="sec-head__sub">Cada unidad que sale del taller lleva la documentación y las homologaciones necesarias. Estos son algunos de nuestros trabajos.</p>
+    </header>
+
+    <div class="filters reveal" role="tablist" aria-label="Filtrar trabajos">
+      <button class="filter is-active" data-filter="all" role="tab" aria-selected="true">Todos</button>
+      <button class="filter" data-filter="eje" role="tab" aria-selected="false">3er eje</button>
+      <button class="filter" data-filter="chasis" role="tab" aria-selected="false">Chasis</button>
+      <button class="filter" data-filter="susp" role="tab" aria-selected="false">Suspensión y frenos</button>
     </div>
-    <div class="certs__seals">
-      <div class="seal reveal"><strong>CENT</strong><span>Consultora Ejecutiva Nacional del Transporte</span></div>
-      <div class="seal reveal" style="--d:.1s"><strong>CNTSV</strong><span>Comisión Nacional del Tránsito y la Seguridad Vial</span></div>
-      <div class="seal reveal" style="--d:.2s"><strong>AITA</strong><span>Asociación de Ingenieros y Técnicos del Automotor</span></div>
+
+    <div class="works" id="works">
+      <article class="work reveal" data-cat="chasis">
+        <button class="media--wide work__media" data-lightbox data-img="assets/img/trabajo-escalabilidad.webp" data-caption="Escalabilidad — Cliente Katerynicz" aria-label="Ampliar foto del trabajo de escalabilidad" style="--foto:url('/assets/img/trabajo-escalabilidad.webp')">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-escalabilidad.webp">
+            <img src="assets/img/trabajo-escalabilidad.jpg" class="is-wide" width="700" height="345" decoding="async" alt="Semirremolque tanque con chasis alargado" loading="lazy">
+          </picture>
+          <span class="work__zoom" aria-hidden="true">＋</span>
+        </button>
+        <div class="work__body">
+          <p class="work__client">Cliente Katerynicz</p>
+          <h3>Escalabilidad</h3>
+          <p>Alargue y modificación de chasis en zona delantera y trasera, para aumentar la capacidad de carga en el tanque. Reubicación del tren rodante. Colocación de frenos ABS. Cambio de paragolpe homologado. Colocación de guardaciclista homologado. Cambio de chapón y perno de arrastre homologado. Unidad escalable, aumento de la capacidad de carga.</p>
+        </div>
+      </article>
+
+      <article class="work reveal" style="--d:.08s" data-cat="eje">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-3er-eje-tractor.webp" data-caption="3er eje neumático en unidad tractora — Cliente Rivosecchi" aria-label="Ampliar foto del 3er eje en tractor">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-3er-eje-tractor-800.webp 800w, assets/img/trabajo-3er-eje-tractor.webp 1280w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-3er-eje-tractor.jpg" srcset="assets/img/trabajo-3er-eje-tractor-800.jpg 800w, assets/img/trabajo-3er-eje-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Unidad tractora con tercer eje neumático colocado" loading="lazy">
+          </picture>
+          <span class="work__zoom" aria-hidden="true">＋</span>
+        </button>
+        <div class="work__body">
+          <p class="work__client">Cliente Rivosecchi</p>
+          <h3>3er eje neumático · Tractor</h3>
+          <p>Alargue de chasis. Colocación de 3er eje neumático. Reubicación del plato de arrastre. Unidad tractora.</p>
+        </div>
+      </article>
+
+      <article class="work reveal" style="--d:.16s" data-cat="eje">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-3er-eje-chasis.webp" data-caption="3er eje neumático en chasis — Cliente Germat S.R.L." aria-label="Ampliar foto del 3er eje en chasis">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-3er-eje-chasis-800.webp 800w, assets/img/trabajo-3er-eje-chasis.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-3er-eje-chasis.jpg" srcset="assets/img/trabajo-3er-eje-chasis-800.jpg 800w, assets/img/trabajo-3er-eje-chasis.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Chasis con tercer eje neumático y refuerzo envainado" loading="lazy">
+          </picture>
+          <span class="work__zoom" aria-hidden="true">＋</span>
+        </button>
+        <div class="work__body">
+          <p class="work__client">Cliente Germat S.R.L.</p>
+          <h3>3er eje neumático · Chasis</h3>
+          <p>Alargue de chasis. Colocación de 3er eje neumático. Refuerzo exterior completo (envainado). Unidad preparada para colocación de carrocería de hidrogrúa.</p>
+        </div>
+      </article>
+
+      <article class="work reveal" style="--d:.24s" data-cat="chasis">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-cambio-chasis-tractor.webp" data-caption="Cambio de chasis a tractor — Cliente SL Natural S.R.L." aria-label="Ampliar foto de cambio de chasis a tractor">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-cambio-chasis-tractor-800.webp 800w, assets/img/trabajo-cambio-chasis-tractor.webp 1280w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-cambio-chasis-tractor.jpg" srcset="assets/img/trabajo-cambio-chasis-tractor-800.jpg 800w, assets/img/trabajo-cambio-chasis-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Unidad convertida de chasis a tractor" loading="lazy">
+          </picture>
+          <span class="work__zoom" aria-hidden="true">＋</span>
+        </button>
+        <div class="work__body">
+          <p class="work__client">Cliente SL Natural S.R.L.</p>
+          <h3>Cambio de chasis a tractor</h3>
+          <p>Cambio de unidad chasis a tractor. Se modificó la distancia entre ejes (cambio de paso) y se acortó el chasis a medidas estándar de tractor, colocando plato de arrastre homologado.</p>
+        </div>
+      </article>
+
+      <article class="work reveal" style="--d:.32s" data-cat="chasis">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-carroceria.webp" data-caption="Colocación de carrocería — Cliente particular" aria-label="Ampliar foto de colocación de carrocería">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-carroceria-800.webp 800w, assets/img/trabajo-carroceria.webp 1156w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-carroceria.jpg" srcset="assets/img/trabajo-carroceria-800.jpg 800w, assets/img/trabajo-carroceria.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Carrocería adaptada y colocada sobre chasis" loading="lazy">
+          </picture>
+          <span class="work__zoom" aria-hidden="true">＋</span>
+        </button>
+        <div class="work__body">
+          <p class="work__client">Cliente particular</p>
+          <h3>Colocación de carrocería</h3>
+          <p>Se adaptó y colocó la carrocería con los anclajes y la bulonería correspondientes.</p>
+        </div>
+      </article>
+
+      <article class="work reveal" style="--d:.4s" data-cat="susp">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-semirremolque.webp" data-caption="Modificación de semirremolque — Cliente Guagliano" aria-label="Ampliar foto de modificación de semirremolque">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-semirremolque-800.webp 800w, assets/img/trabajo-semirremolque.webp 1280w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-semirremolque.jpg" srcset="assets/img/trabajo-semirremolque-800.jpg 800w, assets/img/trabajo-semirremolque.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Semirremolque con suspensión neumática direccional" loading="lazy">
+          </picture>
+          <span class="work__zoom" aria-hidden="true">＋</span>
+        </button>
+        <div class="work__body">
+          <p class="work__client">Cliente Guagliano</p>
+          <h3>Modificación de semirremolque</h3>
+          <p>Modificación del chasis con colocación de suspensión neumática direccional. Aro bolita.</p>
+        </div>
+      </article>
+
+      <article class="work reveal" style="--d:.48s" data-cat="susp">
+        <button class="work__media" data-lightbox data-img="assets/img/trabajo-freno-abs.webp" data-caption="Sistema de freno ABS — Cliente Katerynicz" aria-label="Ampliar foto del sistema de freno ABS">
+          <picture>
+            <source type="image/webp" srcset="assets/img/trabajo-freno-abs-800.webp 800w, assets/img/trabajo-freno-abs.webp 1156w" sizes="(max-width: 900px) 100vw, 1200px">
+            <img src="assets/img/trabajo-freno-abs.jpg" srcset="assets/img/trabajo-freno-abs-800.jpg 800w, assets/img/trabajo-freno-abs.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Sistema de freno ABS instalado con registros automáticos" loading="lazy">
+          </picture>
+          <span class="work__zoom" aria-hidden="true">＋</span>
+        </button>
+        <div class="work__body">
+          <p class="work__client">Cliente Katerynicz</p>
+          <h3>Sistema de freno ABS</h3>
+          <p>Colocación de sistema de freno ABS con los registros automáticos.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -463,127 +571,19 @@
   </div>
 </section>
 
-<!-- ══════════ TRABAJOS ══════════ -->
-<section class="section section--light" id="trabajos">
-  <div class="container">
-    <header class="sec-head reveal">
-      <p class="sec-head__kicker">Portfolio</p>
-      <h2 class="sec-head__title">Trabajos <span class="accent">realizados</span></h2>
-      <p class="sec-head__sub">Cada unidad que sale del taller lleva la documentación y las homologaciones necesarias. Estos son algunos de nuestros trabajos.</p>
-    </header>
-
-    <div class="filters reveal" role="tablist" aria-label="Filtrar trabajos">
-      <button class="filter is-active" data-filter="all" role="tab" aria-selected="true">Todos</button>
-      <button class="filter" data-filter="eje" role="tab" aria-selected="false">3er eje</button>
-      <button class="filter" data-filter="chasis" role="tab" aria-selected="false">Chasis</button>
-      <button class="filter" data-filter="susp" role="tab" aria-selected="false">Suspensión y frenos</button>
+<!-- ══════════ FRANJA CERTIFICACIONES ══════════ -->
+<section class="certs" aria-label="Certificaciones">
+  <div class="certs__bg" style="background-image:url('assets/img/taller-chasis.jpg')" aria-hidden="true"></div>
+  <div class="container certs__inner">
+    <div class="certs__text reveal">
+      <h2>Trabajos <span class="accent">certificados</span> y habilitados</h2>
+      <p>Nuestro taller cuenta con las habilitaciones y certificaciones necesarias por parte de CENT, CNTSV y AITA, lo que garantiza la calidad y seguridad de nuestros trabajos de reparación y modificación en unidades de carga.</p>
+      <a href="#contacto" class="btn btn--primary">Consultar por su unidad</a>
     </div>
-
-    <div class="works" id="works">
-      <article class="work reveal" data-cat="chasis">
-        <button class="media--wide work__media" data-lightbox data-img="assets/img/trabajo-escalabilidad.webp" data-caption="Escalabilidad — Cliente Katerynicz" aria-label="Ampliar foto del trabajo de escalabilidad" style="--foto:url('/assets/img/trabajo-escalabilidad.webp')">
-          <picture>
-            <source type="image/webp" srcset="assets/img/trabajo-escalabilidad.webp">
-            <img src="assets/img/trabajo-escalabilidad.jpg" class="is-wide" width="700" height="345" decoding="async" alt="Semirremolque tanque con chasis alargado" loading="lazy">
-          </picture>
-          <span class="work__zoom" aria-hidden="true">＋</span>
-        </button>
-        <div class="work__body">
-          <p class="work__client">Cliente Katerynicz</p>
-          <h3>Escalabilidad</h3>
-          <p>Alargue y modificación de chasis en zona delantera y trasera, para aumentar la capacidad de carga en el tanque. Reubicación del tren rodante. Colocación de frenos ABS. Cambio de paragolpe homologado. Colocación de guardaciclista homologado. Cambio de chapón y perno de arrastre homologado. Unidad escalable, aumento de la capacidad de carga.</p>
-        </div>
-      </article>
-
-      <article class="work reveal" style="--d:.08s" data-cat="eje">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-3er-eje-tractor.webp" data-caption="3er eje neumático en unidad tractora — Cliente Rivosecchi" aria-label="Ampliar foto del 3er eje en tractor">
-          <picture>
-            <source type="image/webp" srcset="assets/img/trabajo-3er-eje-tractor-800.webp 800w, assets/img/trabajo-3er-eje-tractor.webp 1280w" sizes="(max-width: 900px) 100vw, 1200px">
-            <img src="assets/img/trabajo-3er-eje-tractor.jpg" srcset="assets/img/trabajo-3er-eje-tractor-800.jpg 800w, assets/img/trabajo-3er-eje-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Unidad tractora con tercer eje neumático colocado" loading="lazy">
-          </picture>
-          <span class="work__zoom" aria-hidden="true">＋</span>
-        </button>
-        <div class="work__body">
-          <p class="work__client">Cliente Rivosecchi</p>
-          <h3>3er eje neumático · Tractor</h3>
-          <p>Alargue de chasis. Colocación de 3er eje neumático. Reubicación del plato de arrastre. Unidad tractora.</p>
-        </div>
-      </article>
-
-      <article class="work reveal" style="--d:.16s" data-cat="eje">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-3er-eje-chasis.webp" data-caption="3er eje neumático en chasis — Cliente Germat S.R.L." aria-label="Ampliar foto del 3er eje en chasis">
-          <picture>
-            <source type="image/webp" srcset="assets/img/trabajo-3er-eje-chasis-800.webp 800w, assets/img/trabajo-3er-eje-chasis.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px">
-            <img src="assets/img/trabajo-3er-eje-chasis.jpg" srcset="assets/img/trabajo-3er-eje-chasis-800.jpg 800w, assets/img/trabajo-3er-eje-chasis.jpg 1600w" sizes="(max-width: 900px) 100vw, 1200px" width="1600" height="1201" decoding="async" alt="Chasis con tercer eje neumático y refuerzo envainado" loading="lazy">
-          </picture>
-          <span class="work__zoom" aria-hidden="true">＋</span>
-        </button>
-        <div class="work__body">
-          <p class="work__client">Cliente Germat S.R.L.</p>
-          <h3>3er eje neumático · Chasis</h3>
-          <p>Alargue de chasis. Colocación de 3er eje neumático. Refuerzo exterior completo (envainado). Unidad preparada para colocación de carrocería de hidrogrúa.</p>
-        </div>
-      </article>
-
-      <article class="work reveal" style="--d:.24s" data-cat="chasis">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-cambio-chasis-tractor.webp" data-caption="Cambio de chasis a tractor — Cliente SL Natural S.R.L." aria-label="Ampliar foto de cambio de chasis a tractor">
-          <picture>
-            <source type="image/webp" srcset="assets/img/trabajo-cambio-chasis-tractor-800.webp 800w, assets/img/trabajo-cambio-chasis-tractor.webp 1280w" sizes="(max-width: 900px) 100vw, 1200px">
-            <img src="assets/img/trabajo-cambio-chasis-tractor.jpg" srcset="assets/img/trabajo-cambio-chasis-tractor-800.jpg 800w, assets/img/trabajo-cambio-chasis-tractor.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Unidad convertida de chasis a tractor" loading="lazy">
-          </picture>
-          <span class="work__zoom" aria-hidden="true">＋</span>
-        </button>
-        <div class="work__body">
-          <p class="work__client">Cliente SL Natural S.R.L.</p>
-          <h3>Cambio de chasis a tractor</h3>
-          <p>Cambio de unidad chasis a tractor. Se modificó la distancia entre ejes (cambio de paso) y se acortó el chasis a medidas estándar de tractor, colocando plato de arrastre homologado.</p>
-        </div>
-      </article>
-
-      <article class="work reveal" style="--d:.32s" data-cat="chasis">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-carroceria.webp" data-caption="Colocación de carrocería — Cliente particular" aria-label="Ampliar foto de colocación de carrocería">
-          <picture>
-            <source type="image/webp" srcset="assets/img/trabajo-carroceria-800.webp 800w, assets/img/trabajo-carroceria.webp 1156w" sizes="(max-width: 900px) 100vw, 1200px">
-            <img src="assets/img/trabajo-carroceria.jpg" srcset="assets/img/trabajo-carroceria-800.jpg 800w, assets/img/trabajo-carroceria.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Carrocería adaptada y colocada sobre chasis" loading="lazy">
-          </picture>
-          <span class="work__zoom" aria-hidden="true">＋</span>
-        </button>
-        <div class="work__body">
-          <p class="work__client">Cliente particular</p>
-          <h3>Colocación de carrocería</h3>
-          <p>Se adaptó y colocó la carrocería con los anclajes y la bulonería correspondientes.</p>
-        </div>
-      </article>
-
-      <article class="work reveal" style="--d:.4s" data-cat="susp">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-semirremolque.webp" data-caption="Modificación de semirremolque — Cliente Guagliano" aria-label="Ampliar foto de modificación de semirremolque">
-          <picture>
-            <source type="image/webp" srcset="assets/img/trabajo-semirremolque-800.webp 800w, assets/img/trabajo-semirremolque.webp 1280w" sizes="(max-width: 900px) 100vw, 1200px">
-            <img src="assets/img/trabajo-semirremolque.jpg" srcset="assets/img/trabajo-semirremolque-800.jpg 800w, assets/img/trabajo-semirremolque.jpg 1280w" sizes="(max-width: 900px) 100vw, 1200px" width="1280" height="960" decoding="async" alt="Semirremolque con suspensión neumática direccional" loading="lazy">
-          </picture>
-          <span class="work__zoom" aria-hidden="true">＋</span>
-        </button>
-        <div class="work__body">
-          <p class="work__client">Cliente Guagliano</p>
-          <h3>Modificación de semirremolque</h3>
-          <p>Modificación del chasis con colocación de suspensión neumática direccional. Aro bolita.</p>
-        </div>
-      </article>
-
-      <article class="work reveal" style="--d:.48s" data-cat="susp">
-        <button class="work__media" data-lightbox data-img="assets/img/trabajo-freno-abs.webp" data-caption="Sistema de freno ABS — Cliente Katerynicz" aria-label="Ampliar foto del sistema de freno ABS">
-          <picture>
-            <source type="image/webp" srcset="assets/img/trabajo-freno-abs-800.webp 800w, assets/img/trabajo-freno-abs.webp 1156w" sizes="(max-width: 900px) 100vw, 1200px">
-            <img src="assets/img/trabajo-freno-abs.jpg" srcset="assets/img/trabajo-freno-abs-800.jpg 800w, assets/img/trabajo-freno-abs.jpg 1156w" sizes="(max-width: 900px) 100vw, 1200px" width="1156" height="868" decoding="async" alt="Sistema de freno ABS instalado con registros automáticos" loading="lazy">
-          </picture>
-          <span class="work__zoom" aria-hidden="true">＋</span>
-        </button>
-        <div class="work__body">
-          <p class="work__client">Cliente Katerynicz</p>
-          <h3>Sistema de freno ABS</h3>
-          <p>Colocación de sistema de freno ABS con los registros automáticos.</p>
-        </div>
-      </article>
+    <div class="certs__seals">
+      <div class="seal reveal"><strong>CENT</strong><span>Consultora Ejecutiva Nacional del Transporte</span></div>
+      <div class="seal reveal" style="--d:.1s"><strong>CNTSV</strong><span>Comisión Nacional del Tránsito y la Seguridad Vial</span></div>
+      <div class="seal reveal" style="--d:.2s"><strong>AITA</strong><span>Asociación de Ingenieros y Técnicos del Automotor</span></div>
     </div>
   </div>
 </section>
@@ -982,8 +982,8 @@
       <h3>Navegación</h3>
       <ul class="footer__links">
         <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#fabricacion">Fabricación</a></li>
         <li><a href="#trabajos">Trabajos</a></li>
+        <li><a href="#fabricacion">Fabricación</a></li>
         <li><a href="#empresa">Empresa</a></li>
         <li><a href="#ubicacion">Ubicación</a></li>
       </ul>
