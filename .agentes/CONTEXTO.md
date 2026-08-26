@@ -55,3 +55,17 @@
 | `ads/INFORME.md` | último análisis de campañas |
 | `ads/HISTORIAL.md` | métricas por fecha, para comparar revisión contra revisión |
 | `ads/CAMBIOS.md` | qué se cambió y cuándo, para medir el antes y el después |
+
+## Nota sobre GEMINI (actualizado 26/08/2026)
+
+Leandro usa **Gemini en el navegador**, que **no puede tocar archivos**. Por lo tanto hoy
+Gemini NO es un segundo ejecutor: es un **consultor externo** para textos de anuncios,
+titulares de landings y segundas opiniones sobre el análisis de campañas.
+
+Circuito: Claude escribe `.agentes\consultas\C-00X-consulta.md` (autocontenido) → Leandro lo
+pega en Gemini → pega la respuesta en `C-00X-respuesta.md` → Claude la evalúa e implementa.
+Detalle en `.agentes\PROMPT-GEMINI-NAVEGADOR.md`.
+
+Mientras sea así, **todo lo del TABLERO lo ejecuta Claude**. La sección "ASIGNADO A GEMINI",
+los locks y las reglas de no pisarse quedan listas para el día que se instale **Gemini CLI**
+(ahí se usa `PROMPT-GEMINI.md` y el esquema completo entra en vigencia).
