@@ -1,0 +1,14 @@
+# Fin de linea unificado.
+# El 25/08/2026 los 11 HTML y CLAUDE.md aparecieron como "modificados" sin que
+# cambiara una sola letra: un script de PowerShell los reguardo con fin de linea
+# de Windows. Esta linea evita que vuelva a pasar.
+* text=auto eol=lf
+
+# Binarios: que Git no intente tocarlos nunca
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.ico  binary
+*.woff2 binary
+*.zip  binary
