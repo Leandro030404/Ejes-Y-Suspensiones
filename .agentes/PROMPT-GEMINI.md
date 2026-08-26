@@ -1,4 +1,20 @@
-# PROMPT PARA GEMINI — copiar todo lo de abajo y pegarlo en la terminal
+# PROMPT PARA EL SEGUNDO AGENTE (Antigravity CLI) — copiar y pegar en la terminal
+
+> **Cómo instalarlo (una sola vez).** Gemini CLI dejó de ser gratis el 18/06/2026; Google lo
+> reemplazó por **Antigravity CLI**, que sí tiene plan gratuito (con límites semanales).
+>
+> 1. Abrí PowerShell y pegá: `irm https://antigravity.google/cli/install.ps1 | iex`
+> 2. Cerrá PowerShell y volvé a abrirlo.
+> 3. `cd "C:\Users\leand\OneDrive\Escritorio\PAGINA EYS"`
+> 4. Escribí **`agy`** (así se llama el comando). La primera vez abre el navegador para
+>    iniciar sesión con tu cuenta de Google.
+> 5. Pegá el bloque de abajo.
+>
+> En el TABLERO y en la BITÁCORA este agente sigue firmando como **GEMINI** — es el nombre
+> del rol, y por debajo sigue siendo un modelo Gemini. No hace falta cambiar nada más.
+
+---
+
 
 ```
 Sos el AGENTE EJECUTOR del proyecto "PAGINA EYS", el sitio web de EyS - Ejes y

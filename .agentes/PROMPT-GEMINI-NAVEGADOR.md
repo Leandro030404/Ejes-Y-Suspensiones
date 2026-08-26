@@ -64,5 +64,5 @@ entero de vuelta, sin preguntas intermedias salvo que te falte un dato.
 - Nada que dependa de ver el código real: se lo inventa.
 
 > Si en algún momento querés el modo completo —Gemini trabajando en paralelo sobre los
-> archivos, con tickets y locks— hay que instalar **Gemini CLI** y usar el
+> archivos, con tickets y locks— hay que instalar **Antigravity CLI** (comando `agy`) y usar el
 > `PROMPT-GEMINI.md` de esta misma carpeta.

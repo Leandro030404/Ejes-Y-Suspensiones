@@ -18,15 +18,6 @@ Formato de ticket:
 
 ## BACKLOG
 
-### [G-001] Resolver los cambios sin commitear que hay en la carpeta
-- objetivo: la carpeta queda limpia (`git status` sin cambios pendientes) y con el historial claro
-- archivos_permitidos: los 12 ya modificados (index.html, las 10 paginas de servicio, CLAUDE.md, .gitignore)
-- criterio_de_aceptacion: `git status --short` no devuelve nada y el sitio en vivo sigue igual o mejor
-- notas: **PRIMERO DE TODO.** Al 26/08 hay 12 archivos modificados sin commitear. Hasta no
-  resolver esto, cualquier commit de un ticket nuevo se mezcla con trabajo a medio hacer.
-  Claude revisa el diff, le explica a Leandro qué es cada cambio y recién ahí commitea.
-- responsable sugerido: CLAUDE
-
 ### [A-001] Verificar que las 3 conversiones disparan de verdad
 - objetivo: confirmar, probando, que el clic en WhatsApp, el clic en telefono y el envio del
   formulario disparan su evento en las 11 paginas
@@ -62,7 +53,18 @@ _(vacio)_
 
 ## HECHO
 
-_(vacio)_
+### [G-001] Resolver los cambios sin commitear que hay en la carpeta
+- objetivo: la carpeta queda limpia (`git status` sin cambios pendientes) y con el historial claro
+- archivos_permitidos: los 12 ya modificados (index.html, las 10 paginas de servicio, CLAUDE.md, .gitignore)
+- criterio_de_aceptacion: `git status --short` no devuelve nada y el sitio en vivo sigue igual o mejor
+- notas: **PRIMERO DE TODO.** Al 26/08 hay 12 archivos modificados sin commitear. Hasta no
+  resolver esto, cualquier commit de un ticket nuevo se mezcla con trabajo a medio hacer.
+  Claude revisa el diff, le explica a Leandro qué es cada cambio y recién ahí commitea.
+- HECHO el 26/08/2026: eran 12 archivos con el fin de linea cambiado (CRLF), sin una sola
+  letra distinta. Se normalizaron a LF, se sumo .gitattributes para que no vuelva a pasar,
+  y se commitearon .gitignore, .gitattributes y .agentes. Commits f445a0a y 18668be,
+  todavia SIN pushear.
+
 
 ## DUDAS PARA LEANDRO
 

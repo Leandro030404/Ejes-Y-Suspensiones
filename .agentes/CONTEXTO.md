@@ -67,5 +67,6 @@ pega en Gemini → pega la respuesta en `C-00X-respuesta.md` → Claude la eval�
 Detalle en `.agentes\PROMPT-GEMINI-NAVEGADOR.md`.
 
 Mientras sea así, **todo lo del TABLERO lo ejecuta Claude**. La sección "ASIGNADO A GEMINI",
-los locks y las reglas de no pisarse quedan listas para el día que se instale **Gemini CLI**
-(ahí se usa `PROMPT-GEMINI.md` y el esquema completo entra en vigencia).
+los locks y las reglas de no pisarse quedan listas para el día que se instale **Antigravity CLI**
+(comando `agy` — Gemini CLI dejó de ser gratis el 18/06/2026). Ahí se usa `PROMPT-GEMINI.md`
+y el esquema completo entra en vigencia.
