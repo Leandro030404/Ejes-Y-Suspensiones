@@ -12,3 +12,6 @@ Desktop.ini
 
 # Copia local de las fotos en alta (no hace falta versionarla)
 _originales/
+
+# Locks de coordinacion entre agentes (son temporales, no se versionan)
+.agentes/locks/*.lock
