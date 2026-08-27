@@ -45,7 +45,10 @@ IMPORTANTE - en este modo NO podes ejecutar comandos de terminal, solo leer y es
 archivos. Entonces:
 
 1. El lock lo creas ESCRIBIENDO el archivo .agentes/locks/<ruta-con-guiones>.lock
-   (una linea adentro: GEMINI - $Ticket - fecha y hora). Borralo al terminar.
+   (una linea adentro: GEMINI - $Ticket - fecha y hora).
+   **BORRALO VOS ANTES DE TERMINAR, no se lo dejes a Claude.** Un lock olvidado le
+   traba el trabajo al otro agente. Si tu modo no te deja borrar archivos, escribi
+   adentro del lock la palabra LIBRE y decilo en el resumen.
    Si ya existe uno de CLAUDE para ese archivo, no lo toques y avisa.
 2. NO intentes correr git, ni npm, ni pruebas. De eso se encarga CLAUDE.
 3. Al terminar: anota una linea en .agentes/BITACORA.md y move el ticket a la seccion

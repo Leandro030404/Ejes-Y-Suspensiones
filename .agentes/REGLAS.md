@@ -111,6 +111,7 @@ sistema de ordenes de trabajo.
 | Locks, BITACORA, TABLERO | si | si |
 | `git add` / `commit` | no | si |
 | `git push` | no | si |
+| Limpiar el lock que Gemini se olvido | no | si |
 | Verificar en el navegador | no | si |
 
 Los permisos de Gemini viven en `C:\Users\leand\.gemini\antigravity-cli\settings.json`

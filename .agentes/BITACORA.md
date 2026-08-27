@@ -24,3 +24,5 @@ Formato: [YYYY-MM-DD HH:MM] [CLAUDE|GEMINI] G-00X que se hizo | archivos tocados
 [2026-08-27 10:25] [CLAUDE] G-005 hecho: creado .agentes/delegar.ps1. Claude ya puede pasarle un ticket a Gemini sin que Leandro toque nada. Claves: --add-dir obligatorio en modo -p, permisos de comando son literales (comodines ignorados), y --mode accept-edits deja editar archivos sin permisos de terminal | .agentes/delegar.ps1, .agentes/REGLAS.md, CLAUDE.md, .agentes/TABLERO.md
 
 [2026-08-27 11:05] [CLAUDE] G-006 sistema de dos agentes portatil: delegar.ps1 generico + ENCARGO.md por proyecto, estado.ps1 aguanta repos sin remoto, instalado en el sistema de ordenes, y corregido trustedWorkspaces de Gemini que apuntaba a OneDrive | .agentes/delegar.ps1, .agentes/estado.ps1, .agentes/ENCARGO.md, .agentes/REGLAS.md, .agentes/TABLERO.md
+
+[2026-08-27 11:37] [CLAUDE] probada la delegacion a Gemini de punta a punta en el otro proyecto: funciona, pero se deja el lock puesto. Reforzado el pedido en delegar.ps1 y anotado en REGLAS.md que Claude revise locks/ despues de cada delegacion | .agentes/delegar.ps1, .agentes/REGLAS.md
