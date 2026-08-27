@@ -18,3 +18,5 @@ Y cuando ya se pueda medir, se le agrega abajo:
    sin conversiones
 [2026-08-24] [CUENTA] Se aplico la lista "Negativas EyS" a las 3 campanas y se arreglo la
    entrada rota "cubiertasNegativas EyS" | efecto esperado: menos clics basura
+[2026-08-27] [WEB] [A-002] Boton flotante de WhatsApp visible desde la carga en celular y pantallas <=900px | assets/css/styles.css (las 11 paginas) | efecto esperado: mas clics en WhatsApp de visitantes que llegan desde anuncios sin scrollear
+

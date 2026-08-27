@@ -1015,6 +1015,8 @@ html:not(.js) .preloader{ display:none; }
   .certs__bg{ background-attachment:scroll; }
 
   .footer__grid{ grid-template-columns:1fr; gap:2rem; }
+
+  .wsp-float{ opacity:1; visibility:visible; transform:translateY(0) scale(1); }
 }
 
 @media (max-width:640px){

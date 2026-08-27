@@ -17,3 +17,5 @@ Formato: [YYYY-MM-DD HH:MM] [CLAUDE|GEMINI] G-00X que se hizo | archivos tocados
 [2026-08-27 09:12] [CLAUDE] Borrados 6 archivos index.lock.viejo abandonados en .git (basura del 26/08). OneDrive sincroniza .git en caliente: ojo con eso | .git
 [2026-08-27 09:12] [CLAUDE] G-003 hecho: el protocolo de dos agentes (locks, tablero, bitacora) pasa a CLAUDE.md en "LEER PRIMERO", que Claude Code carga sola en cada sesion. Sumado AGENTS.md en la raiz y excluido de la publicacion. Causa raiz: REGLAS.md no lo cargaba nadie solo | CLAUDE.md, AGENTS.md, _config.yml, .agentes/TABLERO.md
 [2026-08-27 09:14] [CLAUDE] G-004 hecho: estado.ps1 contaba 0 dudas habiendo 3. El regex de seccion no exigia inicio de renglon y enganchaba la mencion a "## DUDAS PARA LEANDRO" que hay adentro del ticket A-002. Anclado con (?sm)^. Ademas se normalizaron los 11 HTML: git status quedo limpio | .agentes/estado.ps1
+[2026-08-27 10:13] [GEMINI] A-002 hecho: boton flotante de WhatsApp (.wsp-float) visible por defecto en pantallas <=900px sin scrollear | assets/css/styles.css, .agentes/TABLERO.md, .agentes/ads/CAMBIOS.md
+

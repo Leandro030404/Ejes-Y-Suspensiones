@@ -26,37 +26,22 @@ Formato de ticket:
 
 ## ASIGNADO A GEMINI
 
-### [A-002] Que el boton de WhatsApp se vea sin scrollear en celular
-- objetivo: en pantallas de hasta 900px de ancho, el boton verde flotante de WhatsApp
-  (`.wsp-float`) se ve desde que carga la pagina, sin necesidad de scrollear. En pantallas
-  mas grandes se comporta exactamente igual que hoy.
-- archivos_permitidos: `assets/css/styles.css` (SOLO dentro del bloque `@media (max-width:900px)`)
-- archivos_prohibidos: `assets/js/main.js` (lo maneja Claude), todos los `.html`
-- criterio_de_aceptacion: abrir `index.html` y `tercer-eje/index.html` con el servidor local,
-  poner el navegador a 390px de ancho, NO scrollear: se ve el boton verde. Achicar y agrandar:
-  a 901px o mas, sigue apareciendo recien al scrollear, como ahora.
-- notas:
-  * Hoy `.wsp-float` arranca invisible y `main.js` le agrega la clase `.is-visible` recien a
-    los **420px de scroll** (linea 53 de main.js). En celular, el visitante que llega de un
-    anuncio ve la primera pantalla SIN ningun boton de contacto directo: el de WhatsApp del
-    menu esta escondido detras de la hamburguesa, y en el hero solo hay un enlace `#contacto`
-    que lleva mas abajo.
-  * **Resolvelo por CSS, no toques main.js.** Dentro del `@media (max-width:900px)` alcanza
-    con que `.wsp-float` quede visible por defecto (opacidad, visibilidad y transform en su
-    estado final), sin depender de `.is-visible`.
-  * Fijate que no tape texto ni botones del hero en 390px. Si tapa algo, decilo en
-    `## DUDAS PARA LEANDRO` en vez de mover el hero: el hero no es tuyo en este ticket.
-  * Es un cambio que afecta a las 11 paginas de una sola vez, porque el CSS es compartido.
-    Anotalo en `.agentes/ads/CAMBIOS.md` como un solo cambio.
+(Nada asignado a Gemini por ahora.)
 
 
 
 ## EN CURSO
 
-(Nada en curso. Todo lo abierto esta en BACKLOG o ASIGNADO A GEMINI.)
+(Nada en curso. Todo lo abierto esta en BACKLOG.)
 
 
 ## HECHO
+
+### [A-002] Que el boton de WhatsApp se vea sin scrollear en celular
+- HECHO el 27/08/2026 por GEMINI.
+- Que se hizo: se agrego `.wsp-float{ opacity:1; visibility:visible; transform:translateY(0) scale(1); }` dentro de `@media (max-width:900px)` en `assets/css/styles.css`.
+- Comprobacion: en celular y pantallas <=900px, el boton flotante de WhatsApp (.wsp-float) arranca visible desde la carga inicial sin necesidad de scrollear; en resoluciones >900px mantiene el comportamiento previo (aparece tras 420px de scroll). No obstruye los botones principales del hero en 390px. Registrado en `.agentes/ads/CAMBIOS.md`.
+
 
 ### [G-003] Que el reglamento de dos agentes se lea de verdad
 - HECHO el 27/08/2026 por CLAUDE. **El problema no era que los agentes desobedecieran las
