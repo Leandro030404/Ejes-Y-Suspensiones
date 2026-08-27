@@ -18,24 +18,18 @@ Formato de ticket:
 
 ## BACKLOG
 
-### [A-001] Verificar que las 3 conversiones disparan de verdad
-- objetivo: confirmar, probando, que el clic en WhatsApp, el clic en telefono y el envio del
-  formulario disparan su evento en las 11 paginas
-- archivos_permitidos: (ninguno, es verificacion) — si aparece un error, se abre ticket aparte
-- criterio_de_aceptacion: informe corto en `.agentes/ads/INFORME.md` diciendo pagina por pagina
-  si dispara o no
-- notas: la medicion se instalo el 23/08 y el oyente delegado esta al final de `assets/js/main.js`.
-  Antes de optimizar nada hay que estar seguro de que lo que medimos es real.
+### [G-002] Los documentos internos estan publicados en internet
+- objetivo: que `CLAUDE.md` y la carpeta `.agentes` dejen de ser accesibles desde el sitio
+  publico, sin sacarlos del repositorio
+- criterio_de_aceptacion: abrir `https://ejesysuspensiones.com.ar/CLAUDE.md` y que devuelva 404
+- notas: **verificado el 26/08/2026**: hoy esa URL devuelve el archivo entero. Cualquiera que
+  la escriba lee el numero de cuenta de Google Ads, los presupuestos, lo que se gasto sin
+  convertir, la estrategia de negativas y los pendientes. No hay contrasenas ni datos de
+  tarjeta, pero es informacion de negocio a la vista de la competencia. GitHub Pages publica
+  todo lo que este en el repositorio.
+  La solucion tipica es un `_config.yml` con una lista `exclude`. Toca como se construye el
+  sitio publicado, asi que **requiere el OK de Leandro y verificar en vivo despues de subir.**
 - responsable sugerido: CLAUDE
-
-### [A-002] Contacto visible sin scrollear en celular
-- objetivo: en las 11 paginas, entrando desde un celular, se ve un boton de WhatsApp o de
-  telefono sin necesidad de scrollear
-- archivos_permitidos: a definir por Claude cuando arme el ticket
-- criterio_de_aceptacion: abrir cada pagina a 390px de ancho y ver el boton en la primera pantalla
-- notas: el trafico de Google Ads de este rubro entra casi todo desde el celular. Un cambio por
-  pagina por vez; anotarlo en `.agentes/ads/CAMBIOS.md`.
-- responsable sugerido: GEMINI
 
 ### [A-003] Revision de la campana nueva a los 14 dias
 - objetivo: mirar las conversiones de "Maximo rendimiento - Sitio Web" recien el **7 de septiembre**
@@ -45,13 +39,45 @@ Formato de ticket:
 
 ## ASIGNADO A GEMINI
 
-_(vacio — Claude carga los tickets acá con archivos_permitidos ya definidos)_
+### [A-002] Que el boton de WhatsApp se vea sin scrollear en celular
+- objetivo: en pantallas de hasta 900px de ancho, el boton verde flotante de WhatsApp
+  (`.wsp-float`) se ve desde que carga la pagina, sin necesidad de scrollear. En pantallas
+  mas grandes se comporta exactamente igual que hoy.
+- archivos_permitidos: `assets/css/styles.css` (SOLO dentro del bloque `@media (max-width:900px)`)
+- archivos_prohibidos: `assets/js/main.js` (lo maneja Claude), todos los `.html`
+- criterio_de_aceptacion: abrir `index.html` y `tercer-eje/index.html` con el servidor local,
+  poner el navegador a 390px de ancho, NO scrollear: se ve el boton verde. Achicar y agrandar:
+  a 901px o mas, sigue apareciendo recien al scrollear, como ahora.
+- notas:
+  * Hoy `.wsp-float` arranca invisible y `main.js` le agrega la clase `.is-visible` recien a
+    los **420px de scroll** (linea 53 de main.js). En celular, el visitante que llega de un
+    anuncio ve la primera pantalla SIN ningun boton de contacto directo: el de WhatsApp del
+    menu esta escondido detras de la hamburguesa, y en el hero solo hay un enlace `#contacto`
+    que lleva mas abajo.
+  * **Resolvelo por CSS, no toques main.js.** Dentro del `@media (max-width:900px)` alcanza
+    con que `.wsp-float` quede visible por defecto (opacidad, visibilidad y transform en su
+    estado final), sin depender de `.is-visible`.
+  * Fijate que no tape texto ni botones del hero en 390px. Si tapa algo, decilo en
+    `## DUDAS PARA LEANDRO` en vez de mover el hero: el hero no es tuyo en este ticket.
+  * Es un cambio que afecta a las 11 paginas de una sola vez, porque el CSS es compartido.
+    Anotalo en `.agentes/ads/CAMBIOS.md` como un solo cambio.
+
+
 
 ## EN CURSO
 
 _(vacio)_
 
 ## HECHO
+
+### [A-001] Verificar que las 3 conversiones disparan de verdad
+- HECHO el 26/08/2026 por CLAUDE. Resultado: **la medicion esta bien puesta**. Etiqueta y
+  main.js en las 11 paginas, oyente en fase de captura, enlaces de WhatsApp con target=_blank,
+  y el formulario dispara `formulario` sin contar doble. Informe completo en
+  `.agentes/ads/INFORME.md`.
+- Se encontro un error de documentacion en CLAUDE.md (decia que el formulario llamaba a
+  'whatsapp'); corregido.
+- Queda para Leandro: mirar en Google Ads que las 3 acciones figuren activas y principales.
 
 ### [G-001] Resolver los cambios sin commitear que hay en la carpeta
 - objetivo: la carpeta queda limpia (`git status` sin cambios pendientes) y con el historial claro

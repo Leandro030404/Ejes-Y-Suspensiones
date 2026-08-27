@@ -281,7 +281,7 @@ aunque termine abriendo WhatsApp: sería contar dos veces a la misma persona.
 
 El código vive al final de `assets/js/main.js`. Es **un solo oyente delegado**:
 cubre los 66 enlaces de WhatsApp y los 3 de teléfono sin tocar el HTML botón por
-botón. El formulario llama a `window.eysConversion('whatsapp')` a mano, porque
+botón. El formulario llama a `window.eysConversion('formulario')` a mano, porque
 abre WhatsApp con `window.open` y no pasa por un enlace.
 
 **Trampa:** las etiquetas se leen mal a ojo — la `l` minúscula y la `I` mayúscula
