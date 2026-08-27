@@ -10,3 +10,4 @@ Formato: [YYYY-MM-DD HH:MM] [CLAUDE|GEMINI] G-00X que se hizo | archivos tocados
 [2026-08-27 08:38] [CLAUDE] Antigravity CLI instalado y logueado. El esquema completo de dos agentes entra en vigencia | .agentes/CONTEXTO.md
 [2026-08-27 08:47] [CLAUDE] A-001 hecho: medicion verificada, todo correcto. Corregido error de doc en CLAUDE.md | CLAUDE.md, .agentes/ads/INFORME.md
 [2026-08-27 08:47] [CLAUDE] A-002 asignado a GEMINI con archivos definidos. Nuevo G-002: los documentos internos se ven en internet | .agentes/TABLERO.md
+[2026-08-27 08:51] [CLAUDE] G-002: creado _config.yml para no publicar CLAUDE.md, LEEME.md ni .agentes. Falta push y verificacion en vivo | _config.yml

@@ -18,19 +18,6 @@ Formato de ticket:
 
 ## BACKLOG
 
-### [G-002] Los documentos internos estan publicados en internet
-- objetivo: que `CLAUDE.md` y la carpeta `.agentes` dejen de ser accesibles desde el sitio
-  publico, sin sacarlos del repositorio
-- criterio_de_aceptacion: abrir `https://ejesysuspensiones.com.ar/CLAUDE.md` y que devuelva 404
-- notas: **verificado el 26/08/2026**: hoy esa URL devuelve el archivo entero. Cualquiera que
-  la escriba lee el numero de cuenta de Google Ads, los presupuestos, lo que se gasto sin
-  convertir, la estrategia de negativas y los pendientes. No hay contrasenas ni datos de
-  tarjeta, pero es informacion de negocio a la vista de la competencia. GitHub Pages publica
-  todo lo que este en el repositorio.
-  La solucion tipica es un `_config.yml` con una lista `exclude`. Toca como se construye el
-  sitio publicado, asi que **requiere el OK de Leandro y verificar en vivo despues de subir.**
-- responsable sugerido: CLAUDE
-
 ### [A-003] Revision de la campana nueva a los 14 dias
 - objetivo: mirar las conversiones de "Maximo rendimiento - Sitio Web" recien el **7 de septiembre**
 - criterio_de_aceptacion: informe con la comparacion contra el periodo anterior
@@ -66,7 +53,23 @@ Formato de ticket:
 
 ## EN CURSO
 
-_(vacio)_
+### [G-002] Los documentos internos estan publicados en internet
+- objetivo: que `CLAUDE.md` y la carpeta `.agentes` dejen de ser accesibles desde el sitio
+  publico, sin sacarlos del repositorio
+- criterio_de_aceptacion: abrir `https://ejesysuspensiones.com.ar/CLAUDE.md` y que devuelva 404
+- notas: **verificado el 26/08/2026**: hoy esa URL devuelve el archivo entero. Cualquiera que
+  la escriba lee el numero de cuenta de Google Ads, los presupuestos, lo que se gasto sin
+  convertir, la estrategia de negativas y los pendientes. No hay contrasenas ni datos de
+  tarjeta, pero es informacion de negocio a la vista de la competencia. GitHub Pages publica
+  todo lo que este en el repositorio.
+  La solucion tipica es un `_config.yml` con una lista `exclude`. Toca como se construye el
+  sitio publicado, asi que **requiere el OK de Leandro y verificar en vivo despues de subir.**
+- ESTADO 26/08/2026: `_config.yml` creado y commiteado (f0a1bc3). **Falta que Leandro haga
+  `git push`** desde su terminal (desde el contenedor no hay credenciales de GitHub) y despues
+  verificar en vivo que `https://ejesysuspensiones.com.ar/CLAUDE.md` devuelva 404 y que la
+  portada siga funcionando.
+
+
 
 ## HECHO
 
