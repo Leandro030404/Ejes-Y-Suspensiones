@@ -13,3 +13,6 @@ Formato: [YYYY-MM-DD HH:MM] [CLAUDE|GEMINI] G-00X que se hizo | archivos tocados
 [2026-08-27 08:51] [CLAUDE] G-002: creado _config.yml para no publicar CLAUDE.md, LEEME.md ni .agentes. Falta push y verificacion en vivo | _config.yml
 [2026-08-27 08:54] [CLAUDE] Sumado .agentes/estado.ps1 para ver de un vistazo quien esta trabajando | .agentes/estado.ps1
 [2026-08-27 09:06] [CLAUDE] Sumado modo economico a CLAUDE.md y prompt de mudanza fuera de OneDrive | CLAUDE.md, .agentes/PROMPT-MUDANZA.md
+[2026-08-27 09:12] [CLAUDE] G-002 hecho y VERIFICADO EN VIVO: push d0d27ec..e4307a5. CLAUDE.md, LEEME.md y servidor-local.ps1 dan 404; las 11 paginas, sitemap, robots y el archivo de Search Console siguen en 200 | _config.yml
+[2026-08-27 09:12] [CLAUDE] Borrados 6 archivos index.lock.viejo abandonados en .git (basura del 26/08). OneDrive sincroniza .git en caliente: ojo con eso | .git
+[2026-08-27 09:12] [CLAUDE] G-003 hecho: el protocolo de dos agentes (locks, tablero, bitacora) pasa a CLAUDE.md en "LEER PRIMERO", que Claude Code carga sola en cada sesion. Sumado AGENTS.md en la raiz y excluido de la publicacion. Causa raiz: REGLAS.md no lo cargaba nadie solo | CLAUDE.md, AGENTS.md, _config.yml, .agentes/TABLERO.md

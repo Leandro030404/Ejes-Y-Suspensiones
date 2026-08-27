@@ -18,6 +18,7 @@ exclude:
   - .gitattributes
   - .gitignore
   - README.md
+  - AGENTS.md          # punto de entrada de agentes, no es contenido del sitio
 
 # NO agregar a esta lista, se necesitan publicados:
 #   index.html, 404.html, las 10 carpetas de servicio, assets/, favicons,

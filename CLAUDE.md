@@ -9,6 +9,37 @@ el *por qué* de cada cosa, y evitá jerga técnica sin traducir.
 
 ---
 
+## LEER PRIMERO — no trabajás solo en esta carpeta
+
+Acá trabajan **dos agentes sobre los mismos archivos**: **CLAUDE** (Claude Code) y
+**GEMINI** (Antigravity CLI, comando `agy`). No hay ramas separadas. Si los dos tocan el
+mismo archivo, el segundo pisa al primero **sin ningún aviso**.
+
+**Antes de editar cualquier archivo:**
+
+1. Mirá `.agentes/locks/`. Si ya existe el lock de ese archivo y es del otro agente,
+   **no lo toques**: anotalo en la BITÁCORA y pasá a otra cosa.
+2. Creá el tuyo: `.agentes/locks/<ruta-con-guiones>.lock`
+   (ej: `index-html.lock`, `assets-css-styles-css.lock`), con una línea adentro:
+   `CLAUDE|GEMINI · G-00X · YYYY-MM-DD HH:MM`
+3. Al terminar: **borrá tus locks**, anotá en `.agentes/BITACORA.md` y mové el ticket a
+   `## HECHO` en `.agentes/TABLERO.md`. Un lock olvidado le traba el trabajo al otro.
+
+**No empieces nada que no esté como ticket en `.agentes/TABLERO.md`.** Ese es el único
+canal entre los dos agentes: no se hablan, se escriben ahí.
+
+El reglamento completo —qué comandos de Git están prohibidos, cómo se reparten los
+archivos, qué hacer si algo es ambiguo— está en **`.agentes/REGLAS.md`**. Leelo antes de
+tu primer cambio; es corto.
+
+Para ver de un vistazo quién está trabajando en qué:
+
+```
+powershell -ExecutionPolicy Bypass -File ".agentes\estado.ps1"
+```
+
+---
+
 ## Estado actual
 
 | | |
