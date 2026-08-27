@@ -42,7 +42,7 @@ Titulo "TABLERO"
 if (Test-Path ".agentes\TABLERO.md") {
   $txt = Get-Content ".agentes\TABLERO.md" -Raw
   foreach ($sec in @("BACKLOG","ASIGNADO A GEMINI","EN CURSO","HECHO","DUDAS PARA LEANDRO")) {
-    $m = [regex]::Match($txt, "(?s)##\s+$([regex]::Escape($sec))(.*?)(?=\r?\n##\s|\z)")
+    $m = [regex]::Match($txt, "(?sm)^##\s+$([regex]::Escape($sec))(.*?)(?=\r?\n##\s|\z)")
     $cuerpo = if ($m.Success) { $m.Groups[1].Value } else { "" }
     $n = ([regex]::Matches($cuerpo, "(?m)^###\s")).Count
     if ($sec -eq "DUDAS PARA LEANDRO") { $n = ([regex]::Matches($cuerpo, "(?m)^-\s")).Count }
