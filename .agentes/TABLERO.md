@@ -37,6 +37,22 @@ Formato de ticket:
 
 ## HECHO
 
+### [G-005] Que Claude pueda delegarle a Gemini sin intervencion de Leandro
+- HECHO el 27/08/2026 por CLAUDE. Antes habia que abrir `agy` a mano y pegarle un prompt.
+  Ahora: `powershell -ExecutionPolicy Bypass -File ".agentes\delegar.ps1" -Ticket A-00X`
+- Tres descubrimientos que costaron encontrar:
+  * En modo `-p`, `agy` **no toma la carpeta actual**: corre en un proyecto vacio y tira
+    "not a git repository". Hay que pasarle `--add-dir` con la ruta completa, siempre.
+  * Sus permisos de comandos son de **coincidencia literal**: permitir `git status --short`
+    no permite `git status`, y los comodines (`command(git *)`) se ignoran. Precargar una
+    lista de comandos es inviable.
+  * Salida: `--mode accept-edits`. Gemini lee y escribe archivos sin pedir permiso pero
+    **no ejecuta comandos**. Los locks los crea escribiendo el archivo, funciona igual.
+    Git entero queda del lado de Claude, que es lo que REGLAS.md ya pedia.
+- Probado de punta a punta: se le paso A-002 (ya HECHO), lo detecto y no toco ni un archivo.
+- Los permisos de Gemini viven en `C:\Users\leand\.gemini\antigravity-cli\settings.json`,
+  NO en la carpeta del proyecto. Un `.agy/settings.json` ahi adentro es inerte.
+
 ### [A-002] Que el boton de WhatsApp se vea sin scrollear en celular
 - HECHO el 27/08/2026 por GEMINI.
 - Que se hizo: se agrego `.wsp-float{ opacity:1; visibility:visible; transform:translateY(0) scale(1); }` dentro de `@media (max-width:900px)` en `assets/css/styles.css`.

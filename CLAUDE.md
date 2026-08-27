@@ -32,6 +32,15 @@ El reglamento completo —qué comandos de Git están prohibidos, cómo se repar
 archivos, qué hacer si algo es ambiguo— está en **`.agentes/REGLAS.md`**. Leelo antes de
 tu primer cambio; es corto.
 
+**Para delegarle un ticket a Gemini** (desde Claude o desde la terminal), una sola línea:
+
+```
+powershell -ExecutionPolicy Bypass -File ".agentes\delegar.ps1" -Ticket A-002
+```
+
+No hace falta abrir `agy` ni pegar ningún prompt. Gemini edita archivos; **Git y la
+verificación quedan del lado de Claude**. El detalle está en el punto 7 de `.agentes/REGLAS.md`.
+
 Para ver de un vistazo quién está trabajando en qué:
 
 ```

@@ -72,3 +72,43 @@ Están en `CLAUDE.md`, pero las repito porque son las que más se rompen:
 ## 6. Si algo está ambiguo
 
 No adivines. Escribilo en `TABLERO.md` bajo `## DUDAS PARA LEANDRO` y seguí con otro ticket.
+
+---
+
+## 7. Como se le delega un ticket a GEMINI
+
+Desde Claude, o desde tu terminal, con una sola linea:
+
+```
+powershell -ExecutionPolicy Bypass -File ".agentes\delegar.ps1" -Ticket A-002
+```
+
+Ya no hace falta abrir `agy` ni pegar ningun prompt: el script se lo arma solo.
+
+**Tres cosas que se aprendieron el 27/08/2026 y que hay que respetar:**
+
+1. **En modo automatico (`-p`), `agy` NO toma la carpeta actual.** Corre en un proyecto
+   vacio y te dice "not a git repository". Hay que pasarle
+   `--add-dir "C:\Users\leand\OneDrive\Escritorio\PAGINA EYS"` siempre.
+2. **Sus permisos de comandos son de coincidencia LITERAL.** Permitir
+   `git status --short` NO permite `git status`. Los comodines tipo `command(git *)`
+   se ignoran. Precargar una lista de comandos es inviable.
+3. **Por eso se usa `--mode accept-edits`:** Gemini lee y escribe archivos sin pedir
+   permiso, pero **no ejecuta comandos**. Los locks los crea escribiendo el archivo,
+   que funciona igual. Git queda entero del lado de Claude, que es lo que este
+   reglamento ya pedia en el punto 2.
+
+**El reparto queda asi:**
+
+| | GEMINI | CLAUDE |
+|---|---|---|
+| Leer y editar archivos | si | si |
+| Locks, BITACORA, TABLERO | si | si |
+| `git add` / `commit` | no | si |
+| `git push` | no | si |
+| Verificar en el navegador | no | si |
+
+Los permisos de Gemini viven en `C:\Users\leand\.gemini\antigravity-cli\settings.json`
+(no en la carpeta del proyecto). Ahi tambien esta `trustedWorkspaces`, que ya incluye
+PAGINA EYS.
+
