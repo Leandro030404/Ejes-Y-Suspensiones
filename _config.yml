@@ -1,0 +1,24 @@
+# Configuracion de GitHub Pages para ejesysuspensiones.com.ar
+#
+# GitHub Pages publica TODO lo que este en el repositorio. El 26/08/2026 se verifico que
+# https://ejesysuspensiones.com.ar/CLAUDE.md devolvia el archivo entero: numero de cuenta de
+# Google Ads, presupuestos, estrategia de negativas y pendientes, a la vista de cualquiera.
+#
+# Esta lista dice que archivos NO se publican. Siguen estando en el repositorio y en tu PC:
+# solo dejan de servirse desde el sitio.
+#
+# Si mas adelante sumas otro documento interno, agregalo a esta lista.
+
+exclude:
+  - CLAUDE.md          # contexto interno del proyecto
+  - LEEME.md           # manual de uso, no es contenido del sitio
+  - .agentes/          # coordinacion entre agentes, tablero, informes de Ads
+  - _originales/       # fotos en alta y textos de campanas (ya esta en .gitignore)
+  - servidor-local.ps1 # script de previsualizacion local
+  - .gitattributes
+  - .gitignore
+  - README.md
+
+# NO agregar a esta lista, se necesitan publicados:
+#   index.html, 404.html, las 10 carpetas de servicio, assets/, favicons,
+#   CNAME, robots.txt, sitemap.xml y google6f4817e7bc103d04.html (verifica Search Console)
