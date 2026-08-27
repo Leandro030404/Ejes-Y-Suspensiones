@@ -56,17 +56,18 @@
 | `ads/HISTORIAL.md` | métricas por fecha, para comparar revisión contra revisión |
 | `ads/CAMBIOS.md` | qué se cambió y cuándo, para medir el antes y el después |
 
-## Nota sobre GEMINI (actualizado 26/08/2026)
+## Nota sobre el segundo agente (actualizado 26/08/2026)
 
-Leandro usa **Gemini en el navegador**, que **no puede tocar archivos**. Por lo tanto hoy
-Gemini NO es un segundo ejecutor: es un **consultor externo** para textos de anuncios,
-titulares de landings y segundas opiniones sobre el análisis de campañas.
+El segundo agente es **Antigravity CLI** (comando `agy`, instalado el 26/08/2026 — Gemini CLI
+dejó de ser gratis el 18/06/2026). Corre en su propia terminal sobre esta misma carpeta y
+firma como **GEMINI** en el TABLERO y en la BITÁCORA. **El esquema completo está en vigencia:**
+tickets, locks y reglas de no pisarse valen desde ya.
 
-Circuito: Claude escribe `.agentes\consultas\C-00X-consulta.md` (autocontenido) → Leandro lo
-pega en Gemini → pega la respuesta en `C-00X-respuesta.md` → Claude la evalúa e implementa.
-Detalle en `.agentes\PROMPT-GEMINI-NAVEGADOR.md`.
+Recordá que su plan gratuito tiene límites semanales de uso. Si un día se queda sin cupo, no
+está roto: Claude sigue solo y los tickets pendientes quedan en el TABLERO.
 
-Mientras sea así, **todo lo del TABLERO lo ejecuta Claude**. La sección "ASIGNADO A GEMINI",
-los locks y las reglas de no pisarse quedan listas para el día que se instale **Antigravity CLI**
-(comando `agy` — Gemini CLI dejó de ser gratis el 18/06/2026). Ahí se usa `PROMPT-GEMINI.md`
-y el esquema completo entra en vigencia.
+Además existe un circuito aparte para **Gemini del navegador**, útil como consultor externo
+para textos de anuncios y segundas opiniones sobre el análisis de campañas: Claude escribe
+`.agentes\consultas\C-00X-consulta.md` (autocontenido) → Leandro lo pega en Gemini → pega la
+respuesta en `C-00X-respuesta.md` → Claude la evalúa e implementa. Detalle en
+`.agentes\PROMPT-GEMINI-NAVEGADOR.md`. Es opcional y no reemplaza a nada.

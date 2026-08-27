@@ -7,3 +7,4 @@ Formato: [YYYY-MM-DD HH:MM] [CLAUDE|GEMINI] G-00X que se hizo | archivos tocados
 [2026-08-26 14:41] [CLAUDE] G-001 hecho: normalizado fin de linea a LF en 12 archivos, sumado .gitattributes, 2 commits sin pushear | 11 html, CLAUDE.md, .gitignore, .gitattributes
 [2026-08-26 14:41] [CLAUDE] Sumado circuito de consultas para Gemini navegador | .agentes/PROMPT-GEMINI-NAVEGADOR.md, .agentes/consultas/
 [2026-08-26 14:48] [CLAUDE] Actualizado: el segundo agente pasa a ser Antigravity CLI (comando agy). Gemini CLI dejo de ser gratis el 18/06/2026 | .agentes/PROMPT-GEMINI.md, CONTEXTO.md, PROMPT-GEMINI-NAVEGADOR.md
+[2026-08-27 08:38] [CLAUDE] Antigravity CLI instalado y logueado. El esquema completo de dos agentes entra en vigencia | .agentes/CONTEXTO.md
