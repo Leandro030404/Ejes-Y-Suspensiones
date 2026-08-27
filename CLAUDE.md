@@ -330,7 +330,36 @@ se reenvió para que Google lo relea.
 
 ---
 
-## Cómo trabajar acá
+## Modo economico (aplica siempre, en toda sesion)
+
+Leandro paga por uso. Estas reglas no son sobre ser breve por gusto: cada una corta trabajo
+que no aporta.
+
+1. **No leas archivos enteros si alcanza con una parte.** `index.html` pesa 69 KB y
+   `styles.css` y `main.js` son largos. Usa `grep -n` para ubicar y despues lee solo ese
+   rango de lineas. Leer los tres archivos completos para cambiar un color es tirar plata.
+2. **No pegues el contenido de los archivos en el chat.** Leandro los tiene. Deci que
+   cambiaste y por que, no le muestres 200 lineas.
+3. **No narres lo que vas a hacer.** Hacelo y conta el resultado. Nada de "voy a revisar
+   el CSS, despues voy a..." seguido de hacerlo.
+4. **Un solo pase por archivo.** Junta todos los cambios que necesita un archivo y hacelos
+   de una. No lo edites cinco veces seguidas.
+5. **No re-verifiques lo ya verificado** en esta misma sesion ni lo que figura como hecho en
+   `.agentes/ads/INFORME.md` o en la BITACORA. Si ya esta comprobado, esta comprobado.
+6. **Respuestas cortas:** que se hizo, si funciono, que falta. Sin resumenes de cada paso ni
+   repetir lo que Leandro acaba de decir.
+7. **Antes de una exploracion larga, avisa y espera.** Si algo requiere abrir muchos
+   archivos, decilo en una linea y pedi el OK en vez de arrancar solo.
+8. **Delega lo repetitivo a Antigravity** (`agy`, plan gratuito de Google): cargale el ticket
+   en `.agentes/TABLERO.md`. Pero ojo: escribir un ticket bien cuesta parecido a hacer el
+   cambio. Delega lo largo y lo repetitivo, no lo de dos minutos.
+9. **Tema nuevo, conversacion nueva.** Las charlas largas se encarecen solas porque arrastran
+   todo lo anterior. Cuando se cierra un tema, conviene arrancar de cero con
+   "lee CLAUDE.md y .agentes". El contexto vive en la carpeta, no en el chat.
+
+---
+
+## Como trabajar aca
 
 ```bash
 # previsualizar
