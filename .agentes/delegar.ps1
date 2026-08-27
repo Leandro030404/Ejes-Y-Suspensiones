@@ -14,7 +14,7 @@ param(
   [int]$MinutosMax = 10
 )
 
-$carpeta = "C:\Users\leand\OneDrive\Escritorio\PAGINA EYS"
+$carpeta = "C:\proyectos\PAGINA EYS"
 
 $pedido = @"
 Sos el AGENTE EJECUTOR del proyecto PAGINA EYS (sitio de EyS - Ejes y Suspensiones).

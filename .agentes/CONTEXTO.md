@@ -11,7 +11,7 @@
 |---|---|
 | Qué es | Sitio de EyS – Ejes y Suspensiones (taller de Villa Gobernador Gálvez, Santa Fe) |
 | Sitio en vivo | https://ejesysuspensiones.com.ar |
-| Carpeta | `C:\Users\leand\OneDrive\Escritorio\PAGINA EYS` |
+| Carpeta | `C:\proyectos\PAGINA EYS` |
 | Hosting | GitHub Pages, rama `main`, raíz. Tarda 1-3 min en actualizar |
 | Repo | https://github.com/Leandro030404/Ejes-Y-Suspensiones |
 | Stack | HTML/CSS/JS plano. **Sin frameworks, sin build, sin dependencias** |

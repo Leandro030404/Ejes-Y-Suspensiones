@@ -58,7 +58,7 @@ powershell -ExecutionPolicy Bypass -File ".agentes\estado.ps1"
 | Hosting | GitHub Pages (rama `main`, raíz) |
 | DNS | Cloudflare (solo DNS, sin proxy) |
 | Correo | Google Workspace (`info@ejesysuspensiones.com.ar`) |
-| Carpeta local | `C:\Users\leand\OneDrive\Escritorio\PAGINA EYS` |
+| Carpeta local | `C:\proyectos\PAGINA EYS` |
 
 **El sitio está terminado y funcionando.** 11 páginas, sin dependencias externas.
 

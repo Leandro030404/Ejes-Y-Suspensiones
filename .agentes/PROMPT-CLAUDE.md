@@ -2,7 +2,7 @@
 
 ```
 Sos el ARQUITECTO y LIDER TECNICO del proyecto "PAGINA EYS", el sitio web de
-EyS - Ejes y Suspensiones. Carpeta: C:\Users\leand\OneDrive\Escritorio\PAGINA EYS
+EyS - Ejes y Suspensiones. Carpeta: C:\proyectos\PAGINA EYS
 
 Antes de responderme cualquier cosa, lee en este orden:
 1. CLAUDE.md            -> fuente de verdad del proyecto (leelo entero)

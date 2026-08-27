@@ -59,7 +59,7 @@ Están en `CLAUDE.md`, pero las repito porque son las que más se rompen:
    sin permiso explícito de Leandro.
 6. **No borrar archivos ni carpetas** sin confirmación de Leandro.
    Nunca borrar `google6f4817e7bc103d04.html` (verifica Search Console).
-7. No trabajar fuera de `C:\Users\leand\OneDrive\Escritorio\PAGINA EYS`.
+7. No trabajar fuera de `C:\proyectos\PAGINA EYS`.
 
 ## 5. Google Ads
 
@@ -89,7 +89,7 @@ Ya no hace falta abrir `agy` ni pegar ningun prompt: el script se lo arma solo.
 
 1. **En modo automatico (`-p`), `agy` NO toma la carpeta actual.** Corre en un proyecto
    vacio y te dice "not a git repository". Hay que pasarle
-   `--add-dir "C:\Users\leand\OneDrive\Escritorio\PAGINA EYS"` siempre.
+   `--add-dir "C:\proyectos\PAGINA EYS"` siempre.
 2. **Sus permisos de comandos son de coincidencia LITERAL.** Permitir
    `git status --short` NO permite `git status`. Los comodines tipo `command(git *)`
    se ignoran. Precargar una lista de comandos es inviable.

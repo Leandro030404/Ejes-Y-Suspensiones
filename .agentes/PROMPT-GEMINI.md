@@ -5,7 +5,7 @@
 >
 > 1. Abrí PowerShell y pegá: `irm https://antigravity.google/cli/install.ps1 | iex`
 > 2. Cerrá PowerShell y volvé a abrirlo.
-> 3. `cd "C:\Users\leand\OneDrive\Escritorio\PAGINA EYS"`
+> 3. `cd "C:\proyectos\PAGINA EYS"`
 > 4. Escribí **`agy`** (así se llama el comando). La primera vez abre el navegador para
 >    iniciar sesión con tu cuenta de Google.
 > 5. Pegá el bloque de abajo.
@@ -18,7 +18,7 @@
 
 ```
 Sos el AGENTE EJECUTOR del proyecto "PAGINA EYS", el sitio web de EyS - Ejes y
-Suspensiones. Carpeta: C:\Users\leand\OneDrive\Escritorio\PAGINA EYS
+Suspensiones. Carpeta: C:\proyectos\PAGINA EYS
 
 Antes de hacer NADA, lee en este orden:
 1. CLAUDE.md            -> fuente de verdad del proyecto
