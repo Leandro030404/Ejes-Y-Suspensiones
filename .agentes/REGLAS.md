@@ -85,11 +85,16 @@ powershell -ExecutionPolicy Bypass -File ".agentes\delegar.ps1" -Ticket A-002
 
 Ya no hace falta abrir `agy` ni pegar ningun prompt: el script se lo arma solo.
 
+**El script es generico desde el 27/08/2026.** Deduce la carpeta solo (la que contiene
+a `.agentes`) y lo propio de este proyecto lo lee de `.agentes/ENCARGO.md`. Se copia tal
+cual a otro proyecto; lo unico que cambia es el ENCARGO. Ya corre igual en la carpeta del
+sistema de ordenes de trabajo.
+
 **Tres cosas que se aprendieron el 27/08/2026 y que hay que respetar:**
 
 1. **En modo automatico (`-p`), `agy` NO toma la carpeta actual.** Corre en un proyecto
    vacio y te dice "not a git repository". Hay que pasarle
-   `--add-dir "C:\proyectos\PAGINA EYS"` siempre.
+   `--add-dir` con la carpeta siempre. El script ya lo hace solo.
 2. **Sus permisos de comandos son de coincidencia LITERAL.** Permitir
    `git status --short` NO permite `git status`. Los comodines tipo `command(git *)`
    se ignoran. Precargar una lista de comandos es inviable.
@@ -109,6 +114,8 @@ Ya no hace falta abrir `agy` ni pegar ningun prompt: el script se lo arma solo.
 | Verificar en el navegador | no | si |
 
 Los permisos de Gemini viven en `C:\Users\leand\.gemini\antigravity-cli\settings.json`
-(no en la carpeta del proyecto). Ahi tambien esta `trustedWorkspaces`, que ya incluye
-PAGINA EYS.
+(no en la carpeta del proyecto). Ahi tambien esta `trustedWorkspaces`, que ahora lista las
+dos carpetas: la del sitio y la del sistema de ordenes. **Al mudar una carpeta hay que
+actualizarlo:** habia quedado apuntando a la ruta vieja de OneDrive, asi que Gemini no
+habria confiado en la nueva.
 

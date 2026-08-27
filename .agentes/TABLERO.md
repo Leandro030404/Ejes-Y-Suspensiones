@@ -37,6 +37,16 @@ Formato de ticket:
 
 ## HECHO
 
+### [G-006] El sistema de dos agentes ahora es portatil
+- objetivo: que CLAUDE y GEMINI funcionen igual en otro proyecto, sin reescribir nada
+- que se hizo: `delegar.ps1` dejo de tener la ruta escrita a mano (la deduce de su propia
+  ubicacion) y lo propio de cada proyecto salio a `.agentes/ENCARGO.md`. `estado.ps1` ya
+  aguanta proyectos sin remoto de Git y muestra bien los acentos. Se instalo todo en la
+  carpeta del sistema de ordenes de trabajo, adaptado (ahi si hay dependencias, pruebas
+  y compilacion).
+- ademas: `trustedWorkspaces` de Gemini seguia apuntando a la carpeta vieja de OneDrive.
+  Corregido; ahora lista las dos carpetas.
+
 ### [G-005] Que Claude pueda delegarle a Gemini sin intervencion de Leandro
 - HECHO el 27/08/2026 por CLAUDE. Antes habia que abrir `agy` a mano y pegarle un prompt.
   Ahora: `powershell -ExecutionPolicy Bypass -File ".agentes\delegar.ps1" -Ticket A-00X`
