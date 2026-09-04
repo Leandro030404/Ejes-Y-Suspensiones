@@ -32,10 +32,25 @@ Formato de ticket:
 
 ## EN CURSO
 
+## HECHO
+### [G-007] Los botones de WhatsApp piden los datos antes de abrir el chat
+- objetivo: que los mensajes que llegan al taller vengan con el trabajo y la unidad ya
+  escritos, en vez de la plantilla en blanco que casi nadie completa
+- problema: los 66 botones abren WhatsApp con `Trabajo que necesito:` y
+  `Unidad (marca, modelo y año):` **vacíos**. La mayoría borra la plantilla y escribe
+  "hola". El formulario de contacto sí arma el mensaje bien; los botones no.
+- archivos_permitidos: `assets/js/main.js`, `assets/css/styles.css`
+- archivos_prohibidos: los 11 HTML (el panel se arma desde el JS, no se tocan)
+- criterio_de_aceptacion: toco un botón de WhatsApp, aparece un panel corto, completo la
+  unidad y se abre WhatsApp con el mensaje ya redactado. Con "prefiero escribir yo" se
+  abre el enlace de siempre. Sin JavaScript, todo sigue funcionando como hoy.
+- notas: **no puede inflar la medición.** Hoy un oyente delegado cuenta la conversión al
+  tocar el enlace; si contamos el toque y la persona abandona el panel, Google Ads
+  optimiza con datos falsos. La conversión tiene que dispararse recién cuando WhatsApp
+  abre de verdad.
+
 (Nada en curso. Todo lo abierto esta en BACKLOG.)
 
-
-## HECHO
 
 ### [G-006] El sistema de dos agentes ahora es portatil
 - objetivo: que CLAUDE y GEMINI funcionen igual en otro proyecto, sin reescribir nada

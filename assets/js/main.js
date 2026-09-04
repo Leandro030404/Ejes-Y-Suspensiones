@@ -402,6 +402,164 @@
     });
   });
 
+  /* ── 12. Paso previo a WhatsApp ────────────────── */
+  /* Los botones mandaban a WhatsApp una plantilla con los renglones EN BLANCO
+     ("Trabajo que necesito:", "Unidad (marca, modelo y año):") para que la
+     persona los completara dentro de WhatsApp. Casi nadie lo hace: llega "hola"
+     y el taller pierde el primer intercambio preguntando lo basico.
+     Ahora esos datos se piden aca, en dos toques, y WhatsApp abre con el
+     mensaje ya redactado. El que prefiere escribir el, tiene el enlace de
+     siempre a un toque. Sin JavaScript, todo funciona como antes. */
+  (function () {
+    var TRABAJOS = [
+      'Colocación de 3er eje',
+      'Escalabilidad / modificación de chasis',
+      'Cambio de chasis a tractor',
+      'Carrocerías y semirremolques',
+      'Sistema de freno ABS',
+      'Fabricación de ejes autodireccionales',
+      'Ejes trunnion / carretones',
+      'Suspensiones neumáticas',
+      'Trenes rodantes agrícolas',
+      'Repuestos y componentes',
+      'Consulta general'
+    ];
+
+    var panel = null, previo = null, enlace = null;
+
+    function textoDe(href) {
+      var i = href.indexOf('text=');
+      if (i === -1) return '';
+      try { return decodeURIComponent(href.slice(i + 5).replace(/\+/g, ' ')); }
+      catch (err) { return ''; }
+    }
+
+    /* El saludo del enlace ya dice de que trabajo se trata ("...consultar por
+       la colocacion de un tercer eje"). Lo reusamos tal cual y descartamos los
+       renglones vacios de la plantilla, que son los que venimos a reemplazar. */
+    function saludoDe(texto) {
+      var l = texto.split('\n');
+      return (l[0] || 'Hola, quisiera hacer una consulta.').trim();
+    }
+    function pideTrabajo(texto) { return texto.indexOf('Trabajo que necesito') !== -1; }
+
+    function cerrar() {
+      if (!panel) return;
+      panel.classList.remove('is-open');
+      document.body.classList.remove("no-scroll");
+      var p = panel;
+      setTimeout(function () { if (p && p.parentNode) p.parentNode.removeChild(p); }, reduced ? 0 : 200);
+      panel = null;
+      if (previo && previo.focus) previo.focus();
+    }
+
+    function abrirWhatsapp(mensaje) {
+      window.open('https://wa.me/' + WSP_NUMBER + '?text=' + encodeURIComponent(mensaje),
+                  '_blank', 'noopener');
+      if (window.eysConversion) window.eysConversion('whatsapp');
+      cerrar();
+    }
+
+    function abrirPanel(a) {
+      if (panel) return;
+      previo = a;
+      enlace = a.getAttribute('href') || '';
+      var texto  = textoDe(enlace);
+      var saludo = saludoDe(texto);
+      var conSel = pideTrabajo(texto);
+
+      panel = document.createElement('div');
+      panel.className = 'guia';
+      panel.setAttribute('role', 'dialog');
+      panel.setAttribute('aria-modal', 'true');
+      panel.setAttribute('aria-label', 'Preparar la consulta de WhatsApp');
+
+      var opciones = '';
+      for (var i = 0; i < TRABAJOS.length; i++) {
+        opciones += '<option value="' + TRABAJOS[i] + '">' + TRABAJOS[i] + '</option>';
+      }
+
+      panel.innerHTML =
+        '<div class="guia__fondo" data-cerrar></div>' +
+        '<div class="guia__caja">' +
+          '<button type="button" class="guia__x" data-cerrar aria-label="Cerrar">&times;</button>' +
+          '<p class="guia__titulo">Así te contestamos más rápido</p>' +
+          '<p class="guia__bajada">Completá esto y WhatsApp se abre con el mensaje ya escrito.</p>' +
+          '<form class="guia__form" novalidate>' +
+            (conSel
+              ? '<label class="guia__campo"><span>¿Qué trabajo necesitás?</span>' +
+                '<select name="trabajo">' + opciones + '</select></label>'
+              : '') +
+            '<label class="guia__campo"><span>Unidad — marca, modelo y año</span>' +
+              '<input name="unidad" type="text" autocomplete="off" placeholder="Ej.: Scania R450 2019" required></label>' +
+            '<label class="guia__campo"><span>¿Algo más que quieras contarnos? <em>(opcional)</em></span>' +
+              '<textarea name="detalle" rows="2" placeholder="Ej.: la uso para cereal, quiero sumar carga"></textarea></label>' +
+            '<p class="guia__error" hidden>Escribinos al menos la marca y el modelo.</p>' +
+            '<button type="submit" class="btn btn--wsp guia__enviar">Abrir WhatsApp con mi consulta</button>' +
+          '</form>' +
+          '<button type="button" class="guia__saltar">Prefiero escribir yo</button>' +
+        '</div>';
+
+      document.body.appendChild(panel);
+      document.body.classList.add("no-scroll");
+      requestAnimationFrame(function () { panel.classList.add('is-open'); });
+
+      var form  = $('.guia__form', panel);
+      var error = $('.guia__error', panel);
+      var campo = $('[name="unidad"]', panel);
+      setTimeout(function () { if (campo) campo.focus(); }, reduced ? 0 : 220);
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var unidad = (campo.value || '').trim();
+        if (unidad.length < 3) {
+          error.hidden = false;
+          campo.focus();
+          return;
+        }
+        var sel     = $('[name="trabajo"]', panel);
+        var detalle = ($('[name="detalle"]', panel).value || '').trim();
+
+        var lineas = [saludo, ''];
+        if (sel) lineas.push('Trabajo que necesito: ' + sel.value);
+        lineas.push('Unidad: ' + unidad);
+        if (detalle) { lineas.push(''); lineas.push(detalle); }
+        abrirWhatsapp(lineas.join('\n'));
+      });
+
+      campo.addEventListener('input', function () { error.hidden = true; });
+
+      $('.guia__saltar', panel).addEventListener('click', function () {
+        window.open(enlace, '_blank', 'noopener');
+        if (window.eysConversion) window.eysConversion('whatsapp');
+        cerrar();
+      });
+
+      $$('[data-cerrar]', panel).forEach(function (el) {
+        el.addEventListener('click', cerrar);
+      });
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (panel && e.key === 'Escape') cerrar();
+    });
+
+    /* Este oyente se registra ANTES que el de medicion (que vive en el IIFE de
+       abajo), asi que stopImmediatePropagation lo frena: la conversion NO se
+       cuenta al abrir el panel, solo cuando WhatsApp abre de verdad. Si se
+       contara el toque, Google Ads optimizaria con conversiones que no pasaron. */
+    document.addEventListener('click', function (e) {
+      var a = (e.target && e.target.closest) ? e.target.closest('a[href]') : null;
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      if (href.indexOf('wa.me') === -1) return;
+      if (a.closest('.guia')) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      abrirPanel(a);
+    }, true);
+  })();
+
 })();
 
 /* ---------- Medicion de conversiones (Google Ads) ---------- */
