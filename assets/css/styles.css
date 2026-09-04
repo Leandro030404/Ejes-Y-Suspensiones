@@ -1392,7 +1392,8 @@ html:not(.js) .preloader{ display:none; }
 .chat-lanzador{
   position:fixed; right:1.3rem; bottom:5.6rem; z-index:901;
   display:flex; align-items:center; gap:.4rem;
-  padding:.62rem 1rem;
+  padding:.72rem 1.05rem;   /* garantiza 44px de alto: el minimo tactil */
+  min-height:44px;
   border:0; border-radius:999px; cursor:pointer;
   font-family:var(--font-body); font-size:.86rem; font-weight:600;
   color:var(--txt-invert); background:var(--ink-3);

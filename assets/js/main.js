@@ -21,7 +21,15 @@
   }
   window.addEventListener('load', function () { setTimeout(hidePreloader, 320); });
   // Red de seguridad: si algún recurso queda colgado, se oculta igual.
-  setTimeout(hidePreloader, 4500);
+  /* Antes esto colgaba de window.load, que espera a las 21 fotos de la portada: hasta
+     4,5 segundos de pantalla en blanco para alguien con datos moviles en la ruta, que es
+     el visitante tipico. La foto del hero tiene prioridad alta y esta lista mucho antes. */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hidePreloader);
+  } else {
+    hidePreloader();
+  }
+  setTimeout(hidePreloader, 1500);
 
   /* ── 2. Año en el footer ───────────────────────── */
   var yearEl = $('#year');
@@ -430,6 +438,31 @@
 
     var panel = null, previo = null, enlace = null;
 
+    /* El taller atiende lunes a viernes de 8 a 15: son 43 de las 168 horas de la semana.
+       Prometerle a alguien "te contestamos mas rapido" un sabado a las 22:40 es mentira, y
+       se lee como una burla. Fuera de hora la promesa honesta es otra, y es mejor: dejalo
+       escrito y es lo primero que leemos el lunes. */
+    function estaAbierto() {
+      var d = new Date(), dia = d.getDay(), hora = d.getHours();
+      return dia >= 1 && dia <= 5 && hora >= 8 && hora < 15;
+    }
+
+    function textoCabecera() {
+      if (estaAbierto()) {
+        return {
+          titulo: 'Así te contestamos más rápido',
+          bajada: 'Completá esto y WhatsApp se abre con el mensaje ya escrito. ' +
+                  'El plazo y el presupuesto te los confirmamos viendo la unidad.'
+        };
+      }
+      return {
+        titulo: 'Dejanos esto y te contestamos apenas abrimos',
+        bajada: 'Ahora el taller está cerrado. Completá esto y tu consulta es lo primero ' +
+                'que leemos el próximo día hábil a las 8. El plazo y el presupuesto te los ' +
+                'confirmamos viendo la unidad.'
+      };
+    }
+
     function textoDe(href) {
       var i = href.indexOf('text=');
       if (i === -1) return '';
@@ -523,8 +556,8 @@
         '<div class="guia__fondo" data-cerrar></div>' +
         '<div class="guia__caja">' +
           '<button type="button" class="guia__x" data-cerrar aria-label="Cerrar">&times;</button>' +
-          '<p class="guia__titulo">Así te contestamos más rápido</p>' +
-          '<p class="guia__bajada">Completá esto y WhatsApp se abre con el mensaje ya escrito.</p>' +
+          '<p class="guia__titulo">' + textoCabecera().titulo + '</p>' +
+          '<p class="guia__bajada">' + textoCabecera().bajada + '</p>' +
           '<form class="guia__form" novalidate>' +
             (conSel
               ? '<label class="guia__campo"><span>¿Qué trabajo necesitás?</span>' +

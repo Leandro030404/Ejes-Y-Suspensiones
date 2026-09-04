@@ -33,6 +33,25 @@ Formato de ticket:
 ## EN CURSO
 
 ## HECHO
+### [G-013] Los P1 que quedaban de la crítica
+- objetivo: que el camino al contacto funcione en el celular y que el horario deje de ser
+  una disculpa para pasar a ser la promesa
+- qué entra:
+  1. **Hero de la portada**: hoy el botón rojo grande dice "Ver trabajos" y lleva a fotos.
+     **Las 10 páginas de servicio ya tienen WhatsApp como principal**; la portada es la
+     única que no. Se unifica.
+  2. **El panel sabe la hora**: prometer "te contestamos más rápido" un sábado a las 22:40
+     es falso. Fuera de las 8 a 15 de lunes a viernes cambia el texto y suma la única
+     tranquilidad honesta que podemos dar sobre plazo y presupuesto.
+  3. **Preloader**: esperaba al evento `load`, o sea a las 21 fotos, con red de 4500 ms.
+  4. **Botón "¿Dudas?"**: medido en vivo, 42,5px de alto. El mínimo táctil es 44.
+- archivos_permitidos: `index.html` (solo el hero), `assets/js/main.js`, `assets/css/styles.css`
+- criterio_de_aceptacion: en el celular, el botón más grande del hero abre WhatsApp; el
+  panel dice algo distinto fuera de hora; la portada pinta sin esperar las fotos; el chip
+  mide 44px o más
+- notas: NO se toca el rojo sobre fondo oscuro (3,8:1 medido). Es color de marca y la
+  decisión es de Leandro, no mía.
+
 ### [G-012] Los tres defectos del panel de WhatsApp
 - objetivo: que el panel no mande datos falsos ni pierda al visitante en silencio
 - problema: los tres los introdujo G-007 y los encontró la crítica del 04/09
