@@ -560,6 +560,168 @@
     }, true);
   })();
 
+  /* ── 13. Asistente del sitio ───────────────────── */
+  /* El taller atiende lunes a viernes de 8 a 15. Todas las tardes, las noches y
+     los fines de semana el sitio recibe visitas y no hay nadie del otro lado.
+     Este asistente contesta lo que ya esta publicado y empuja a WhatsApp.
+
+     La clave de la IA NO esta aca: el navegador le habla a un intermediario en
+     Cloudflare (asistente/worker.js) y ese guarda la clave. Es la SEGUNDA
+     excepcion a "cero recursos externos", despues de la etiqueta de Google Ads.
+     Si el intermediario no contesta, el asistente no se rompe: avisa y ofrece
+     el WhatsApp de siempre. */
+  (function () {
+    var CEREBRO = 'https://eys-asistente.leandrobertainariver.workers.dev';
+
+    var SALUDO = 'Hola. Soy el asistente de EyS. Puedo contarte qué trabajos hacemos, ' +
+                 'dónde estamos y cómo seguir con tu consulta. ¿Qué necesitás?';
+
+    var SUGERIDAS = [
+      '¿Hacen colocación de tercer eje?',
+      '¿Cuánto tardan?',
+      '¿Dónde están?'
+    ];
+
+    /* El enlace generico de siempre. Al tocarlo lo agarra la seccion 12 y abre
+       el panel que pide trabajo y unidad, asi que el mensaje sale completo. */
+    var WSP_LINK = 'https://wa.me/' + WSP_NUMBER + '?text=' + encodeURIComponent(
+      'Hola, quisiera hacer una consulta.\n\nTrabajo que necesito: \nUnidad (marca, modelo y año): '
+    );
+
+    var caja = null, lista = null, entrada = null, historia = [], esperando = false;
+
+    function nodoTexto(t) { return document.createTextNode(t); }
+
+    function burbuja(quien, texto) {
+      var d = document.createElement('div');
+      d.className = 'chat__msg chat__msg--' + quien;
+      /* Sin innerHTML: lo que vuelve de la IA se trata como texto, nunca como
+         marcado. Asi no hay forma de que una respuesta inyecte nada en la pagina. */
+      texto.split('\n').forEach(function (linea, i) {
+        if (i) d.appendChild(document.createElement('br'));
+        d.appendChild(nodoTexto(linea));
+      });
+      lista.appendChild(d);
+      lista.scrollTop = lista.scrollHeight;
+      return d;
+    }
+
+    function pensando() {
+      var d = document.createElement('div');
+      d.className = 'chat__msg chat__msg--asistente chat__msg--pensando';
+      d.innerHTML = '<span></span><span></span><span></span>';
+      lista.appendChild(d);
+      lista.scrollTop = lista.scrollHeight;
+      return d;
+    }
+
+    function preguntar(texto) {
+      if (esperando || !texto) return;
+      esperando = true;
+      var sug = $('.chat__sugeridas', caja);
+      if (sug) sug.remove();
+      burbuja('yo', texto);
+      historia.push({ rol: 'yo', texto: texto });
+      entrada.value = '';
+      var espera = pensando();
+
+      fetch(CEREBRO, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: texto, history: historia.slice(0, -1) })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          espera.remove();
+          var t = (d && d.reply) ||
+                  'No pude contestarte ahora. Escribinos por WhatsApp y te respondemos ' +
+                  'apenas abrimos (lunes a viernes de 8 a 15).';
+          burbuja('asistente', t);
+          historia.push({ rol: 'asistente', texto: t });
+        })
+        .catch(function () {
+          espera.remove();
+          burbuja('asistente',
+            'Se me cortó la conexión. Escribinos por WhatsApp al 0341 685-5469 y ' +
+            'te contestamos apenas abrimos.');
+        })
+        .then(function () { esperando = false; entrada.focus(); });
+    }
+
+    function cerrarChat() {
+      if (!caja) return;
+      caja.classList.remove('is-open');
+      var c = caja;
+      setTimeout(function () { if (c && c.parentNode) c.parentNode.removeChild(c); },
+                 reduced ? 0 : 200);
+      caja = null;
+      var b = $('.chat-lanzador');
+      if (b) { b.setAttribute('aria-expanded', 'false'); b.focus(); }
+    }
+
+    function abrirChat() {
+      if (caja) { cerrarChat(); return; }
+
+      caja = document.createElement('div');
+      caja.className = 'chat';
+      caja.setAttribute('role', 'dialog');
+      caja.setAttribute('aria-label', 'Asistente de EyS');
+
+      var sug = '';
+      for (var i = 0; i < SUGERIDAS.length; i++) {
+        sug += '<button type="button" class="chat__sug">' + SUGERIDAS[i] + '</button>';
+      }
+
+      caja.innerHTML =
+        '<div class="chat__barra">' +
+          '<span class="chat__nombre">Asistente de EyS</span>' +
+          '<button type="button" class="chat__x" aria-label="Cerrar">&times;</button>' +
+        '</div>' +
+        '<div class="chat__lista"></div>' +
+        '<div class="chat__sugeridas">' + sug + '</div>' +
+        '<form class="chat__form">' +
+          '<input class="chat__entrada" type="text" autocomplete="off" ' +
+                 'placeholder="Escribí tu consulta" aria-label="Tu consulta" maxlength="500">' +
+          '<button type="submit" class="chat__enviar" aria-label="Enviar">&rarr;</button>' +
+        '</form>' +
+        '<a class="chat__wsp" href="' + WSP_LINK + '">o escribinos directo por WhatsApp</a>';
+
+      document.body.appendChild(caja);
+      lista   = $('.chat__lista', caja);
+      entrada = $('.chat__entrada', caja);
+      requestAnimationFrame(function () { caja.classList.add('is-open'); });
+
+      burbuja('asistente', SALUDO);
+      historia.push({ rol: 'asistente', texto: SALUDO });
+
+      $('.chat__x', caja).addEventListener('click', cerrarChat);
+      $('.chat__form', caja).addEventListener('submit', function (e) {
+        e.preventDefault();
+        preguntar((entrada.value || '').trim());
+      });
+      $$('.chat__sug', caja).forEach(function (b) {
+        b.addEventListener('click', function () { preguntar(b.textContent); });
+      });
+
+      var lanz = $('.chat-lanzador');
+      if (lanz) lanz.setAttribute('aria-expanded', 'true');
+      setTimeout(function () { entrada.focus(); }, reduced ? 0 : 220);
+    }
+
+    /* El boton flotante se arma desde aca: los 11 HTML no se tocan. */
+    var boton = document.createElement('button');
+    boton.type = 'button';
+    boton.className = 'chat-lanzador';
+    boton.setAttribute('aria-expanded', 'false');
+    boton.innerHTML = '<span class="chat-lanzador__txt">¿Dudas?</span>';
+    boton.addEventListener('click', abrirChat);
+    document.body.appendChild(boton);
+
+    document.addEventListener('keydown', function (e) {
+      if (caja && e.key === 'Escape') cerrarChat();
+    });
+  })();
+
 })();
 
 /* ---------- Medicion de conversiones (Google Ads) ---------- */
