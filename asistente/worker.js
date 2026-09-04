@@ -33,7 +33,7 @@ const POR_IP_MINUTO = 6;
 const POR_IP_DIA    = 60;
 const TOTAL_DIA     = 800;
 
-const MODELOS = ['gemini-3.1-flash-lite', 'gemini-3.5-flash-lite', 'gemini-3.6-flash', 'gemini-flash-lite-latest'];
+const MODELOS = ['gemini-3.1-flash-lite', 'gemini-3.6-flash', 'gemini-3.5-flash-lite', 'gemini-flash-lite-latest'];
 
 /* ── Lo que el asistente sabe ────────────────────────────────────────
    TODO lo de acá sale del sitio y de la ficha de Google. Si un dato no
@@ -259,15 +259,21 @@ export default {
             'x-goog-api-key': env.GEMINI_API_KEY
           },
           body: JSON.stringify(cuerpoPedido),
-          /* Si un modelo esta saturado no lo esperamos eternamente: a los 9
-             segundos cortamos y probamos el siguiente. Sin esto, un modelo
-             caido le suma su demora a todas las respuestas. */
-          signal: AbortSignal.timeout(8000)
+          /* El limite es del TOTAL de la espera, no de cada intento. Con un tope
+             por intento, una pregunta que da para pensar (y que el modelo iba a
+             contestar bien en 12 segundos) moria degollada cuatro veces seguidas
+             y el visitante terminaba sin respuesta. Los modelos saturados fallan
+             solos en 2 o 3 segundos, asi que casi no gastan del presupuesto. */
+          signal: AbortSignal.timeout(Math.max(2500, limite - Date.now()))
         }
       );
     }
 
+    /* Cuanto esta dispuesto a esperar el visitante, en total. */
+    const limite = Date.now() + 20000;
+
     for (const modelo of MODELOS) {
+      if (Date.now() >= limite) break;
       try {
         let r = await pedirle(modelo, true);
         if (r.status === 400) r = await pedirle(modelo, false);
