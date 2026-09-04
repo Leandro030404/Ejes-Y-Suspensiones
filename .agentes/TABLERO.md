@@ -33,6 +33,19 @@ Formato de ticket:
 ## EN CURSO
 
 ## HECHO
+### [G-010] Descripciones que Google corta a la mitad
+- objetivo: que el texto que aparece bajo el título en Google se lea entero, y que lo
+  que sobreviva al corte sea lo que convierte: qué hacen y dónde están
+- problema: Google muestra ~155 caracteres. Las 11 descripciones van de 171 a 271. La
+  de la portada pierde "certificados por CENT, CNTSV y AITA. Villa Gobernador Gálvez",
+  que es justo la parte que da confianza y ubica al taller.
+- archivos_permitidos: los 11 `index.html` (solo las etiquetas description y
+  og:description), `sitemap.xml`
+- archivos_prohibidos: todo lo demás. No se toca el contenido visible de las páginas.
+- criterio_de_aceptacion: las 11 descripciones quedan en 155 caracteres o menos, sin
+  inventar nada que no esté ya en la página
+- notas: no hay dato nuevo. Se recorta y se reordena lo que ya estaba escrito.
+
 ### [G-009] Asistente que contesta fuera de hora y termina en WhatsApp
 - objetivo: que el visitante que llega a la noche o el fin de semana (el taller atiende
   lun-vie 8 a 15) tenga con quién hablar, y que la charla termine en un mensaje de
