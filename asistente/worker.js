@@ -33,7 +33,7 @@ const POR_IP_MINUTO = 6;
 const POR_IP_DIA    = 60;
 const TOTAL_DIA     = 800;
 
-const MODELOS = ['gemini-2.5-flash-lite', 'gemini-2.5-flash'];
+const MODELOS = ['gemini-2.5-flash-lite', 'gemini-2.5-flash', 'gemini-flash-latest', 'gemini-2.0-flash'];
 
 /* ── Lo que el asistente sabe ────────────────────────────────────────
    TODO lo de acá sale del sitio y de la ficha de Google. Si un dato no
@@ -162,6 +162,7 @@ export default {
     try { cuerpo = await request.json(); }
     catch (e) { return respuesta({ error: 'json' }, 400, origen); }
 
+    const cuerpoDiag = cuerpo && cuerpo.diagnostico === true;
     const mensaje = String(cuerpo.message || '').slice(0, 1000).trim();
     if (!mensaje) return respuesta({ error: 'vacio' }, 400, origen);
 
@@ -191,15 +192,62 @@ export default {
       ].map(c => ({ category: c, threshold: 'BLOCK_ONLY_HIGH' }))
     };
 
-    /* Si el primer modelo falla o esta saturado, probamos el siguiente. */
+    /* Modo diagnostico: le pregunta a Google que modelos tiene disponibles esta
+       clave y devuelve el error tal cual si algo falla. NUNCA devuelve la clave.
+       Se usa solo para depurar desde afuera; un visitante nunca pasa por aca. */
+    if (cuerpoDiag) {
+      const salida = { modelos: null, errores: [] };
+      try {
+        const r = await fetch(
+          'https://generativelanguage.googleapis.com/v1beta/models',
+          { headers: { 'x-goog-api-key': env.GEMINI_API_KEY } }
+        );
+        const txt = await r.text();
+        if (r.ok) {
+          try {
+            salida.modelos = (JSON.parse(txt).models || [])
+              .map(m => m.name)
+              .filter(n => n.indexOf('gemini') !== -1);
+          } catch (e) { salida.modelos = 'no pude leer la lista'; }
+        } else {
+          salida.errores.push({ paso: 'listar modelos', estado: r.status, detalle: txt.slice(0, 400) });
+        }
+      } catch (e) {
+        salida.errores.push({ paso: 'listar modelos', excepcion: String(e).slice(0, 200) });
+      }
+
+      for (const modelo of MODELOS) {
+        try {
+          const r = await fetch(
+            'https://generativelanguage.googleapis.com/v1beta/models/' + modelo + ':generateContent',
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
+              body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: 'hola' }] }] })
+            }
+          );
+          const txt = await r.text();
+          salida.errores.push({ modelo: modelo, estado: r.status, detalle: r.ok ? 'OK' : txt.slice(0, 400) });
+        } catch (e) {
+          salida.errores.push({ modelo: modelo, excepcion: String(e).slice(0, 200) });
+        }
+      }
+      return respuesta(salida, 200, origen);
+    }
+
+    /* Si un modelo falla o esta saturado, probamos el siguiente.
+       La clave viaja en un encabezado, no en la direccion: asi no queda escrita
+       en ningun registro de servidor intermedio. */
     for (const modelo of MODELOS) {
       try {
         const r = await fetch(
-          'https://generativelanguage.googleapis.com/v1beta/models/' + modelo +
-          ':generateContent?key=' + env.GEMINI_API_KEY,
+          'https://generativelanguage.googleapis.com/v1beta/models/' + modelo + ':generateContent',
           {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              'x-goog-api-key': env.GEMINI_API_KEY
+            },
             body: JSON.stringify(pedido)
           }
         );
