@@ -32,6 +32,7 @@ Formato de ticket:
 
 ## EN CURSO
 
+## HECHO
 ### [G-009] Asistente que contesta fuera de hora y termina en WhatsApp
 - objetivo: que el visitante que llega a la noche o el fin de semana (el taller atiende
   lun-vie 8 a 15) tenga con quién hablar, y que la charla termine en un mensaje de
@@ -47,7 +48,6 @@ Formato de ticket:
   Leandro la pega él mismo en el panel de Cloudflare; ningún agente la ve ni la escribe.
   Es la **segunda excepción** a "cero recursos externos", después de la etiqueta de Ads.
 
-## HECHO
 ### [G-008] Que el navegador no siga mostrando el CSS y el JS viejos
 - objetivo: dejar de tener que avisar "recargá con Ctrl+F5" en cada publicación
 - problema: las 11 páginas piden `styles.css` y `main.js` sin número de versión, así que

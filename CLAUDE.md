@@ -111,10 +111,12 @@ _originales/                  NO versionado (gitignore). Fotos en alta,
 ## Reglas del proyecto
 
 1. **Sin frameworks, sin build.** HTML/CSS/JS plano. No agregar dependencias.
-2. **Cero recursos externos, con UNA excepción.** Las tipografías se sirven localmente;
-   no volver a Google Fonts. La única excepción autorizada es la etiqueta de Google Ads
-   (`googletagmanager.com`), que se sumó el 23/08/2026 para medir conversiones. Es
-   inevitable: sin ese script no hay medición posible.
+2. **Cero recursos externos, con DOS excepciones.** Las tipografías se sirven localmente;
+   no volver a Google Fonts. Las dos excepciones autorizadas son la etiqueta de Google
+   Ads (`googletagmanager.com`, 23/08/2026), sin la cual no hay medición de conversiones
+   posible, y el asistente del sitio (04/09/2026), que le habla a un intermediario propio
+   en Cloudflare porque la clave de la IA no puede vivir en el navegador. Cualquier
+   tercera excepción se consulta con Leandro antes.
 3. **No inventar datos.** Todo el contenido sale del sitio original. Nunca inventar
    plazos de entrega, precios ni especificaciones técnicas. Si falta un dato, pedirlo.
 4. **Verificar antes de decir que está hecho.** Levantar el servidor local, medir, y
@@ -230,6 +232,37 @@ de hover y degradado). Para capas nuevas usar `::before`.
 - **Sin `latin-ext`** en las tipografías: el español entra completo en `latin`.
 - Los horarios y los datos de contacto **coinciden exactamente** con el Perfil de
   Empresa de Google. Si se cambia uno, cambiar el otro.
+
+---
+
+- **Asistente en el sitio** (04/09/2026, G-009). Botón flotante "¿Dudas?" en las 11
+  páginas, con una ventana de chat. Existe por el horario: el taller atiende lunes a
+  viernes de 8 a 15, y todas las tardes, noches y fines de semana el sitio recibe
+  visitas sin nadie del otro lado. El asistente contesta lo que ya está publicado y
+  empuja a WhatsApp; su enlace de WhatsApp cae en el panel de G-007, así que la
+  consulta igual sale con trabajo y unidad.
+  **La clave de la IA NO está en el sitio.** El navegador le habla a un intermediario
+  propio en Cloudflare (`asistente/worker.js`, publicado en
+  `eys-asistente.leandrobertainariver.workers.dev`) y la clave vive ahí, cargada a mano
+  por Leandro. Es la **segunda excepción** autorizada a "cero recursos externos".
+  Se usa la dirección `.workers.dev` y **no** una ruta del dominio: el DNS está en
+  "solo DNS" y usar una ruta propia obligaría a activar el proxy sobre todo el sitio.
+  **Para cambiar lo que sabe o dice**, se edita `asistente/worker.js` y Leandro lo pega
+  en Cloudflare (Edit code → Ctrl+A → pegar → Deploy). No hay despliegue automático.
+  **Trampa de Cloudflare:** cargar un secreto o cambiar el código crea una *versión*
+  que queda **sin desplegar**. Hay que mirar Version History y confirmar que la barra
+  azul quedó en la de arriba. Perdimos un rato largo por esto.
+  **Trampa de Google:** jubila modelos sin aviso. `gemini-2.5-flash` y
+  `gemini-2.5-flash-lite` devuelven 404 "no longer available to new users" en cuentas
+  nuevas. El worker prueba varios modelos en orden y tiene un **modo diagnóstico**
+  (`{"message":"x","diagnostico":true}`) que pregunta qué modelos acepta la clave y
+  devuelve el error de Google tal cual. Ante cualquier falla, correrlo primero.
+  **Reglas del asistente:** no da precios, no inventa plazos salvo el del tercer eje
+  (10 a 15 días hábiles), no promete que un trabajo se pueda hacer en una unidad
+  concreta, y no habla de otra cosa. Probado contra un intento de saltarse las reglas.
+  Se decidió **no publicar el precio del tercer eje** (USD 9.800): con el número a la
+  vista, parte de los interesados se autodescarta sin llegar a escribir. La
+  implementación quedó en el historial (commit 6aea462) por si conviene más adelante.
 
 ---
 
