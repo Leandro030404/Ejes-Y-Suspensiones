@@ -19,6 +19,11 @@ exclude:
   - .gitignore
   - README.md
   - AGENTS.md          # punto de entrada de agentes, no es contenido del sitio
+  - PRODUCT.md         # contexto de producto (nombra la cuenta de Google Ads)
+  - versionar.ps1      # script interno de publicacion
+  - asistente/         # codigo del intermediario del asistente. No tiene claves, pero
+                       # publica entero el texto con el que se lo instruye y sus topes
+                       # de uso: es el mapa para intentar saltarselo.
 
 # NO agregar a esta lista, se necesitan publicados:
 #   index.html, 404.html, las 10 carpetas de servicio, assets/, favicons,
