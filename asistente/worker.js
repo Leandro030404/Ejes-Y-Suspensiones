@@ -33,7 +33,7 @@ const POR_IP_MINUTO = 6;
 const POR_IP_DIA    = 60;
 const TOTAL_DIA     = 800;
 
-const MODELOS = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.6-flash', 'gemini-flash-lite-latest'];
+const MODELOS = ['gemini-3.1-flash-lite', 'gemini-3.5-flash-lite', 'gemini-3.6-flash', 'gemini-flash-lite-latest'];
 
 /* ── Lo que el asistente sabe ────────────────────────────────────────
    TODO lo de acá sale del sitio y de la ficha de Google. Si un dato no
@@ -253,7 +253,11 @@ export default {
             'Content-Type': 'application/json',
             'x-goog-api-key': env.GEMINI_API_KEY
           },
-          body: JSON.stringify(cuerpoPedido)
+          body: JSON.stringify(cuerpoPedido),
+          /* Si un modelo esta saturado no lo esperamos eternamente: a los 9
+             segundos cortamos y probamos el siguiente. Sin esto, un modelo
+             caido le suma su demora a todas las respuestas. */
+          signal: AbortSignal.timeout(9000)
         }
       );
     }
