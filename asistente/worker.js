@@ -69,8 +69,8 @@ De ningun otro trabajo sabemos el plazo. Si preguntan por otro, deci que el plaz
 lo confirma el taller segun la unidad, y ofrece pasar la consulta por WhatsApp.
 
 REGLAS QUE NO PODES ROMPER:
-- NUNCA des un precio salvo el del tercer eje, que figura mas abajo. Del resto de
-  los trabajos NO tenemos precio: si preguntan, decilo y ofrece el presupuesto.
+- NUNCA des un precio, ni un rango, ni un "aproximadamente". No los sabes. Los
+  presupuestos los hace el taller mirando la unidad.
 - NUNCA inventes plazos, medidas, capacidades de carga ni normativa. Si no esta
   en esta lista, no lo sabes, y lo decis sin vueltas.
 - NUNCA prometas que un trabajo se puede hacer en una unidad concreta. Eso lo
@@ -84,33 +84,6 @@ consulta completa. Para eso, cuando entiendas que trabajo necesita, pedile la
 marca, el modelo y el ano de la unidad, y despues invitala a pasar a WhatsApp.
 Respuestas de 3 o 4 renglones como mucho.
 `.trim();
-
-/* ── El precio orientativo del tercer eje ────────────────────────────
-   NO va escrito acá a proposito. Vive en una variable de Cloudflare
-   (Settings -> Variables and Secrets, tipo Text, nombre PRECIO_TERCER_EJE)
-   para que Leandro lo cambie solo, sin pegar codigo ni pedirselo a nadie.
-   Un precio en dolares se pone viejo, y un precio viejo en boca del
-   asistente es peor que no tener precio.
-
-   Si la variable no esta cargada, el asistente NO inventa: vuelve a
-   mandar al presupuesto, como hacia antes.                              */
-function conocimientoCon(env) {
-  const precio = (env.PRECIO_TERCER_EJE || '').trim();
-  if (!precio) {
-    return CONOCIMIENTO + `
-
-PRECIO DEL TERCER EJE: no lo tenemos cargado. NO des ningun numero; deci que el
-presupuesto lo hace el taller viendo la unidad.`;
-  }
-  return CONOCIMIENTO + `
-
-PRECIO ORIENTATIVO DEL TERCER EJE: ${precio}.
-Es un valor DE REFERENCIA, no un presupuesto. Cada vez que lo digas tenes que
-aclarar que es orientativo y que el precio final depende de la unidad y del
-estado en que llega, y que el presupuesto lo hace el taller cuando la ve.
-Nunca lo presentes como un precio cerrado ni prometas que va a ser ese.
-De ningun OTRO trabajo tenemos precio: si preguntan por otro, no inventes.`;
-}
 
 /* ── Topes, en la memoria del Worker ──────────────────────────────── */
 const memoria = new Map();
@@ -204,7 +177,7 @@ export default {
     contents.push({ role: 'user', parts: [{ text: mensaje }] });
 
     const pedido = {
-      systemInstruction: { parts: [{ text: conocimientoCon(env) }] },
+      systemInstruction: { parts: [{ text: CONOCIMIENTO }] },
       contents: contents,
       generationConfig: {
         temperature: 0.4,
