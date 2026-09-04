@@ -190,6 +190,12 @@ de hover y degradado). Para capas nuevas usar `::before`.
   **No volver a los saludos vacios** — el taller perdia tiempo preguntando lo basico.
   El formulario de la portada tiene el campo `unidad` (opcional) con el mismo fin.
   Son 55 enlaces; se editan con un script, no a mano.
+  **Actualizado el 04/09/2026 (G-007):** esa plantilla con renglones en blanco no
+  alcanzaba — la mayoría la borraba y escribía "hola". Ahora los botones abren primero
+  un panel corto (trabajo + unidad) y WhatsApp recibe el mensaje **ya redactado**. El
+  panel lo arma `main.js` (sección 12), no hay marcado en los 11 HTML. La plantilla
+  vieja sigue siendo el respaldo: es lo que se abre con "prefiero escribir yo" y lo que
+  ve quien tenga JavaScript apagado, así que **no se toca**.
 - **Fotos en WebP** (24/08/2026). Las 41 imágenes están duplicadas en `.webp` y se
   sirven con `<picture>`: el navegador baja la webp y, si es muy viejo y no la
   entiende, cae sola en el `.jpg`. Son 28% menos de bytes (4,67 → 3,36 MB en la
