@@ -33,6 +33,23 @@ Formato de ticket:
 ## EN CURSO
 
 ## HECHO
+### [G-016] Pasada de calidad visual: lo que se puede medir
+- objetivo: que el sitio se lea y se toque bien en un celular, al sol, con 50 años
+- qué entra (todo medido, nada de gusto):
+  1. **Cinco textos por debajo de 12px.** El peor es "Trabajos certificados" bajo el logo,
+     a 10,5px: es una frase que vende y no se lee. También las etiquetas de los datos de
+     contacto. Se suben a 12,5-13px bajando el espaciado entre letras para no ensanchar.
+  2. **31 de 90 controles por debajo del mínimo táctil de 44px** (medido en vivo): 19
+     enlaces del pie a 23px, 6 enlaces de tarjeta a 22px, "volver arriba" a 42.
+- archivos_permitidos: `assets/css/styles.css`
+- archivos_prohibidos: los 11 HTML, `assets/js/main.js`
+- criterio_de_aceptacion: ningún texto por debajo de 12px; los enlaces del pie, los de
+  tarjeta y el de volver arriba miden 44px o más; nada se desacomoda en celular ni en
+  escritorio
+- notas: NO entra el rojo de marca sobre fondo oscuro (3,8:1) ni los títulos en mayúscula
+  ni la cantidad de animación. Eso es identidad, y el propio manual de la skill dice que
+  `polish` no es un rediseño disfrazado.
+
 ### [G-015] "Trabajos realizados" se lee como si fueran los únicos
 - objetivo: que las fotos se lean como ejemplos y no como el inventario completo del taller
 - problema: pedido de Leandro. Un título "Trabajos realizados" con dos o tres fotos abajo

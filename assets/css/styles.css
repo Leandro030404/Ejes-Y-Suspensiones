@@ -212,7 +212,7 @@ p:last-child{ margin-bottom:0; }
   color:#fff; text-transform:uppercase;
 }
 .brand__text em{
-  font-style:normal; font-size:.66rem; letter-spacing:.19em; text-transform:uppercase;
+  font-style:normal; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase;
   color:var(--red); font-weight:600;
 }
 
@@ -383,7 +383,7 @@ p:last-child{ margin-bottom:0; }
 .hero__scroll{
   position:absolute; left:50%; bottom:2rem; transform:translateX(-50%); z-index:3;
   display:flex; flex-direction:column; align-items:center; gap:.6rem;
-  font-size:.66rem; letter-spacing:.22em; text-transform:uppercase;
+  font-size:.78rem; letter-spacing:.16em; text-transform:uppercase;
   color:var(--txt-invert-soft);
   animation:floaty 2.6s ease-in-out infinite;
   transition:color .3s;
@@ -482,7 +482,7 @@ p:last-child{ margin-bottom:0; }
 .card h3{ font-size:1.42rem; margin-bottom:.65rem; text-transform:uppercase; }
 .card p{ font-size:.93rem; color:var(--txt-soft); line-height:1.7; margin:0; }
 .card__link{
-  display:inline-flex; align-items:center; gap:.45rem; margin-top:1rem;
+  display:inline-flex; align-items:center; gap:.45rem; margin-top:1rem; min-height:44px;
   font-size:.83rem; font-weight:700; letter-spacing:.04em; color:var(--red);
   transition:gap .3s var(--ease-out);
 }
@@ -563,8 +563,8 @@ p:last-child{ margin-bottom:0; }
 .product__tag{
   display:inline-block; margin-bottom:.9rem; padding:.3rem .85rem;
   border-radius:99px; border:1px solid rgba(217,38,28,.45);
-  color:var(--red); font-size:.68rem; font-weight:700;
-  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--red); font-size:.78rem; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase;
 }
 .product__body h3{ font-size:clamp(1.6rem,3.4vw,2.3rem); text-transform:uppercase; margin-bottom:.9rem; color:#fff; }
 .product__body > p{ color:var(--txt-invert-soft); line-height:1.8; margin-bottom:1.5rem; }
@@ -674,7 +674,7 @@ p:last-child{ margin-bottom:0; }
   box-shadow:0 12px 30px rgba(217,38,28,.4);
 }
 .about__badge strong{ display:block; font-family:var(--font-head); font-size:2.1rem; line-height:1; }
-.about__badge span{ font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; opacity:.9; }
+.about__badge span{ font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; opacity:.9; }
 .about__text p{ color:var(--txt-invert-soft); line-height:1.85; font-size:1rem; margin-bottom:1.3rem; }
 .about__text strong{ color:#fff; }
 
@@ -792,7 +792,7 @@ p:last-child{ margin-bottom:0; }
 .info-card:hover .info-card__icon--google{ background:#f5a623; color:#fff; }
 .info-card__body{ display:flex; flex-direction:column; gap:.15rem; min-width:0; }
 .info-card__body strong{
-  font-size:.72rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--txt-soft);
+  font-size:.8rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--txt-soft);
 }
 .info-card__body > span{ font-size:.95rem; font-weight:600; color:var(--txt); word-break:break-word; }
 
@@ -846,9 +846,10 @@ p:last-child{ margin-bottom:0; }
   font-size:1.05rem; text-transform:uppercase; color:#fff; margin-bottom:1.1rem;
   letter-spacing:.06em;
 }
-.footer__links{ display:grid; gap:.6rem; }
+.footer__links{ display:grid; gap:.15rem; }
 .footer__links a{
-  font-size:.89rem; display:inline-block;
+  /* 44px es el minimo tactil. Antes median 23 y se tocaba el de al lado. */
+  font-size:.89rem; display:flex; align-items:center; min-height:44px;
   transition:color .3s var(--ease), transform .3s var(--ease-out);
 }
 .footer__links a:hover{ color:var(--red); transform:translateX(5px); }
@@ -861,7 +862,7 @@ p:last-child{ margin-bottom:0; }
 .footer__bottom{ border-top:1px solid rgba(255,255,255,.09); padding:1.3rem 0; }
 .footer__bottom-inner{ display:flex; flex-wrap:wrap; gap:1rem; align-items:center; justify-content:space-between; }
 .footer__bottom p{ margin:0; font-size:.82rem; }
-.to-top{
+.to-top{ min-width:44px; min-height:44px;
   width:42px; height:42px; border-radius:50%;
   display:grid; place-items:center;
   background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14);
