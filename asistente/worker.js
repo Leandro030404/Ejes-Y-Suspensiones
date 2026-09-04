@@ -181,7 +181,9 @@ export default {
       contents: contents,
       generationConfig: {
         temperature: 0.4,
-        maxOutputTokens: 500,
+        maxOutputTokens: 1200,   /* Los modelos nuevos gastan parte de este presupuesto
+                                     "pensando" antes de escribir. Con 500 la respuesta
+                                     salia cortada a la mitad. */
         thinkingConfig: { thinkingBudget: 0 }
       },
       safetySettings: [
@@ -217,6 +219,7 @@ export default {
       }
 
       for (const modelo of MODELOS) {
+        const t0 = Date.now();
         try {
           const r = await fetch(
             'https://generativelanguage.googleapis.com/v1beta/models/' + modelo + ':generateContent',
@@ -227,7 +230,9 @@ export default {
             }
           );
           const txt = await r.text();
-          salida.errores.push({ modelo: modelo, estado: r.status, detalle: r.ok ? 'OK' : txt.slice(0, 400) });
+          let corte = '';
+          if (r.ok) { try { corte = ' finishReason=' + JSON.parse(txt).candidates[0].finishReason; } catch (e) {} }
+          salida.errores.push({ modelo: modelo, estado: r.status, ms: Date.now() - t0, detalle: r.ok ? 'OK' + corte : txt.slice(0, 300) });
         } catch (e) {
           salida.errores.push({ modelo: modelo, excepcion: String(e).slice(0, 200) });
         }
@@ -257,7 +262,7 @@ export default {
           /* Si un modelo esta saturado no lo esperamos eternamente: a los 9
              segundos cortamos y probamos el siguiente. Sin esto, un modelo
              caido le suma su demora a todas las respuestas. */
-          signal: AbortSignal.timeout(9000)
+          signal: AbortSignal.timeout(8000)
         }
       );
     }
