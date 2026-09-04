@@ -33,6 +33,20 @@ Formato de ticket:
 ## EN CURSO
 
 ## HECHO
+### [G-011] Archivos internos que se estaban sirviendo desde el dominio
+- objetivo: que solo se publique lo que es contenido del sitio
+- problema: la lista de exclusión de `_config.yml` no incluía `asistente/` ni
+  `versionar.ps1`, y los dos devolvían 200 en el dominio. El worker publica entero el
+  texto con el que se instruye al asistente y los topes de uso: no hay claves, pero
+  quien lo lee tiene el mapa para intentar saltárselo. PRODUCT.md se sumaba al problema:
+  nombra el número de cuenta de Google Ads.
+- archivos_permitidos: `_config.yml`
+- criterio_de_aceptacion: las tres rutas devuelven 404 en el dominio, y el sitio sigue
+  funcionando igual
+- notas: excluir de GitHub Pages **no** los saca del repositorio. Si el repositorio es
+  público, siguen siendo legibles en GitHub. Esto los quita del dominio y de los
+  buscadores, que es lo que importa acá.
+
 ### [G-010] Descripciones que Google corta a la mitad
 - objetivo: que el texto que aparece bajo el título en Google se lea entero, y que lo
   que sobreviva al corte sea lo que convierte: qué hacen y dónde están
