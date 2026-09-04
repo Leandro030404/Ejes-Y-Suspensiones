@@ -33,6 +33,17 @@ Formato de ticket:
 ## EN CURSO
 
 ## HECHO
+### [G-015] "Trabajos realizados" se lee como si fueran los únicos
+- objetivo: que las fotos se lean como ejemplos y no como el inventario completo del taller
+- problema: pedido de Leandro. Un título "Trabajos realizados" con dos o tres fotos abajo
+  da a entender que esos son todos los trabajos que hizo EyS. El taller trabaja desde 2005
+  y lo que se muestra es una muestra.
+- archivos_permitidos: `index.html` y los 5 `index.html` de servicio que tienen ese título
+  (tercer-eje, carrocerias, escalabilidad, cambio-chasis-tractor, freno-abs)
+- criterio_de_aceptacion: ninguna página dice "Trabajo(s) realizado(s)" como título; donde
+  hay una sola foto dice "un ejemplo", donde hay varias dice "algunos ejemplos"
+- notas: solo cambia el título. No se toca ni una foto ni una descripción.
+
 ### [G-014] Voz, texto de relleno y roles de accesibilidad mal puestos
 - objetivo: que la portada hable con una sola voz y que el lector de pantalla no reciba
   una estructura que no existe
