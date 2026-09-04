@@ -33,6 +33,26 @@ Formato de ticket:
 ## EN CURSO
 
 ## HECHO
+### [G-014] Voz, texto de relleno y roles de accesibilidad mal puestos
+- objetivo: que la portada hable con una sola voz y que el lector de pantalla no reciba
+  una estructura que no existe
+- qué entra:
+  1. **Tres frases en "usted"** ("su unidad") en un sitio que es de vos en todo lo demás.
+     `PRODUCT.md` fija el rioplatense de vos como compromiso de marca.
+  2. **El párrafo de Ubicación** es el único escrito en voz de SEO genérico ("cerca de una
+     intersección principal… no dudes en visitarnos") y encima dice "tu vehículo" a gente
+     que tiene camiones. Se reemplaza por qué hacer y cuándo venir.
+  3. **La banda de certificaciones manda al formulario**, no a WhatsApp, que es el canal
+     principal del sitio y el único que pasa por el panel de datos.
+  4. **Los filtros de trabajos dicen ser pestañas** (`role="tablist"`/`role="tab"`) sin
+     paneles de pestaña. Un lector de pantalla anuncia una estructura que no existe. Son
+     botones de filtro: el rol honesto es `aria-pressed`.
+- archivos_permitidos: `index.html`, `assets/js/main.js`
+- criterio_de_aceptacion: no queda ningún "su unidad"; el párrafo de Ubicación dice algo
+  útil; la banda de certificaciones abre WhatsApp; los filtros ya no se anuncian como
+  pestañas
+- notas: no se inventa ningún dato. La dirección y el horario ya estaban publicados.
+
 ### [G-013] Los P1 que quedaban de la crítica
 - objetivo: que el camino al contacto funcione en el celular y que el horario deje de ser
   una disculpa para pasar a ser la promesa

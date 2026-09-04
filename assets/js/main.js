@@ -207,7 +207,7 @@
       filters.forEach(function (b) {
         var on = b === btn;
         b.classList.toggle('is-active', on);
-        b.setAttribute('aria-selected', String(on));
+        b.setAttribute("aria-pressed", String(on));
       });
 
       works.forEach(function (w, i) {
@@ -575,7 +575,9 @@
 
       document.body.appendChild(panel);
       document.body.classList.add("no-scroll");
-      requestAnimationFrame(function () { panel.classList.add('is-open'); });
+      /* Si el panel se abre y se cierra dentro del mismo cuadro de animacion,
+         cerrar() ya vacio la variable y esto reventaba con un error de consola. */
+      requestAnimationFrame(function () { if (panel) panel.classList.add('is-open'); });
 
       var form  = $('.guia__form', panel);
       var error = $('.guia__error', panel);
@@ -762,7 +764,7 @@
       document.body.appendChild(caja);
       lista   = $('.chat__lista', caja);
       entrada = $('.chat__entrada', caja);
-      requestAnimationFrame(function () { caja.classList.add('is-open'); });
+      requestAnimationFrame(function () { if (caja) caja.classList.add('is-open'); });
 
       burbuja('asistente', SALUDO);
       historia.push({ rol: 'asistente', texto: SALUDO });
