@@ -33,7 +33,7 @@ const POR_IP_MINUTO = 6;
 const POR_IP_DIA    = 60;
 const TOTAL_DIA     = 800;
 
-const MODELOS = ['gemini-2.5-flash-lite', 'gemini-2.5-flash', 'gemini-flash-latest', 'gemini-2.0-flash'];
+const MODELOS = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.6-flash', 'gemini-flash-lite-latest'];
 
 /* ── Lo que el asistente sabe ────────────────────────────────────────
    TODO lo de acá sale del sitio y de la ficha de Google. Si un dato no
@@ -237,20 +237,31 @@ export default {
 
     /* Si un modelo falla o esta saturado, probamos el siguiente.
        La clave viaja en un encabezado, no en la direccion: asi no queda escrita
-       en ningun registro de servidor intermedio. */
+       en ningun registro de servidor intermedio.
+
+       El segundo intento sin thinkingConfig existe porque ese ajuste es de la
+       familia 2.5 y no todos los modelos nuevos lo aceptan: si lo rechazan
+       (error 400) volvemos a preguntar sin el, en vez de darnos por vencidos. */
+    async function pedirle(modelo, conAjustes) {
+      const cuerpoPedido = JSON.parse(JSON.stringify(pedido));
+      if (!conAjustes) delete cuerpoPedido.generationConfig.thinkingConfig;
+      return fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/' + modelo + ':generateContent',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': env.GEMINI_API_KEY
+          },
+          body: JSON.stringify(cuerpoPedido)
+        }
+      );
+    }
+
     for (const modelo of MODELOS) {
       try {
-        const r = await fetch(
-          'https://generativelanguage.googleapis.com/v1beta/models/' + modelo + ':generateContent',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-goog-api-key': env.GEMINI_API_KEY
-            },
-            body: JSON.stringify(pedido)
-          }
-        );
+        let r = await pedirle(modelo, true);
+        if (r.status === 400) r = await pedirle(modelo, false);
         if (!r.ok) continue;
         const data = await r.json();
         const texto = data &&
