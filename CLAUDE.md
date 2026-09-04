@@ -80,6 +80,7 @@ index.html                    portada (one-page)
 favicon.ico + PNGs            en la raíz (Google los exige ahí)
 robots.txt, sitemap.xml
 servidor-local.ps1            servidor de previsualización
+versionar.ps1                 pone ?v= al CSS y al JS en las 11 paginas
 LEEME.md                      manual para el usuario
 CLAUDE.md                     este archivo
 
@@ -411,9 +412,18 @@ que no aporta.
 # previsualizar
 powershell -ExecutionPolicy Bypass -File "servidor-local.ps1"
 
-# publicar
-git add -A && git commit -m "mensaje" && git push
+# si tocaste el CSS o el JS, antes de publicar:
+powershell -ExecutionPolicy Bypass -File "versionar.ps1"
+
+# publicar (rutas exactas, nunca -A: te llevás el trabajo a medio hacer del otro agente)
+git add <las rutas de tu ticket> && git commit -m "mensaje" && git push
 ```
 
-GitHub Pages tarda 1 a 3 minutos. Después del push, verificar en vivo con `curl`
-y avisar al usuario que recargue con Ctrl+F5 (el navegador cachea).
+GitHub Pages tarda 1 a 3 minutos. Después del push, verificar en vivo con `curl`.
+
+**`versionar.ps1` (04/09/2026, G-008)** le pone `?v=XXXX` a `styles.css` y `main.js` en
+las 11 páginas. Antes se pedían "a secas", así que el navegador reusaba la copia guardada
+y había que pedirle al usuario que recargara con Ctrl+F5 — cosa que un visitante nunca va
+a hacer. El número sale del **contenido** del archivo (no de la fecha): correrlo siempre
+da el valor correcto, y si no cambió nada no toca ningún archivo. **Es el único archivo
+que escribe en los 11 HTML; no editar esas líneas a mano.**

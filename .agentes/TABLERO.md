@@ -33,6 +33,19 @@ Formato de ticket:
 ## EN CURSO
 
 ## HECHO
+### [G-008] Que el navegador no siga mostrando el CSS y el JS viejos
+- objetivo: dejar de tener que avisar "recargá con Ctrl+F5" en cada publicación
+- problema: las 11 páginas piden `styles.css` y `main.js` sin número de versión, así que
+  el navegador reusa la copia guardada. Quien ya visitó el sitio puede tardar días en
+  ver un cambio. Con G-007 recién publicado, es justo lo que está pasando ahora.
+- archivos_permitidos: `versionar.ps1` (nuevo), los 11 `index.html`, `CLAUDE.md`
+- archivos_prohibidos: `assets/css/styles.css`, `assets/js/main.js` (no se tocan)
+- criterio_de_aceptacion: las 11 páginas piden `styles.css?v=XXXX`; si cambio el CSS y
+  vuelvo a correr el script, el número cambia solo; si no cambié nada, queda igual
+- notas: el número sale del **contenido** del archivo, no de la fecha. Con la fecha hay
+  que acordarse de subirla y se olvida; con el contenido, correr el script siempre da
+  el valor correcto y no ensucia el historial si no cambió nada.
+
 ### [G-007] Los botones de WhatsApp piden los datos antes de abrir el chat
 - objetivo: que los mensajes que llegan al taller vengan con el trabajo y la unidad ya
   escritos, en vez de la plantilla en blanco que casi nadie completa
