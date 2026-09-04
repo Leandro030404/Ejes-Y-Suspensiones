@@ -110,9 +110,15 @@ raros. Soldar lo puede hacer cualquiera; la cadena completa, no.
   nacionales.
 - **Un desarrollo adoptado por la industria minera de Chile** (ejes trunnion).
 
+- **Doce empresas clientes nombradas en la portada** (Cometto, Astivia, Bernal, Barabino
+  y Grandi, Industrias Marcelini, Tanques Fangio, Cormetal, Sabino, GEC, Nuevo Montenegro,
+  Atarusis y Tanques Milei). Confirmado por Leandro el 04/09/2026: **son clientes reales,
+  pero están publicados sin permiso explícito de ellos**. Queda anotado como riesgo
+  asumido, no como error. No sumar nombres nuevos sin preguntar.
+
 **Lo que NO existe y no debe fabricarse:** casos de estudio, testimonios más allá de las
-reseñas reales, cifras de producción, listas de clientes, fotos antes/después de la misma
-unidad (pedidas a Leandro, todavía no entregadas) y los plazos de los otros nueve trabajos.
+reseñas reales, cifras de producción, fotos antes/después de la misma unidad (pedidas a
+Leandro, todavía no entregadas) y los plazos de los otros nueve trabajos.
 
 ## Product Principles
 

@@ -1497,3 +1497,7 @@ html:not(.js) .preloader{ display:none; }
   .chat{ transform:none; }
   .chat__msg--pensando span{ animation:none; opacity:.55; }
 }
+
+/* Rescate cuando el navegador bloquea la ventana de WhatsApp (G-012) */
+.guia__rescate p{ margin:0 0 .8rem; font-size:.88rem; color:var(--txt-soft); }
+.guia__rescate .guia__enviar{ margin-top:0; }

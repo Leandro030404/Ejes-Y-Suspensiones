@@ -411,7 +411,11 @@
      mensaje ya redactado. El que prefiere escribir el, tiene el enlace de
      siempre a un toque. Sin JavaScript, todo funciona como antes. */
   (function () {
+    /* "Consulta general" va PRIMERA a proposito: ninguna opcion esta marcada, asi que
+       el navegador deja la de arriba. Si ahi hubiera un trabajo concreto, todo el que
+       pasa sin abrir el desplegable le manda al taller un trabajo que nunca pidio. */
     var TRABAJOS = [
+      'Consulta general',
       'Colocación de 3er eje',
       'Escalabilidad / modificación de chasis',
       'Cambio de chasis a tractor',
@@ -421,8 +425,7 @@
       'Ejes trunnion / carretones',
       'Suspensiones neumáticas',
       'Trenes rodantes agrícolas',
-      'Repuestos y componentes',
-      'Consulta general'
+      'Repuestos y componentes'
     ];
 
     var panel = null, previo = null, enlace = null;
@@ -441,7 +444,11 @@
       var l = texto.split('\n');
       return (l[0] || 'Hola, quisiera hacer una consulta.').trim();
     }
-    function pideTrabajo(texto) { return texto.indexOf('Trabajo que necesito') !== -1; }
+    /* Solo se oculta el selector cuando el saludo YA nombra el servicio, que es lo que
+       pasa en las 10 paginas internas ("...quisiera consultar por el tercer eje").
+       Antes se miraba la plantilla, y el enlace del pie no la lleva: el panel no
+       preguntaba el trabajo y el mensaje llegaba sin el. */
+    function pideTrabajo(saludo) { return !/consultar por/i.test(saludo); }
 
     function cerrar() {
       if (!panel) return;
@@ -453,11 +460,44 @@
       if (previo && previo.focus) previo.focus();
     }
 
+    /* Si el navegador bloquea la ventana (pasa siempre entrando desde Instagram o
+       Facebook), antes el panel se cerraba, no pasaba nada, y la conversion se contaba
+       igual: Google Ads optimizando hacia contactos que nunca ocurrieron. Ahora el panel
+       se queda abierto con un enlace de verdad y la conversion NO se cuenta hasta que la
+       persona lo toca. */
     function abrirWhatsapp(mensaje) {
-      window.open('https://wa.me/' + WSP_NUMBER + '?text=' + encodeURIComponent(mensaje),
-                  '_blank', 'noopener');
-      if (window.eysConversion) window.eysConversion('whatsapp');
-      cerrar();
+      var url = 'https://wa.me/' + WSP_NUMBER + '?text=' + encodeURIComponent(mensaje);
+      var v = window.open(url, '_blank', 'noopener');
+
+      if (v) {
+        if (window.eysConversion) window.eysConversion('whatsapp');
+        cerrar();
+        return;
+      }
+
+      var form = $('.guia__form', panel);
+      if (form) form.hidden = true;
+      var saltar = $('.guia__saltar', panel);
+      if (saltar) saltar.hidden = true;
+
+      var rescate = document.createElement('div');
+      rescate.className = 'guia__rescate';
+      rescate.innerHTML =
+        '<p>Tu navegador no dejó abrir WhatsApp solo. Tocá acá y se abre con el ' +
+        'mensaje ya escrito:</p>';
+      var a = document.createElement('a');
+      a.className = 'btn btn--wsp guia__enviar';
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'Abrir WhatsApp';
+      a.addEventListener('click', function () {
+        if (window.eysConversion) window.eysConversion('whatsapp');
+        setTimeout(cerrar, 400);
+      });
+      rescate.appendChild(a);
+      $('.guia__caja', panel).appendChild(rescate);
+      a.focus();
     }
 
     function abrirPanel(a) {
@@ -466,7 +506,7 @@
       enlace = a.getAttribute('href') || '';
       var texto  = textoDe(enlace);
       var saludo = saludoDe(texto);
-      var conSel = pideTrabajo(texto);
+      var conSel = pideTrabajo(saludo);
 
       panel = document.createElement('div');
       panel.className = 'guia';

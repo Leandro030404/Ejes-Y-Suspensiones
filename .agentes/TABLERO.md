@@ -33,6 +33,25 @@ Formato de ticket:
 ## EN CURSO
 
 ## HECHO
+### [G-012] Los tres defectos del panel de WhatsApp
+- objetivo: que el panel no mande datos falsos ni pierda al visitante en silencio
+- problema: los tres los introdujo G-007 y los encontró la crítica del 04/09
+  1. El desplegable no marca opción, así que queda en "Colocación de 3er eje" y quien
+     pasa sin abrirlo manda un trabajo equivocado. Peor que el renglón en blanco que
+     vino a reemplazar: un vacío se nota, una respuesta falsa parece un dato.
+  2. El enlace del pie no lleva plantilla, así que el panel no muestra el selector y el
+     mensaje llega SIN trabajo.
+  3. `window.open` no se verifica: si el navegador la bloquea (típico entrando desde
+     Instagram), el panel se cierra, no pasa nada, y la conversión se cuenta igual.
+     Google Ads optimiza hacia conversiones que nunca ocurrieron.
+- archivos_permitidos: `assets/js/main.js`, `assets/css/styles.css`
+- archivos_prohibidos: los 11 HTML
+- criterio_de_aceptacion: el desplegable arranca en "Consulta general"; el enlace del pie
+  muestra el selector; si la ventana se bloquea, el panel queda abierto con un enlace real
+  y NO se cuenta la conversión
+- notas: alcance acotado a los defectos por decisión de Leandro. Preseleccionar el trabajo
+  desde el saludo en las 10 páginas de servicio queda como mejora, no entra acá.
+
 ### [G-011] Archivos internos que se estaban sirviendo desde el dominio
 - objetivo: que solo se publique lo que es contenido del sitio
 - problema: la lista de exclusión de `_config.yml` no incluía `asistente/` ni
