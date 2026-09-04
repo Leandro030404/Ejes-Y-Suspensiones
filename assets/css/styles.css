@@ -1302,3 +1302,86 @@ html:not(.js) .preloader{ display:none; }
   font-style:normal; font-weight:700; font-size:.88rem; color:var(--ink);
 }
 .review__meta{ font-size:.76rem; color:var(--txt-soft); line-height:1.45; }
+
+/* ── Paso previo a WhatsApp (G-007) ─────────────────────────────
+   Panel corto que junta trabajo y unidad antes de abrir el chat.
+   Lo arma main.js: no hay marcado de esto en los 11 HTML.        */
+.guia{
+  position:fixed; inset:0; z-index:2100;   /* por encima del boton flotante (900), la barra de progreso (1200) y el visor de fotos (2000) */
+  display:flex; align-items:center; justify-content:center;
+  padding:1.1rem;
+  opacity:0; transition:opacity .2s ease;
+}
+.guia.is-open{ opacity:1; }
+.guia__fondo{ position:absolute; inset:0; background:rgba(14,19,25,.62); }
+.guia__caja{
+  position:relative; width:min(430px,100%);
+  max-height:calc(100vh - 2.2rem); overflow-y:auto;
+  background:var(--paper); color:var(--txt);
+  border-radius:var(--radius); box-shadow:var(--sh-lg);
+  padding:1.6rem 1.4rem 1.3rem;
+  transform:translateY(14px); transition:transform .2s ease;
+}
+.guia.is-open .guia__caja{ transform:translateY(0); }
+
+.guia__x{
+  position:absolute; top:.5rem; right:.6rem;
+  width:38px; height:38px; padding:0 0 4px;
+  border:0; background:transparent; cursor:pointer;
+  font-size:1.7rem; line-height:1; color:var(--steel);
+  border-radius:50%;
+}
+.guia__x:hover{ background:var(--paper-2); color:var(--txt); }
+
+.guia__titulo{
+  margin:0 2rem .3rem 0;
+  font-family:var(--font-head); font-weight:700;
+  font-size:1.5rem; line-height:1.15; letter-spacing:.01em;
+}
+.guia__bajada{ margin:0 0 1.1rem; font-size:.9rem; color:var(--txt-soft); }
+
+.guia__campo{ display:block; margin-bottom:.85rem; }
+.guia__campo > span{
+  display:block; margin-bottom:.32rem;
+  font-size:.82rem; font-weight:600; color:var(--txt);
+}
+.guia__campo em{ font-style:normal; font-weight:400; color:var(--steel); }
+.guia__campo input,
+.guia__campo select,
+.guia__campo textarea{
+  width:100%; padding:.62rem .7rem;
+  font-family:var(--font-body); font-size:.95rem; color:var(--txt);
+  background:var(--paper); border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+}
+.guia__campo textarea{ resize:vertical; min-height:60px; }
+.guia__campo input:focus,
+.guia__campo select:focus,
+.guia__campo textarea:focus{
+  outline:none; border-color:var(--red); box-shadow:0 0 0 3px var(--red-soft);
+}
+
+.guia__error{ margin:-.35rem 0 .7rem; font-size:.82rem; color:var(--red); }
+.guia__enviar{ width:100%; justify-content:center; margin-top:.2rem; }
+
+.guia__saltar{
+  display:block; width:100%; margin-top:.8rem; padding:.4rem;
+  border:0; background:transparent; cursor:pointer;
+  font-family:var(--font-body); font-size:.85rem; color:var(--steel);
+  text-decoration:underline; text-underline-offset:3px;
+}
+.guia__saltar:hover{ color:var(--txt); }
+
+@media (max-width:480px){
+  .guia{ align-items:flex-end; padding:0; }
+  .guia__caja{
+    width:100%; max-height:92vh;
+    border-radius:var(--radius) var(--radius) 0 0;
+    padding:1.4rem 1.1rem 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .guia, .guia__caja{ transition:none; }
+  .guia__caja{ transform:none; }
+}
