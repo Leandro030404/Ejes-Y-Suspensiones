@@ -32,6 +32,21 @@ Formato de ticket:
 
 ## EN CURSO
 
+### [G-009] Asistente que contesta fuera de hora y termina en WhatsApp
+- objetivo: que el visitante que llega a la noche o el fin de semana (el taller atiende
+  lun-vie 8 a 15) tenga con quién hablar, y que la charla termine en un mensaje de
+  WhatsApp completo, con trabajo y unidad
+- archivos_permitidos: `asistente/` (nuevo), `assets/js/main.js`, `assets/css/styles.css`,
+  los 11 `index.html` (solo si hace falta marcado), `CLAUDE.md`
+- archivos_prohibidos: ninguno por ahora
+- criterio_de_aceptacion: abro el sitio, toco el asistente, pregunto "¿hacen tercer eje?"
+  y contesta con datos reales; le pregunto un precio y **no lo inventa**; al final me
+  ofrece pasar a WhatsApp con el mensaje armado
+- notas: **la clave NUNCA en el sitio.** El navegador habla con un intermediario en
+  Cloudflare (dirección `.workers.dev`, sin tocar el DNS) y la clave vive ahí adentro.
+  Leandro la pega él mismo en el panel de Cloudflare; ningún agente la ve ni la escribe.
+  Es la **segunda excepción** a "cero recursos externos", después de la etiqueta de Ads.
+
 ## HECHO
 ### [G-008] Que el navegador no siga mostrando el CSS y el JS viejos
 - objetivo: dejar de tener que avisar "recargá con Ctrl+F5" en cada publicación
