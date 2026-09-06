@@ -268,6 +268,33 @@ de hover y degradado). Para capas nuevas usar `::before`.
 
 ## Fuera del sitio
 
+### WhatsApp Business (perfil mejorado el 06/09/2026)
+
+El número del sitio es una cuenta de **WhatsApp Business**, vinculada a la app de
+escritorio de esta PC. Desde ahí se cargó: descripción, correo, 3 categorías (Taller de
+reparación de camiones, Fabricante de metal, Servicio automotor), horario lun–vie 8 a 15
+(decía 16 y no coincidía con Google ni con el sitio), la **respuesta rápida `/datos`**
+(pide trabajo y unidad al que manda un "hola" pelado) y un **catálogo con los 11
+servicios** del sitio, cada uno con foto de `assets/img`, texto de
+`_originales/perfil-google.txt` y enlace a su página. Sin precios, a propósito.
+
+**Por qué:** la mayoría de los que escriben son gente grande que manda el mensaje
+prearmado sin completarlo. El **mensaje de bienvenida** y el **de ausencia** (que
+contestan solos pidiendo trabajo y unidad) **solo se configuran desde el celular**: la
+app de escritorio no tiene esa sección. Leandro los activó el 06/09/2026; los textos
+están en el chat "Eys (Tú)". Ese mismo día puso desde el celular la foto de portada
+(frente del taller) y la frase "Info." ("Ejes y suspensiones. Lun a vie de 8 a 15.",
+que **vence**: se eligió Personalizado con fecha lejana). El logo del perfil se subió
+desde la PC.
+
+**Trampas de la app de escritorio:** los botones del encabezado ("Guardar", "Añadir al
+catálogo") **no responden al clic**; se guarda cerrando con la X y aceptando "¿Guardar
+cambios?", o llegando al botón con Tab y apretando espacio. La rueda del mouse no
+desplaza el perfil: usar Ctrl+menos para achicar. La descripción admite **256
+caracteres** como máximo (una más larga se descarta en silencio). El "Info." de arriba
+de la portada es un estado que **caduca** (máximo 50 caracteres). Ni la portada ni
+ese "Info." se pueden editar desde la PC; el logo del perfil sí (menú "Subir foto").
+
 ### Perfil de Empresa de Google
 Ficha: https://maps.app.goo.gl/zkaP3enqU7rfY4Uk7
 Nombre "EyS Ejes y Suspensiones", categoría "Taller de camiones", 4,9 con 15 reseñas.
