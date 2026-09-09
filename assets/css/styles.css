@@ -120,6 +120,7 @@ button{ font:inherit; color:inherit; }
 a{ color:inherit; text-decoration:none; }
 ul{ margin:0; padding:0; list-style:none; }
 h1,h2,h3,h4{ margin:0; font-family:var(--font-head); font-weight:700; line-height:1.05; letter-spacing:.005em; }
+h2{ letter-spacing:-.01em; }   /* texto grande: seguimiento negativo (G-017) */
 p{ margin:0 0 1em; }
 p:last-child{ margin-bottom:0; }
 ::selection{ background:var(--red); color:#fff; }
@@ -443,7 +444,7 @@ p:last-child{ margin-bottom:0; }
 .section--dark .sec-head__kicker{ background:rgba(217,38,28,.16); }
 .sec-head__title{
   font-size:clamp(2.1rem,5.2vw,3.5rem); text-transform:uppercase;
-  letter-spacing:-.005em; margin-bottom:1rem;
+  letter-spacing:-.01em; margin-bottom:1rem;
 }
 .section--dark .sec-head__title{ color:#fff; }
 .sec-head__sub{ font-size:1.03rem; color:var(--txt-soft); line-height:1.75; }
@@ -1311,9 +1312,9 @@ html:not(.js) .preloader{ display:none; }
   position:fixed; inset:0; z-index:2100;   /* por encima del boton flotante (900), la barra de progreso (1200) y el visor de fotos (2000) */
   display:flex; align-items:center; justify-content:center;
   padding:1.1rem;
-  opacity:0; transition:opacity .2s ease;
+  opacity:0; transition:opacity .18s ease;
 }
-.guia.is-open{ opacity:1; }
+.guia.is-open{ opacity:1; transition:opacity .2s ease; }
 .guia__fondo{ position:absolute; inset:0; background:rgba(14,19,25,.62); }
 .guia__caja{
   position:relative; width:min(430px,100%);
@@ -1321,9 +1322,12 @@ html:not(.js) .preloader{ display:none; }
   background:var(--paper); color:var(--txt);
   border-radius:var(--radius); box-shadow:var(--sh-lg);
   padding:1.6rem 1.4rem 1.3rem;
-  transform:translateY(14px); transition:transform .2s ease;
+  /* Nace desde abajo (donde esta el boton flotante) y sale por el mismo camino:
+     entra con ease-out, sale con la curva inversa (G-017). El JS lo quita a los 200ms. */
+  transform:translateY(14px) scale(.98); transform-origin:50% 100%;
+  transition:transform .18s cubic-bezier(.7,0,.84,0);
 }
-.guia.is-open .guia__caja{ transform:translateY(0); }
+.guia.is-open .guia__caja{ transform:none; transition:transform .24s var(--ease-out); }
 
 .guia__x{
   position:absolute; top:.5rem; right:.6rem;
@@ -1410,10 +1414,10 @@ html:not(.js) .preloader{ display:none; }
   width:min(360px, calc(100vw - 2.6rem)); height:min(520px, calc(100vh - 2.6rem));
   background:var(--paper); border-radius:var(--radius);
   box-shadow:var(--sh-lg); overflow:hidden;
-  opacity:0; transform:translateY(14px);
-  transition:opacity .2s ease, transform .2s ease;
+  opacity:0; transform:translateY(14px) scale(.98); transform-origin:100% 100%;
+  transition:opacity .18s ease, transform .18s cubic-bezier(.7,0,.84,0);
 }
-.chat.is-open{ opacity:1; transform:translateY(0); }
+.chat.is-open{ opacity:1; transform:none; transition:opacity .2s ease, transform .24s var(--ease-out); }
 
 .chat__barra{
   display:flex; align-items:center; justify-content:space-between;
@@ -1503,3 +1507,15 @@ html:not(.js) .preloader{ display:none; }
 /* Rescate cuando el navegador bloquea la ventana de WhatsApp (G-012) */
 .guia__rescate p{ margin:0 0 .8rem; font-size:.88rem; color:var(--txt-soft); }
 .guia__rescate .guia__enviar{ margin-top:0; }
+
+/* ── 26. Respuesta al apretar y preferencias de transparencia (G-017) ──
+   La reaccion va en el pointer-down, no en el click: en el celular no hay hover
+   y sin esto el boton parece muerto hasta que se abre el panel. Va al final para
+   ganar en cascada a los :hover de cada boton. */
+.btn:active, .chat-lanzador:active, .wsp-float:active, .guia__enviar:active{
+  transform:scale(.97); transition-duration:.08s;
+}
+@media (prefers-reduced-transparency:reduce){
+  .header::before{ background:var(--ink); backdrop-filter:none; -webkit-backdrop-filter:none; }
+  .btn--ghost{ background:rgba(255,255,255,.18); backdrop-filter:none; -webkit-backdrop-filter:none; }
+}
