@@ -12,6 +12,11 @@
   var MAIL       = 'info@ejesysuspensiones.com.ar';
   var reduced    = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Safari en iPhone no aplica :active a un boton tocado salvo que la pagina escuche
+     el toque. Este oyente vacio alcanza para que la reaccion al apretar (G-017) exista
+     tambien en iOS. Pasivo: no frena el scroll. */
+  document.addEventListener('touchstart', function () {}, { passive: true });
+
   /* ── 1. Preloader ──────────────────────────────── */
   var preloader = $('#preloader');
   function hidePreloader() {
