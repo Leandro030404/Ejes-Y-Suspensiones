@@ -229,6 +229,14 @@ de hover y degradado). Para capas nuevas usar `::before`.
   propia ficha, y lo penaliza. Se muestran como texto y se enlaza a la ficha.
 - **4 fotos son panorámicas** (hasta 3,6:1) y no entran en los recuadros. Se muestran
   completas con un fondo desenfocado de la propia foto (clase `media--wide` + `--foto`).
+- **Respuesta al apretar y salidas espejadas** (09/09/2026, G-017, con la guía de diseño de
+  Apple). Los botones reaccionan en `:active` (en el celular no hay hover; sin esto el botón
+  parece muerto hasta que abre el panel); el panel de WhatsApp y el chat entran con `--ease-out`
+  y salen con la curva inversa `cubic-bezier(.7,0,.84,0)` en 180ms (el JS los quita a los
+  200ms: **no alargar la salida** sin tocar ese timeout); los h2 y `.sec-head__title` llevan
+  seguimiento `-.01em` (texto grande, seguimiento negativo); y hay bloque
+  `prefers-reduced-transparency`. Se descartó a propósito todo lo de gestos/springs: es para
+  apps, no para una página que se abre una vez desde un anuncio, y rompería "sin dependencias".
 - **Sin `latin-ext`** en las tipografías: el español entra completo en `latin`.
 - Los horarios y los datos de contacto **coinciden exactamente** con el Perfil de
   Empresa de Google. Si se cambia uno, cambiar el otro.
@@ -305,13 +313,14 @@ Textos preparados en `_originales/perfil-google.txt`.
 
 Estado actual, **ARS 4.000/día en total**:
 
-1. **"Maximo rendimiento - Sitio Web"** — ARS 2.500/día. Creada el 24/08 apuntando
+1. **"Maximo rendimiento - Sitio Web"** — ARS 4.000/día (Leandro la subió de 2.500). Creada el 24/08 apuntando
    a `https://ejesysuspensiones.com.ar/`. Maximizar conversiones, Argentina con
    "Presencia". En aprendizaje: **no tocarla los primeros 14 días.**
-2. **"Búsqueda - Sitio Web"** — ARS 1.500/día. **Gasta casi cero** (3 impresiones en
-   dos semanas): el mercado de búsqueda es chico, no le falta presupuesto.
-   Ver [[eys-mercado-busqueda-chico]].
-3. **"Ejes Y Suspensiones"** — **DETENIDA**. Era la vieja de Máximo rendimiento que
+2. **"Búsqueda - Sitio Web"** — ARS 1.500/día. Arrancó lenta (3 impresiones la primera
+   semana) pero desde el 26/08 gasta ARS 500 a 2.300 por día. Revisión completa con datos
+   en `.agentes/ads/INFORME.md` (07/09/2026): parte del gasto se va en marcas de la
+   competencia y en la Red de Display, que vino encendida por defecto.
+3. **"Ejes Y Suspensiones"** — **ELIMINADA** (figura como "removed" desde el 07/09/2026). Era la vieja de Máximo rendimiento que
    apuntaba a `business.google.com` sin campo "URL final". Gastó ARS 32.066 en
    14 días con 0 conversiones. No se eliminó, quedó pausada.
 
@@ -429,7 +438,10 @@ se reenvió para que Google lo relea.
 - [ ] Fotos antes/después de la misma unidad → para armar un deslizador
 - [ ] Llegar a 30 reseñas en Google (**hoy 20, con 5,0** — subieron desde 15)
 - [x] ~~Llamar a soporte por el destino de la campaña~~ → resuelto creando una campaña nueva (24/08/2026)
-- [ ] A los 14 días (7 de septiembre): mirar conversiones de la campaña nueva
+- [x] ~~A los 14 días (7 de septiembre): mirar conversiones de la campaña nueva~~ → hecho, ver
+      `.agentes/ads/INFORME.md`. **Ojo:** las 75 conversiones de esas dos semanas están infladas;
+      hasta el 04/09 se contaba el toque del botón, no la apertura real de WhatsApp (G-007/G-012).
+      La campaña recién aprende con el dato bueno: no juzgarla antes del 18/09.
 
 **Ofrecido y no hecho:**
 - [ ] Artículos sobre homologación y normativa. El usuario tiene que validar la

@@ -32,7 +32,15 @@ Formato de ticket:
 
 ## EN CURSO
 
+
 ## HECHO
+### [G-017] Detalles de respuesta y movimiento (guia de diseno de Apple)
+- objetivo: (1) todos los botones reaccionan al APRETAR, no al soltar (estado :active); (2) el panel de WhatsApp y el chat salen por donde entraron (bajan al cerrarse, curva espejada); (3) el panel nace desde abajo, donde esta el boton flotante (transform-origin); (4) los h2 con seguimiento negativo (-.01em) por ser texto grande; (5) se respeta prefers-reduced-transparency en el header y el boton fantasma.
+- archivos_permitidos: assets/css/styles.css, los 11 index.html (solo la linea ?v= via versionar.ps1)
+- archivos_prohibidos: assets/js/main.js
+- criterio_de_aceptacion: abrir la portada en celular y escritorio, apretar un boton y ver la reaccion inmediata; abrir y cerrar el panel de WhatsApp y el chat y ver que entran subiendo y salen bajando; sin errores de consola; con reducir movimiento activado, nada se desplaza.
+- notas: sin JavaScript nuevo ni librerias. No se tocan colores de marca ni el hero.
+
 ### [G-016] Pasada de calidad visual: lo que se puede medir
 - objetivo: que el sitio se lea y se toque bien en un celular, al sol, con 50 años
 - qué entra (todo medido, nada de gusto):
