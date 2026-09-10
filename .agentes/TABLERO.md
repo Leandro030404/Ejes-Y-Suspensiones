@@ -39,7 +39,7 @@ Formato de ticket:
 - archivos_permitidos: los 11 index.html, assets/js/main.js, assets/css/styles.css
 - criterio_de_aceptacion: tocar un boton de WhatsApp en cualquier pagina abre wa.me sin ventana intermedia; ningun enlace conserva los renglones vacios "Trabajo que necesito:" / "Unidad:"
 - notas: pedido de Leandro el 10/09/2026. Deshace el panel de G-007/G-012 (seccion 12 de main.js y estilos .guia). La conversion se cuenta en el clic, que ahora coincide con la apertura real.
-- responsable: CLAUDE — hecho el 10/09/2026
+- responsable: CLAUDE — hecho el 10/09/2026. Ajuste posterior: el flotante es generico en todas.
 
 ### [G-017] Detalles de respuesta y movimiento (guia de diseno de Apple)
 - objetivo: (1) todos los botones reaccionan al APRETAR, no al soltar (estado :active); (2) el panel de WhatsApp y el chat salen por donde entraron (bajan al cerrarse, curva espejada); (3) el panel nace desde abajo, donde esta el boton flotante (transform-origin); (4) los h2 con seguimiento negativo (-.01em) por ser texto grande; (5) se respeta prefers-reduced-transparency en el header y el boton fantasma.

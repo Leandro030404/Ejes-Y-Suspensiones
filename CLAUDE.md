@@ -190,7 +190,8 @@ de hover y degradado). Para capas nuevas usar `::before`.
 - **Los botones de WhatsApp abren el chat directo** (10/09/2026, G-018, pedido de Leandro).
   El mensaje precargado es una sola frase con el servicio de la página: "Hola, quiero
   consultar por la colocación de un tercer eje." (y así en cada interna); en la portada y
-  en el asistente dice "por un trabajo en mi unidad". Son 56 enlaces; se editan con un
+  en el asistente y en el **botón flotante de todas las páginas** dice "por un trabajo en
+  mi unidad". Son 56 enlaces; se editan con un
   script, no a mano. **Historia:** el 24/08 se les había sumado la plantilla con
   renglones vacíos ("Trabajo que necesito:", "Unidad:") y el 04/09 (G-007) un panel
   previo que pedía trabajo y unidad antes de abrir WhatsApp. Leandro pidió sacar los
