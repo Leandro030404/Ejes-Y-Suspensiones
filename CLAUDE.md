@@ -187,18 +187,17 @@ de hover y degradado). Para capas nuevas usar `::before`.
      Fabricación de Empresa, y Trabajos pasó de `section--light` a `section--soft`
      para no quedar pegado a Servicios (los dos blancos).
 - **Formulario sin backend**: valida y abre WhatsApp o el cliente de correo.
-- **Los enlaces de WhatsApp piden datos** (24/08/2026). El mensaje precargado ya no es
-  solo "Hola, quisiera consultar por X": suma una linea `Unidad (marca, modelo y año):`
-  para que el primer mensaje ya sirva. Los genericos ademas piden `Trabajo que necesito:`.
-  **No volver a los saludos vacios** — el taller perdia tiempo preguntando lo basico.
-  El formulario de la portada tiene el campo `unidad` (opcional) con el mismo fin.
-  Son 55 enlaces; se editan con un script, no a mano.
-  **Actualizado el 04/09/2026 (G-007):** esa plantilla con renglones en blanco no
-  alcanzaba — la mayoría la borraba y escribía "hola". Ahora los botones abren primero
-  un panel corto (trabajo + unidad) y WhatsApp recibe el mensaje **ya redactado**. El
-  panel lo arma `main.js` (sección 12), no hay marcado en los 11 HTML. La plantilla
-  vieja sigue siendo el respaldo: es lo que se abre con "prefiero escribir yo" y lo que
-  ve quien tenga JavaScript apagado, así que **no se toca**.
+- **Los botones de WhatsApp abren el chat directo** (10/09/2026, G-018, pedido de Leandro).
+  El mensaje precargado es una sola frase con el servicio de la página: "Hola, quiero
+  consultar por la colocación de un tercer eje." (y así en cada interna); en la portada y
+  en el asistente dice "por un trabajo en mi unidad". Son 56 enlaces; se editan con un
+  script, no a mano. **Historia:** el 24/08 se les había sumado la plantilla con
+  renglones vacíos ("Trabajo que necesito:", "Unidad:") y el 04/09 (G-007) un panel
+  previo que pedía trabajo y unidad antes de abrir WhatsApp. Leandro pidió sacar los
+  dos pasos: un toque y a WhatsApp. El panel quedó en el historial (commits hasta
+  3ebf427) por si conviene volver. Ahora los datos los pide el mensaje de bienvenida
+  de WhatsApp Business y la respuesta rápida `/datos`.
+  El formulario de la portada sigue teniendo el campo `unidad` (opcional).
 - **Fotos en WebP** (24/08/2026). Las 41 imágenes están duplicadas en `.webp` y se
   sirven con `<picture>`: el navegador baja la webp y, si es muy viejo y no la
   entiende, cae sola en el `.jpg`. Son 28% menos de bytes (4,67 → 3,36 MB en la
@@ -231,7 +230,7 @@ de hover y degradado). Para capas nuevas usar `::before`.
   completas con un fondo desenfocado de la propia foto (clase `media--wide` + `--foto`).
 - **Respuesta al apretar y salidas espejadas** (09/09/2026, G-017, con la guía de diseño de
   Apple). Los botones reaccionan en `:active` (en el celular no hay hover; sin esto el botón
-  parece muerto hasta que abre el panel); el panel de WhatsApp y el chat entran con `--ease-out`
+  parece muerto hasta que abre WhatsApp); el chat del asistente entra con `--ease-out`
   y salen con la curva inversa `cubic-bezier(.7,0,.84,0)` en 180ms (el JS los quita a los
   200ms: **no alargar la salida** sin tocar ese timeout); los h2 y `.sec-head__title` llevan
   seguimiento `-.01em` (texto grande, seguimiento negativo); y hay bloque
@@ -247,8 +246,7 @@ de hover y degradado). Para capas nuevas usar `::before`.
   páginas, con una ventana de chat. Existe por el horario: el taller atiende lunes a
   viernes de 8 a 15, y todas las tardes, noches y fines de semana el sitio recibe
   visitas sin nadie del otro lado. El asistente contesta lo que ya está publicado y
-  empuja a WhatsApp; su enlace de WhatsApp cae en el panel de G-007, así que la
-  consulta igual sale con trabajo y unidad.
+  empuja a WhatsApp; su enlace de WhatsApp abre el chat directo con la frase genérica (G-018).
   **La clave de la IA NO está en el sitio.** El navegador le habla a un intermediario
   propio en Cloudflare (`asistente/worker.js`, publicado en
   `eys-asistente.leandrobertainariver.workers.dev`) y la clave vive ahí, cargada a mano

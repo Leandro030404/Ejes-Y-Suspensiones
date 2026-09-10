@@ -34,6 +34,13 @@ Formato de ticket:
 
 
 ## HECHO
+### [G-018] WhatsApp directo, sin panel previo
+- objetivo: al tocar cualquier boton de WhatsApp se abre el chat de una, con una frase corta ya escrita ("Hola, quiero consultar por <servicio de la pagina>."; en la portada "por un trabajo en mi unidad")
+- archivos_permitidos: los 11 index.html, assets/js/main.js, assets/css/styles.css
+- criterio_de_aceptacion: tocar un boton de WhatsApp en cualquier pagina abre wa.me sin ventana intermedia; ningun enlace conserva los renglones vacios "Trabajo que necesito:" / "Unidad:"
+- notas: pedido de Leandro el 10/09/2026. Deshace el panel de G-007/G-012 (seccion 12 de main.js y estilos .guia). La conversion se cuenta en el clic, que ahora coincide con la apertura real.
+- responsable: CLAUDE — hecho el 10/09/2026
+
 ### [G-017] Detalles de respuesta y movimiento (guia de diseno de Apple)
 - objetivo: (1) todos los botones reaccionan al APRETAR, no al soltar (estado :active); (2) el panel de WhatsApp y el chat salen por donde entraron (bajan al cerrarse, curva espejada); (3) el panel nace desde abajo, donde esta el boton flotante (transform-origin); (4) los h2 con seguimiento negativo (-.01em) por ser texto grande; (5) se respeta prefers-reduced-transparency en el header y el boton fantasma.
 - archivos_permitidos: assets/css/styles.css, los 11 index.html (solo la linea ?v= via versionar.ps1)
