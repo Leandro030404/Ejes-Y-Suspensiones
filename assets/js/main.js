@@ -604,7 +604,8 @@
     var a = (e.target && e.target.closest) ? e.target.closest('a[href]') : null;
     if (!a) return;
     var href = a.getAttribute('href') || '';
-    if (href.indexOf('wa.me') !== -1) window.eysConversion('whatsapp');
+    // El catalogo (wa.me/c/) abre una vidriera, no un chat: no es una conversion
+    if (href.indexOf('wa.me') !== -1 && href.indexOf('wa.me/c/') === -1) window.eysConversion('whatsapp');
     else if (href.lastIndexOf('tel:', 0) === 0) window.eysConversion('telefono');
   }, true);
 })();
