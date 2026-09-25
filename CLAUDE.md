@@ -434,6 +434,12 @@ se reenvió para que Google lo relea.
 - [x] ~~Plazo del tercer eje~~ → **10 a 15 días hábiles** (dato del 24/08/2026).
       Ya está en /tercer-eje/ y en los textos de Ads.
 - [ ] Plazos de entrega de los otros 9 trabajos → para sumarlos a sus páginas
+- [ ] **Tabla "Cargas permitidas" de /tercer-eje/ (G-019): confirmar las filas de 220 y 234 CV.**
+      Las de 315 y 333 CV coinciden exactamente con 6 CV por tonelada (régimen definitivo del
+      Decreto 32/2018). Las de 220 y 234 (49,5 y 51,7 t) responden a una etapa intermedia de
+      la Disposición SSTA 58/2018 que, según el texto actualizado en 2023, **vence el
+      31/12/2026**. Revisar con el ingeniero del taller antes de enero de 2027 y corregir la
+      tabla si esas dos filas dejan de valer. Fuente: argentina.gob.ar/normativa/nacional/norma-315423/actualizacion
 - [ ] Fotos antes/después de la misma unidad → para armar un deslizador
 - [ ] Llegar a 30 reseñas en Google (**hoy 20, con 5,0** — subieron desde 15)
 - [x] ~~Llamar a soporte por el destino de la campaña~~ → resuelto creando una campaña nueva (24/08/2026)
