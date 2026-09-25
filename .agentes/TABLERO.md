@@ -34,6 +34,13 @@ Formato de ticket:
 
 
 ## HECHO
+### [G-019] Cargas permitidas por potencia en /escalabilidad/
+- objetivo: que la pagina de escalabilidad muestre el bloque "Cargas permitidas" del sitio original (Decreto 32/2018 y disposicion SSTA 58/2018, con la tabla potencia -> toneladas)
+- archivos_permitidos: escalabilidad/index.html, sitemap.xml
+- criterio_de_aceptacion: en /escalabilidad/, debajo de "Cuando conviene", un h2 "Cargas permitidas" con la tabla de 4 filas; sin desborde en celular
+- notas: pedido de Leandro el 25/09/2026 con captura del sitio viejo. Datos copiados tal cual, sin agregar nada.
+- responsable: CLAUDE — hecho el 25/09/2026
+
 ### [G-018] WhatsApp directo, sin panel previo
 - objetivo: al tocar cualquier boton de WhatsApp se abre el chat de una, con una frase corta ya escrita ("Hola, quiero consultar por <servicio de la pagina>."; en la portada "por un trabajo en mi unidad")
 - archivos_permitidos: los 11 index.html, assets/js/main.js, assets/css/styles.css
