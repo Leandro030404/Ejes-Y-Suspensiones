@@ -34,6 +34,27 @@ Formato de ticket:
 
 
 ## HECHO
+### [G-020] Textos por ciudad en las 10 paginas de servicio
+- objetivo: que Google asocie cada servicio con "Rosario", no solo con Villa Gobernador Galvez
+- archivos_permitidos: las 10 internas, sitemap.xml
+- criterio_de_aceptacion: cada interna tiene el titulo "<servicio> en Rosario | EyS" y un h2 "<servicio> en Rosario" antes de "Otros servicios"
+- notas: sin datos nuevos: "al sur de Rosario" es geografia y "recibimos unidades de todo el pais" ya estaba publicado. Titulos recortados a "| EyS" para que no pasen de 60.
+- responsable: CLAUDE — hecho el 25/09/2026
+
+### [G-021] Preguntas frecuentes de normativa en tercer eje y escalabilidad
+- objetivo: responder "que documentacion me entregan" y "cuanto puedo cargar" en las dos paginas donde mas se pregunta
+- archivos_permitidos: tercer-eje/index.html, escalabilidad/index.html
+- criterio_de_aceptacion: 2 preguntas nuevas por pagina, en el HTML y en el FAQPage de los datos estructurados
+- notas: redactadas SOLO con lo ya publicado (habilitaciones, Decreto 32/2018, "lo confirmamos viendo la unidad"). **Leandro tiene que validarlas.**
+- responsable: CLAUDE — hecho el 25/09/2026
+
+### [G-022] Enlace al catalogo de WhatsApp Business
+- objetivo: que el catalogo con los 11 servicios sea alcanzable desde el sitio
+- archivos_permitidos: los 11 index.html (pie, columna Contacto), assets/js/main.js
+- criterio_de_aceptacion: "Catalogo de servicios en WhatsApp" en el pie de las 11 paginas; tocarlo NO dispara la conversion "Clic en WhatsApp"
+- notas: el enlace es wa.me/c/<numero>. El catalogo quedo "en revision" de WhatsApp el 06/09; si no lo aprobaron, el enlace abre el perfil sin catalogo.
+- responsable: CLAUDE — hecho el 25/09/2026
+
 ### [G-019] Cargas permitidas por potencia en /tercer-eje/
 - objetivo: que la pagina de tercer eje muestre el bloque "Cargas permitidas" del sitio original (Decreto 32/2018 y disposicion SSTA 58/2018, con la tabla potencia -> toneladas)
 - archivos_permitidos: tercer-eje/index.html, escalabilidad/index.html, sitemap.xml
