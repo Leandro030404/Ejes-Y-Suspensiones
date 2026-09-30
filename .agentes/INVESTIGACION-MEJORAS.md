@@ -41,7 +41,6 @@ captcha en el formulario, YouTube o Instagram incrustados (recurso de terceros).
 ## Hallazgo de la auditoría propia
 
 - El iframe del mapa de la portada busca **"Bv San Diego 2103"**; las otras 56 menciones del sitio
-  dicen **"Av"**. Es el único "Bv" del sitio. No se tocó: corregirlo puede mover el pin del mapa y
-  conviene que Leandro confirme cómo figura la calle en la ficha de Google.
+  dicen **"Av"**. Es el único "Bv" del sitio. **Corregido el 30/09/2026** a pedido de Leandro: el mapa ahora busca "Av San Diego 2103".
 - El mapa es un recurso de terceros (Google) y no figura entre las dos excepciones de CLAUDE.md.
   Ya estaba así antes; queda anotado por si se quiere formalizar.
