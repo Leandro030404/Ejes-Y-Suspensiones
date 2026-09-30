@@ -814,8 +814,7 @@ p:last-child{ margin-bottom:0; }
   position:relative; border-radius:var(--radius); overflow:hidden;
   box-shadow:var(--sh-md); border:1px solid var(--line);
 }
-.map{ display:block; width:100%; height:clamp(340px,52vh,520px); border:0; filter:grayscale(.35) contrast(1.05); transition:filter .5s var(--ease); }
-.map-wrap:hover .map{ filter:grayscale(0); }
+.map{ display:block; width:100%; height:clamp(340px,52vh,520px); border:0; }
 .map__cta{ position:absolute; right:1.2rem; bottom:1.2rem; z-index:2; }
 
 /* ── 19. CTA final ────────────────────────────────── */
