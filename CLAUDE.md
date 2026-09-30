@@ -60,7 +60,7 @@ powershell -ExecutionPolicy Bypass -File ".agentes\estado.ps1"
 | Correo | Google Workspace (`info@ejesysuspensiones.com.ar`) |
 | Carpeta local | `C:\proyectos\PAGINA EYS` |
 
-**El sitio está terminado y funcionando.** 11 páginas, sin dependencias externas.
+**El sitio está terminado y funcionando.** 13 páginas (portada, 10 de servicio y 2 guías), sin dependencias externas.
 
 ### Datos de contacto (unificados con la ficha de Google — no cambiar sin avisar)
 
@@ -100,6 +100,9 @@ ejes-trunnion/                 |
 suspensiones-neumaticas/       |
 trenes-rodantes-agricolas/     |
 componentes/                  /
+
+que-eje-necesito/            guía de decisión (G-025)
+tercer-eje-o-escalabilidad/   guía de decisión (G-025)
 
 _originales/                  NO versionado (gitignore). Fotos en alta,
                               avatares de Gmail, y los archivos de texto
@@ -199,6 +202,16 @@ de hover y degradado). Para capas nuevas usar `::before`.
   3ebf427) por si conviene volver. Ahora los datos los pide el mensaje de bienvenida
   de WhatsApp Business y la respuesta rápida `/datos`.
   El formulario de la portada sigue teniendo el campo `unidad` (opcional).
+- **Portada con entrada por situación, proceso y visita** (30/09/2026, G-023 a G-026, salidas de
+  `.agentes/INVESTIGACION-MEJORAS.md`). Hay tres bloques nuevos: "¿Qué necesita tu unidad?" (8
+  situaciones, entre la franja de números y Servicios), "Cómo trabajamos" (4 pasos, entre Trabajos y
+  Fabricación) y "Vení a ver cómo trabajamos" (bajo el mapa, con su propio WhatsApp: "quiero coordinar una
+  visita"). Y **dos guías**: `/que-eje-necesito/` y `/tercer-eje-o-escalabilidad/`, armadas **solo con
+  textos ya publicados** en las páginas de producto. Si se cambia un dato en una página de producto
+  (trocha, giro, plazo, carga), hay que revisar también la guía que lo repite. **Se decidió a propósito no
+  tocar el formulario** (los sitios con formularios largos pierden consultas) **ni publicar lista de ciudades**
+  (no hay dato publicado que la respalde). Pendiente que destraba lo demás: garantía, número de inscripción
+  del taller y fichas técnicas, que solo tiene Leandro.
 - **Fotos en WebP** (24/08/2026). Las 41 imágenes están duplicadas en `.webp` y se
   sirven con `<picture>`: el navegador baja la webp y, si es muy viejo y no la
   entiende, cae sola en el `.jpg`. Son 28% menos de bytes (4,67 → 3,36 MB en la

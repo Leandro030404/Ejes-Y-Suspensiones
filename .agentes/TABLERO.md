@@ -34,6 +34,34 @@ Formato de ticket:
 
 
 ## HECHO
+### [G-023] "Cómo trabajamos" en la portada
+- objetivo: mostrar el proceso en 4 pasos (contás tu unidad, la vemos y presupuestamos, trabajamos en el taller, entrega con documentación)
+- archivos_permitidos: index.html, assets/css/styles.css
+- criterio_de_aceptacion: sección #como-trabajamos entre Trabajos y Fabricación, 4 pasos numerados, sin plazos inventados
+- notas: todo sale de textos ya publicados. El único plazo es el del tercer eje (10 a 15 días hábiles), como referencia.
+- responsable: CLAUDE — hecho el 30/09/2026
+
+### [G-024] Selector "¿Qué necesita tu unidad?" en la portada
+- objetivo: entrada por situación (8 opciones) hacia cada página de servicio o guía
+- archivos_permitidos: index.html, assets/css/styles.css
+- criterio_de_aceptacion: sección #que-necesitas entre la franja de números y Servicios; en celular las tarjetas están compactadas
+- notas: reusa .related. No duplica el menú: pregunta por el problema, no por el producto.
+- responsable: CLAUDE — hecho el 30/09/2026
+
+### [G-025] Dos guías: "Qué eje necesita tu equipo" y "Tercer eje o escalabilidad"
+- objetivo: páginas de decisión que terminan en WhatsApp y atraen búsquedas del tipo "qué eje para carretón"
+- archivos_permitidos: que-eje-necesito/, tercer-eje-o-escalabilidad/, sitemap.xml, tercer-eje, escalabilidad, ejes-autodireccionales, ejes-trunnion, suspensiones-neumaticas, trenes-rodantes-agricolas (solo una línea de enlace en cada una)
+- criterio_de_aceptacion: 13 páginas en el sitemap; las guías usan SOLO datos ya publicados; enlaces cruzados desde 6 páginas, desde el selector y desde las preguntas frecuentes de la portada
+- notas: NO se inventó nada: cada fila de las tablas sale de un texto ya publicado en las páginas de producto. Leandro debe leerlas igual.
+- responsable: CLAUDE — hecho el 30/09/2026
+
+### [G-026] "Vení a ver cómo trabajamos" en Ubicación
+- objetivo: invitar a visitar el taller con un botón de WhatsApp distinto ("quiero coordinar una visita")
+- archivos_permitidos: index.html, assets/css/styles.css
+- criterio_de_aceptacion: bloque debajo del mapa con "Coordinar una visita" y "Llamar al taller"
+- notas: NO se hizo lista de ciudades atendidas: solo hay publicado "unidades de todo el país" y "al sur de Rosario" es geografía.
+- responsable: CLAUDE — hecho el 30/09/2026
+
 ### [G-020] Textos por ciudad en las 10 paginas de servicio
 - objetivo: que Google asocie cada servicio con "Rosario", no solo con Villa Gobernador Galvez
 - archivos_permitidos: las 10 internas, sitemap.xml

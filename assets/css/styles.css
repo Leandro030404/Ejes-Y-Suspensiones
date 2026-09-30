@@ -1429,3 +1429,40 @@ html:not(.js) .preloader{ display:none; }
   .header::before{ background:var(--ink); backdrop-filter:none; -webkit-backdrop-filter:none; }
   .btn--ghost{ background:rgba(255,255,255,.18); backdrop-filter:none; -webkit-backdrop-filter:none; }
 }
+
+/* ── 27. Como trabajamos, selector de situacion y visita (G-023, G-024, G-026) ──
+   Reusan .sec-head, .related y .btn. Solo se agrega lo que no existia: los pasos
+   numerados, la linea de nota centrada y el bloque de visita. */
+h2[id]{ scroll-margin-top:calc(var(--header-h) + 1rem); }
+.steps{
+  list-style:none; margin:0; padding:0; counter-reset:paso;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.3rem;
+}
+.steps li{
+  position:relative; counter-increment:paso;
+  background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius);
+  padding:4rem 1.5rem 1.6rem;
+}
+.steps li::before{
+  content:counter(paso); position:absolute; top:1.3rem; left:1.5rem;
+  width:2.3rem; height:2.3rem; border-radius:50%;
+  background:var(--red); color:#fff; text-align:center;
+  font:700 1.2rem/2.3rem var(--font-head);
+}
+.steps h3{ font-size:1.3rem; text-transform:uppercase; margin:0 0 .5rem; }
+.steps p{ margin:0; font-size:.93rem; color:var(--txt-soft); line-height:1.7; }
+.nota-centro{ text-align:center; max-width:64ch; margin:1.8rem auto 0; font-size:.95rem; color:var(--txt-soft); line-height:1.7; }
+.nota-centro a:not(.btn){ color:var(--red); font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+.nota-centro--cta{ margin-top:1.4rem; }
+.visita{ text-align:center; max-width:680px; margin:2.6rem auto 0; }
+.visita h3{ font-size:1.7rem; text-transform:uppercase; margin:0 0 .6rem; }
+.visita p{ margin:0; color:var(--txt-soft); line-height:1.75; }
+.visita__actions{ display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center; margin-top:1.3rem; }
+
+/* El selector de situacion tiene 8 opciones: en celular se compactan para que no ocupen dos pantallas */
+@media (max-width:600px){
+  #que-necesitas .related{ gap:.7rem; }
+  #que-necesitas .related a{ padding:1rem 1.15rem; }
+  #que-necesitas .related strong{ font-size:1.12rem; line-height:1.15; margin-bottom:.2rem; }
+  #que-necesitas .related span{ font-size:.82rem; line-height:1.45; }
+}
