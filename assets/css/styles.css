@@ -1451,7 +1451,7 @@ h2[id]{ scroll-margin-top:calc(var(--header-h) + 1rem); }
 }
 .steps h3{ font-size:1.3rem; text-transform:uppercase; margin:0 0 .5rem; }
 .steps p{ margin:0; font-size:.93rem; color:var(--txt-soft); line-height:1.7; }
-.nota-centro{ text-align:center; max-width:64ch; margin:1.8rem auto 0; font-size:.95rem; color:var(--txt-soft); line-height:1.7; }
+.nota-centro{ text-align:center; max-width:90ch; margin:1.8rem auto 0; font-size:.95rem; color:var(--txt-soft); line-height:1.7; }
 .nota-centro a:not(.btn){ color:var(--red); font-weight:600; text-decoration:underline; text-underline-offset:3px; }
 .nota-centro--cta{ margin-top:1.4rem; }
 .visita{ text-align:center; max-width:680px; margin:2.6rem auto 0; }

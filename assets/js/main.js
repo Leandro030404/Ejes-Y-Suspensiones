@@ -193,6 +193,10 @@
       entries.forEach(function (en) {
         if (!en.isIntersecting) return;
         var id = en.target.id;
+        /* Las secciones sin enlace en el menu (ej. "Que necesita tu unidad", "Como
+           trabajamos") no deben apagar el resaltado: que siga la del bloque anterior. */
+        var tieneEnlace = navLinks.some(function (l) { return l.getAttribute('href') === '#' + id; });
+        if (!tieneEnlace) return;
         navLinks.forEach(function (l) {
           l.classList.toggle('is-active', l.getAttribute('href') === '#' + id);
         });
