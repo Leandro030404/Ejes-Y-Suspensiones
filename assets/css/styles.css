@@ -1219,7 +1219,7 @@ html:not(.js) .preloader{ display:none; }
 
 @media (max-width:1080px){
   .page-grid{ grid-template-columns:1fr; gap:2.5rem; }
-  .sidebar{ position:static; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+  .sidebar{ position:static; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); align-items:start; }
 }
 @media (max-width:640px){
   .subhero{ padding:calc(var(--header-h) + 3rem) 0 3rem; }
