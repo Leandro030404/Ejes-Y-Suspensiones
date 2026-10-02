@@ -34,6 +34,12 @@ Formato de ticket:
 
 ## HECHO
 
+### [G-028] Portada: efectos visuales discretos (skill animate)
+- objetivo: 3 efectos con proposito: fotos de la entrada por situacion que se asientan, pasos de Como trabajamos que aparecen en orden, filete rojo bajo los titulos
+- archivos_permitidos: assets/css/styles.css
+- criterio_de_aceptacion: solo transform/opacity, curva --ease-out, apagado con prefers-reduced-motion, sin desborde
+- HECHO el 02/10/2026: 3 efectos en la seccion 29 del CSS (fotos de la entrada que se asientan, pasos que entran en orden, filete rojo bajo los titulos). Solo transform/opacity, apagados con reduced-motion. Comprobado: animaciones aplicadas, sin desborde en 390 y 1440 px. El movimiento en si no se ve en capturas quietas: Leandro lo juzga scrolleando. SIN PUSHEAR.
+
 ### [G-027] Portada: primera pantalla con prueba, una sola entrada con fotos, flotantes en celular
 - objetivo: critica de diseno del 02/10 (3 P1): (1) prueba social pegada a los botones del hero, (2) unir "Que necesita tu unidad" y "Que hacemos" en una sola seccion con fotos, (3) baja la oclusion de los flotantes en celular
 - archivos_permitidos: index.html, assets/css/styles.css
