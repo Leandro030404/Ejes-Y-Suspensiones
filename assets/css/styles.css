@@ -1511,3 +1511,31 @@ h2[id]{ scroll-margin-top:calc(var(--header-h) + 1rem); }
   /* El asistente pasa al lado del boton de WhatsApp (una fila, no una torre): tapa menos contenido */
   .chat-lanzador{ bottom:calc(1rem + 5px); right:4.9rem; }
 }
+
+/* ── 29. Efectos discretos de entrada (G-028) ──────────────────────────────
+   Tres, todos al aparecer la seccion y una sola vez: las fotos de la entrada por situacion
+   se asientan (de 1.1x a 1x), los 4 pasos de "Como trabajamos" entran en orden y un filete
+   rojo se dibuja bajo cada titulo. Solo transform y opacity, con la curva --ease-out de
+   la hoja. Van dentro de no-preference: con "reducir movimiento" no se anima nada.
+   fill-mode "backwards" (no "forwards"): al terminar vuelven a mandar los estilos de
+   siempre, asi el zoom del hover de las fotos no queda pisado por la animacion. */
+@media (prefers-reduced-motion:no-preference){
+  .js .sec-head .sec-head__title::after{
+    content:''; display:block; width:3.2rem; height:3px; margin:.9rem auto 0;
+    background:var(--red); border-radius:2px;
+    transform:scaleX(0); transition:transform .8s var(--ease-out) .3s;
+  }
+  .js .sec-head.is-in .sec-head__title::after{ transform:scaleX(1); }
+
+  @keyframes situAsienta{ from{ transform:scale(1.1); } }
+  .js .situ.is-in .situ__img img{ animation:situAsienta 1s var(--ease-out) backwards; }
+  .js .situ.is-in .situ__item:nth-child(4n+2) .situ__img img{ animation-delay:.07s; }
+  .js .situ.is-in .situ__item:nth-child(4n+3) .situ__img img{ animation-delay:.14s; }
+  .js .situ.is-in .situ__item:nth-child(4n+4) .situ__img img{ animation-delay:.21s; }
+
+  @keyframes pasoEntra{ from{ opacity:0; transform:translateY(14px); } }
+  .js .steps.is-in li{ animation:pasoEntra .7s var(--ease-out) backwards; }
+  .js .steps.is-in li:nth-child(2){ animation-delay:.1s; }
+  .js .steps.is-in li:nth-child(3){ animation-delay:.2s; }
+  .js .steps.is-in li:nth-child(4){ animation-delay:.3s; }
+}
