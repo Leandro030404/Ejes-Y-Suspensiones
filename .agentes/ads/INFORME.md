@@ -157,7 +157,7 @@ Pedido de Leandro: hacer los cambios 5 y 6 en el Editor; el presupuesto lo toca 
 
 - **Palabras repetidas (8):** pausadas (no eliminadas: esta version del Editor no deja quitar palabras con historial sin pasar por el aviso de revision; pausar logra lo mismo y se puede revertir) en el grupo "Fabricacion de ejes", que repetia las del grupo "Tercer eje y chasis": instalacion tercer eje camiones, eje neumatico camion, alargue de chasis, tercer eje, tercer eje camion, colocacion tercer eje, eje camion, modificacion de chasis.
 - **Negativas quitadas (2):** "venta" (frase) y "repuestos" (frase), que podian tapar busquedas buenas. Siguen "en venta", "usado" y "usados".
-- **Negativas agregadas a Busqueda (18):** amplia: alko, estriados, curvo, batan, colectivos, kamlofsky, storani; frase: frenos electricos, freno electrico, frenos eléctricos, freno eléctrico, nueve ejes, carro de arrastre, carros de arrastre, iveco daily, 750 kg, 1500 kg, 2500 kg.
+- **Negativas agregadas a Busqueda (17; "iveco daily" se saco a pedido de Leandro):** amplia: alko, estriados, curvo, batan, colectivos, kamlofsky, storani; frase: frenos electricos, freno electrico, frenos eléctricos, freno eléctrico, nueve ejes, carro de arrastre, carros de arrastre, 750 kg, 1500 kg, 2500 kg.
 - **Ubicaciones de Busqueda:** agregada Argentina (pais) y quitadas 5 provincias sueltas (Cordoba, Entre Rios, Santa Fe, Corrientes, Buenos Aires). Ahora cubre todo el pais, igual que Maximo rendimiento.
 
 **Trampa del Editor:** si aparece el aviso "Revisa las actualizaciones de la cuenta", hay que apretar "Listo"; mientras esta, el boton Quitar queda desactivado. Para ver el informe de terminos o exportar, la ventana emergente solo se cierra con Ctrl+F4 despues de hacerle clic.
