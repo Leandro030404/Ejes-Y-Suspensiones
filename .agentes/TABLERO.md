@@ -32,8 +32,14 @@ Formato de ticket:
 
 ## EN CURSO
 
-
 ## HECHO
+
+### [G-027] Portada: primera pantalla con prueba, una sola entrada con fotos, flotantes en celular
+- objetivo: critica de diseno del 02/10 (3 P1): (1) prueba social pegada a los botones del hero, (2) unir "Que necesita tu unidad" y "Que hacemos" en una sola seccion con fotos, (3) baja la oclusion de los flotantes en celular
+- archivos_permitidos: index.html, assets/css/styles.css
+- criterio_de_aceptacion: sin desborde en 390 y 1440 px, menu y scrollspy intactos, portada en celular mas corta
+- notas: NO se toca el titulo del hero hasta que Leandro elija el diferenciador. Sin push hasta que Leandro vea el resultado.
+- HECHO el 02/10/2026: (1) linea de prueba en el hero (5,0 · 20 resenas en Google, enlaza a #opiniones); (2) "Que necesita tu unidad" y "Que hacemos" unidas en una sola seccion #servicios con foto en cada una de las 8 opciones; en celular la portada baja de 27.687 a ~25.300 px; (3) en celular el asistente pasa al costado del boton de WhatsApp (una fila en vez de una torre). El detector baja de 102 a 93 hallazgos. SIN PUSHEAR: Leandro tiene que ver el resultado. Pendiente: titulo del hero (depende de que Leandro elija el diferenciador).
 ### [G-023] "Cómo trabajamos" en la portada
 - objetivo: mostrar el proceso en 4 pasos (contás tu unidad, la vemos y presupuestamos, trabajamos en el taller, entrega con documentación)
 - archivos_permitidos: index.html, assets/css/styles.css
