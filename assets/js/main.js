@@ -62,7 +62,7 @@
     var y = window.scrollY || window.pageYOffset;
 
     if (header) header.classList.toggle('is-stuck', y > 40);
-    if (progress) progress.style.width = (maxScroll > 0 ? (y / maxScroll) * 100 : 0) + '%';
+    if (progress) progress.style.transform = 'scaleX(' + (maxScroll > 0 ? (y / maxScroll) : 0) + ')';
     if (wspFloat) wspFloat.classList.toggle('is-visible', y > 420);
 
     // Parallax suave del hero (sólo cuando está a la vista)
@@ -236,6 +236,15 @@
       });
     });
   });
+
+  /* ── 8b. Ver todos los trabajos (celular) y Seguir leyendo (Empresa) · G-031 ── */
+  var worksBox = $('#works');
+  function expandirTrabajos() { if (worksBox) worksBox.classList.add('is-expandido'); }
+  var verMasBtn = $('#verMas');
+  if (verMasBtn) verMasBtn.addEventListener('click', expandirTrabajos);
+  filters.forEach(function (b) { b.addEventListener('click', expandirTrabajos); });
+  var masEmpresa = $('.about__mas');
+  if (masEmpresa && window.matchMedia('(min-width:900px)').matches) masEmpresa.open = true;
 
   /* ── 9. Lightbox ───────────────────────────────── */
   var lb        = $('#lightbox');
