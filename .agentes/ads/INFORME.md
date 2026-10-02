@@ -132,3 +132,21 @@ Que las tres acciones figuren como **activas y principales** dentro de Google Ad
 estén recibiendo conversiones. Eso se mira en la cuenta, en Objetivos → Conversiones →
 Resumen. Si alguna dice "Inactiva" o "Sin actividad reciente" después de dos semanas con
 tráfico, avisá: ahí sí hay algo roto.
+
+---
+
+## 02/10/2026 — Revision desde el Google Ads Editor (datos hasta el 01/10)
+
+Hecha en la PC de Leandro con el Editor (exportacion de la cuenta + informe de terminos + informe por canal). Solo lectura: no se publico ningun cambio.
+
+**Presupuestos hoy:** Busqueda 4.200/dia y Maximo rendimiento 7.000/dia (11.200 en total). Ambas en Maximizar conversiones, sin CPA objetivo.
+
+**Busqueda - Sitio Web** (desde 21/08): 175 clics, ARS 76.869, 2.140 impresiones, 21 conversiones, ARS 3.660 por conversion. Gasta ~1.800/dia de 4.200: el limite es el volumen de busquedas, no el presupuesto. 25 de las 45 palabras no tienen ni una impresion. Hay 5 palabras repetidas en los dos grupos y compiten entre si. Solo 7 zonas (Cordoba, Entre Rios, Neuquen, Santa Fe, Buenos Aires, CABA, Corrientes).
+
+**Maximo rendimiento** (desde 24/08): 3.422 clics, ARS 126.463, **352 conversiones** a ARS 359. Por canal: Red de Display ~104.300 (82% del gasto y 330 de las 352 conversiones), Discover ~18.300, YouTube ~2.400, **Busqueda de Google ~1.340 (1%)**. Clic medio ARS 37 contra 439 en Busqueda. Solo 9 de 3.422 clics vienen de una busqueda visible.
+
+**Lectura:** Google cuenta 373 conversiones entre las dos campañas y el taller recibio ~13 consultas. Las conversiones son clics en el boton de WhatsApp, y Maximizar conversiones encuentra los mas baratos, que son los de Display. La campaña vieja (eliminada) hizo lo mismo: 561 clics de Display, 0 conversiones.
+
+**Otros hallazgos:** PMax tiene un formulario de Google (pide nombre, telefono, mail, ciudad y "¿De que podemos darte presupuesto?"); "Presupuesto sin cargo" figura en 3 lugares de los anuncios y en ningun lugar del sitio; terminos irrelevantes pagados en Busqueda: eje alko, fabricacion de ejes estriados, eje curvo, eje con frenos electricos, nueve ejes argentina srl; en la campaña hay negativas "venta" y "repuestos" que pueden tapar busquedas buenas.
+
+**Promocion de 300.000:** gastado hasta ayer ~235.254, faltan ~64.746 antes del 10/10. Como Busqueda no absorbe su presupuesto, el gasto efectivo es ~9.000-9.500/dia: justo. Conviene subir Maximo rendimiento a ~9.000 hasta cumplirlo.
