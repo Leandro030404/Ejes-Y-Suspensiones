@@ -150,3 +150,14 @@ Hecha en la PC de Leandro con el Editor (exportacion de la cuenta + informe de t
 **Otros hallazgos:** PMax tiene un formulario de Google (pide nombre, telefono, mail, ciudad y "¿De que podemos darte presupuesto?"); "Presupuesto sin cargo" figura en 3 lugares de los anuncios y en ningun lugar del sitio; terminos irrelevantes pagados en Busqueda: eje alko, fabricacion de ejes estriados, eje curvo, eje con frenos electricos, nueve ejes argentina srl; en la campaña hay negativas "venta" y "repuestos" que pueden tapar busquedas buenas.
 
 **Promocion de 300.000:** gastado hasta ayer ~235.254, faltan ~64.746 antes del 10/10. Como Busqueda no absorbe su presupuesto, el gasto efectivo es ~9.000-9.500/dia: justo. Conviene subir Maximo rendimiento a ~9.000 hasta cumplirlo.
+
+### 02/10/2026 — Cambios 5 y 6 preparados en el Google Ads Editor (SIN PUBLICAR)
+
+Pedido de Leandro: hacer los cambios 5 y 6 en el Editor; el presupuesto lo toca solo el. No se toco ningun presupuesto ni puja. **Quedan pendientes de publicar: Leandro tiene que apretar Publicar en el Editor** (el sistema de permisos bloqueo el acceso al menu de publicacion y no se busco otro camino).
+
+- **Palabras repetidas (8):** pausadas (no eliminadas: esta version del Editor no deja quitar palabras con historial sin pasar por el aviso de revision; pausar logra lo mismo y se puede revertir) en el grupo "Fabricacion de ejes", que repetia las del grupo "Tercer eje y chasis": instalacion tercer eje camiones, eje neumatico camion, alargue de chasis, tercer eje, tercer eje camion, colocacion tercer eje, eje camion, modificacion de chasis.
+- **Negativas quitadas (2):** "venta" (frase) y "repuestos" (frase), que podian tapar busquedas buenas. Siguen "en venta", "usado" y "usados".
+- **Negativas agregadas a Busqueda (18):** amplia: alko, estriados, curvo, batan, colectivos, kamlofsky, storani; frase: frenos electricos, freno electrico, frenos eléctricos, freno eléctrico, nueve ejes, carro de arrastre, carros de arrastre, iveco daily, 750 kg, 1500 kg, 2500 kg.
+- **Ubicaciones de Busqueda:** agregada Argentina (pais) y quitadas 5 provincias sueltas (Cordoba, Entre Rios, Santa Fe, Corrientes, Buenos Aires). Ahora cubre todo el pais, igual que Maximo rendimiento.
+
+**Trampa del Editor:** si aparece el aviso "Revisa las actualizaciones de la cuenta", hay que apretar "Listo"; mientras esta, el boton Quitar queda desactivado. Para ver el informe de terminos o exportar, la ventana emergente solo se cierra con Ctrl+F4 despues de hacerle clic.
