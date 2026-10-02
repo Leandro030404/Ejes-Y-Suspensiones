@@ -120,3 +120,5 @@ Formato: [YYYY-MM-DD HH:MM] [CLAUDE|GEMINI] G-00X que se hizo | archivos tocados
 [2026-10-02 15:10] [CLAUDE] G-029 (pedido de Leandro: mejorar el diseno lo mas posible, con las skills): leidas de verdad mobile-native, redesign-existing-projects, high-end-visual-design, emil-design-eng, prototype y el comienzo de las demas. Se tomaron recursos, no estilos ajenos (varias skills prohiben Inter o piden GSAP/imagenes generadas, incompatible con el sitio). Cambios en la seccion 31 del CSS. Commit local, sin push.
 
 [2026-10-02 15:40] [CLAUDE] G-030: frase del hero reescrita para cargar fabricacion propia, modificacion, homologacion en una linea ("desde 2005" ya esta en la etiqueta de arriba). Commit local, sin push.
+
+[2026-10-02 16:50] [CLAUDE] G-031 (pedido de Leandro: hace todos los puntos de la critica): contraste, opinion destacada, glosario, mayuscula inicial, limpieza tecnica y largo en celular. Medicion de contraste propia con el navegador (el detector daba falsos positivos). Commit local, sin push.

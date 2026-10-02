@@ -34,6 +34,12 @@ Formato de ticket:
 
 ## HECHO
 
+### [G-031] Portada: contraste, opinion destacada, glosario, mayuscula inicial, limpieza tecnica, largo en celular
+- objetivo: los 6 puntos de la critica de diseno que quedaban (pedido de Leandro: hace todos)
+- archivos_permitidos: index.html, assets/css/styles.css, assets/js/main.js
+- criterio_de_aceptacion: contraste medido sin fallas reales, sin desborde 390/820/1440, filtros y lightbox intactos, h2->h3 en la linea de tiempo
+- HECHO el 02/10/2026: (1) contraste medido con el navegador: rojo mas profundo sobre rosado/claro (--red-on-light #b81f16) y mas claro sobre oscuro (--red-on-dark #e46760) en etiquetas, tagline del header, siglas del hero y del pie; hover del boton de WhatsApp con texto oscuro; (2) opinion destacada (Guillermo Bagneres, textual) entre numeros y entrada por situacion, como cita y SIN marcado Review; (3) glosario En criollo con definiciones ya publicadas; (4) titulos de las 8 opciones en mayuscula inicial; (5) h4 -> h3 en la linea de tiempo, barra de progreso con transform en vez de width; (6) celular: Trabajos muestra 4 con boton Ver los 7 trabajos (se abre solo al filtrar) y Empresa se pliega con Seguir leyendo (abierto en 900 px o mas). Portada en celular de 25.088 a 23.618 px. Probado: filtros, boton, JS sin errores en 390 y 1440. Quedan sin cambiar: estrellas doradas (decorativas, acompanan al 5,0) y avisos de blanco sobre blanco del detector (falsos positivos). SIN PUSHEAR.
+
 ### [G-030] Frase del hero con las cuatro fortalezas
 - HECHO el 02/10/2026: Leandro dijo que las cuatro son importantes; el titulo queda (Ejes y Suspensiones ya dice el rubro) y la frase de abajo pasa a: Fabricamos ejes y suspensiones propios, modificamos tu unidad y la homologamos. Todo en un mismo taller. Solo texto ya publicado en el sitio. SIN PUSHEAR.
 
