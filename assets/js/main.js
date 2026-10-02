@@ -43,7 +43,9 @@
   /* ── 3. Header + progreso de scroll + parallax ─── */
   var header    = $('#header');
   var progress  = $('#scrollProgress');
-  var heroImg   = $('#heroImg');
+  /* La barra de progreso y el parallax del hero los hace el CSS (seccion 34) cuando el navegador
+     soporta animation-timeline; el JS solo mueve la barra si no lo soporta. */
+  var scrollCSS = !!(window.CSS && CSS.supports && CSS.supports('animation-timeline', 'scroll()'));
   var wspFloat  = $('#wspFloat');
   var ticking   = false;
 
@@ -62,13 +64,9 @@
     var y = window.scrollY || window.pageYOffset;
 
     if (header) header.classList.toggle('is-stuck', y > 40);
-    if (progress) progress.style.transform = 'scaleX(' + (maxScroll > 0 ? (y / maxScroll) : 0) + ')';
+    if (progress && !scrollCSS) progress.style.transform = 'scaleX(' + (maxScroll > 0 ? (y / maxScroll) : 0) + ')';
     if (wspFloat) wspFloat.classList.toggle('is-visible', y > 420);
 
-    // Parallax suave del hero (sólo cuando está a la vista)
-    if (heroImg && !reduced && y < altoVista * 1.2) {
-      heroImg.style.transform = 'translate3d(0,' + (y * 0.28) + 'px,0)';
-    }
     ticking = false;
   }
 
@@ -621,4 +619,33 @@
     if (href.indexOf('wa.me') !== -1 && href.indexOf('wa.me/c/') === -1) window.eysConversion('whatsapp');
     else if (href.lastIndexOf('tel:', 0) === 0) window.eysConversion('telefono');
   }, true);
+
+  /* ── Aviso de cookies (G-034) ───────────────────────────────────────────────
+     Solo informa y se cierra: no bloquea la etiqueta de Google, que ya mide los anuncios.
+     Recuerda el cierre con una marca en localStorage; si el navegador lo impide, se vuelve a ver. */
+  (function () {
+    var CLAVE = 'eys-aviso-cookies';
+    try { if (localStorage.getItem(CLAVE) === '1') return; } catch (e) {}
+    var caja = document.createElement('div');
+    caja.className = 'aviso-cookies';
+    caja.setAttribute('role', 'region');
+    caja.setAttribute('aria-label', 'Aviso de cookies');
+    caja.innerHTML = '<p>Usamos la etiqueta de Google Ads para medir los anuncios, y esa etiqueta puede guardar cookies. ' +
+      '<a href="/politica-de-privacidad/">Más información</a>.</p><button type="button">Entendido</button>';
+    function ajustar() { document.documentElement.style.setProperty('--aviso-h', (caja.offsetHeight + 8) + 'px'); }
+    function cerrar() {
+      try { localStorage.setItem(CLAVE, '1'); } catch (e) {}
+      document.body.classList.remove('con-aviso');
+      caja.parentNode && caja.parentNode.removeChild(caja);
+    }
+    caja.querySelector('button').addEventListener('click', cerrar);
+    setTimeout(function () {
+      document.body.appendChild(caja);
+      document.body.classList.add('con-aviso');
+      ajustar();
+      requestAnimationFrame(function () { caja.classList.add('is-in'); });
+      window.addEventListener('resize', ajustar, { passive: true });
+    }, 1400);
+  })();
+
 })();

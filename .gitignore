@@ -15,3 +15,14 @@ _originales/
 
 # Locks de coordinacion entre agentes (son temporales, no se versionan)
 .agentes/locks/*.lock
+
+# Documento interno de diseno (no se publica: GitHub Pages lo serviria en la raiz)
+DESIGN.md
+.impeccable/design.json
+
+# Notas internas y coordinacion entre agentes: solo locales (el repositorio de GitHub es publico)
+.agentes/
+AGENTS.md
+CLAUDE.md
+PRODUCT.md
+.impeccable/
