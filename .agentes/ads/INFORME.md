@@ -151,9 +151,9 @@ Hecha en la PC de Leandro con el Editor (exportacion de la cuenta + informe de t
 
 **Promocion de 300.000:** gastado hasta ayer ~235.254, faltan ~64.746 antes del 10/10. Como Busqueda no absorbe su presupuesto, el gasto efectivo es ~9.000-9.500/dia: justo. Conviene subir Maximo rendimiento a ~9.000 hasta cumplirlo.
 
-### 02/10/2026 — Cambios 5 y 6 preparados en el Google Ads Editor (SIN PUBLICAR)
+### 02/10/2026 — Cambios 5 y 6 en el Google Ads Editor (PUBLICADOS el 02/10/2026 a las 10:46)
 
-Pedido de Leandro: hacer los cambios 5 y 6 en el Editor; el presupuesto lo toca solo el. No se toco ningun presupuesto ni puja. **Quedan pendientes de publicar: Leandro tiene que apretar Publicar en el Editor** (el sistema de permisos bloqueo el acceso al menu de publicacion y no se busco otro camino).
+Pedido de Leandro: hacer los cambios 5 y 6 en el Editor; el presupuesto lo toca solo el. No se toco ningun presupuesto ni puja. **Publicados** a las 10:46 con el OK explicito de Leandro ("aplica los cambios"). El Editor informo: palabras clave 8/8, negativas 19/19 (17 nuevas y 2 quitadas), ubicaciones 6/6 (1 nueva y 5 quitadas). Antes, el sistema de permisos habia bloqueado el menu Cuenta y se dejo en espera la decision de Leandro.
 
 - **Palabras repetidas (8):** pausadas (no eliminadas: esta version del Editor no deja quitar palabras con historial sin pasar por el aviso de revision; pausar logra lo mismo y se puede revertir) en el grupo "Fabricacion de ejes", que repetia las del grupo "Tercer eje y chasis": instalacion tercer eje camiones, eje neumatico camion, alargue de chasis, tercer eje, tercer eje camion, colocacion tercer eje, eje camion, modificacion de chasis.
 - **Negativas quitadas (2):** "venta" (frase) y "repuestos" (frase), que podian tapar busquedas buenas. Siguen "en venta", "usado" y "usados".
