@@ -1681,3 +1681,100 @@ p, li{ text-wrap:pretty; }
 .about__mas[open] > summary{ display:none; }
 @media (min-width:900px){ .about__mas > summary{ display:none; } }
 .footer__certs li{ color:var(--red-on-dark); }
+
+/* ── 33. Animaciones: entre paginas, desplegables, cascada y menos bucles (G-032) ──
+   Salida de la skill find-animation-opportunities. Todo es CSS y se apaga con "reducir movimiento".
+   Lo que el navegador no entiende (Firefox, versiones viejas) simplemente no se anima, no se rompe. */
+
+/* Bucles infinitos fuera: en una pagina que se mira una vez cansan y compiten con el boton de
+   WhatsApp, que es lo unico que tiene que llamar la atencion. Quedan la marquesina de clientes
+   y el aro del boton. */
+.hero__scroll, .hero__mouse i, .pulse-dot{ animation:none; }
+
+/* Entre paginas: fundido corto, con el encabezado y el boton de WhatsApp quietos.
+   Funcion nueva del navegador (transicion de documentos): sin JS y con salida limpia si no existe. */
+@view-transition{ navigation:auto; }
+.header{ view-transition-name:header; }
+.wsp-float{ view-transition-name:wsp; }
+::view-transition-old(root), ::view-transition-new(root){
+  animation-duration:.22s; animation-timing-function:var(--ease-out);
+}
+
+/* Desplegables (preguntas frecuentes y "Seguir leyendo"): se abren con un deslizamiento corto
+   en lugar de saltar. La altura se anima solo aca, que es el caso en que no hay alternativa. */
+@supports (interpolate-size:allow-keywords) and selector(::details-content){
+  .faq details, .about__mas{ interpolate-size:allow-keywords; }
+  .faq details::details-content, .about__mas::details-content{
+    block-size:0; overflow:hidden; opacity:0;
+    transition:block-size .22s var(--ease-out), opacity .22s var(--ease-out), content-visibility .22s allow-discrete;
+  }
+  .faq details[open]::details-content, .about__mas[open]::details-content{ block-size:auto; opacity:1; }
+  /* En pantalla ancha "Seguir leyendo" nace abierto por JS: sin esto se veria abrir al cargar */
+  @media (min-width:900px){ .about__mas::details-content{ transition:none; } }
+}
+
+/* "Ver los 7 trabajos": las 3 fotos que faltan entran en cascada, no de golpe */
+@media (max-width:640px){
+  .works.is-expandido .work:nth-child(6){ --d:.07s; }
+  .works.is-expandido .work:nth-child(7){ --d:.14s; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*){ animation:none !important; }
+  .faq details::details-content, .about__mas::details-content{ transition:none !important; }
+}
+
+/* ── 34. Barra de progreso y parallax del hero con CSS puro (G-033) ──────────────
+   Antes los movia main.js en cada scroll. Con animation-timeline el navegador los hace solo,
+   fuera del hilo principal. Si no lo soporta, la barra sigue funcionando con JS.
+   OJO: el parallax en JS nunca se vio: la animacion heroZoom (transform, con fill forwards)
+   pisaba el transform en linea. Aca va en la propiedad `translate`, que no choca con el zoom. */
+@supports (animation-timeline: scroll()){
+  .scroll-progress{
+    transform-origin:left; transition:none;
+    animation:progresoScroll linear both; animation-timeline:scroll(root);
+  }
+  @keyframes progresoScroll{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+
+  @media (prefers-reduced-motion:no-preference){
+    .hero__img{
+      animation:heroZoom 18s var(--ease) forwards, heroParallax linear both;
+      animation-timeline:auto, scroll(root);
+      animation-range:normal, 0 120vh;
+    }
+    @keyframes heroParallax{ to{ translate:0 33.6vh; } }
+  }
+}
+
+/* ── 35. Enlaces legales en el pie y aviso de cookies (G-034) ───────────────────── */
+.footer__legal{ margin-left:.4rem; white-space:nowrap; }
+.footer__legal a{ text-decoration:underline; text-underline-offset:3px; }
+@media (hover:hover) and (pointer:fine){ .footer__legal a:hover{ color:#fff; } }
+
+/* Aviso de cookies: informa y se cierra. No bloquea ni condiciona la medicion. En celular ocupa el
+   ancho de abajo y sube el boton de WhatsApp y el asistente para no taparlos (--aviso-h lo mide el JS). */
+.aviso-cookies{
+  position:fixed; left:1.3rem; bottom:1.3rem; z-index:1100; max-width:390px;
+  display:grid; gap:.8rem; padding:1rem 1.15rem;
+  background:var(--ink-2); color:var(--txt-invert); border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--radius); box-shadow:var(--sh-lg);
+  font-size:.86rem; line-height:1.55;
+}
+.aviso-cookies p{ margin:0; }
+.aviso-cookies a{ color:#fff; text-decoration:underline; text-underline-offset:3px; }
+.aviso-cookies button{
+  justify-self:start; min-height:44px; padding:.6rem 1.3rem; border:0; border-radius:99px; cursor:pointer;
+  background:var(--red); color:#fff; font:700 .9rem var(--font-body);
+  -webkit-user-select:none; user-select:none;
+}
+.aviso-cookies button:active{ transform:scale(.97); }
+@media (prefers-reduced-motion:no-preference){
+  .aviso-cookies{ opacity:0; transform:translateY(14px); transition:opacity .35s var(--ease-out), transform .35s var(--ease-out); }
+  .aviso-cookies.is-in{ opacity:1; transform:none; }
+}
+@media (max-width:640px){
+  .aviso-cookies{ left:.75rem; right:.75rem; bottom:.75rem; max-width:none; }
+  .con-aviso .wsp-float{ bottom:calc(1rem + var(--aviso-h,0px)); }
+  .con-aviso .chat-lanzador{ bottom:calc(1rem + 5px + var(--aviso-h,0px)); }
+}
+@media print{ .aviso-cookies{ display:none; } }
