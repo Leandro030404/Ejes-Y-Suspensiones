@@ -34,6 +34,12 @@ Formato de ticket:
 
 ## HECHO
 
+### [G-029] Portada: rediseno con recursos de las skills (base movil, regla, visor, ficha tecnica, linea de proceso)
+- objetivo: mejorar el diseno sin cambiar la identidad: hover solo con mouse, campos a 16px en celular, titulos balanceados, regla de medir en la franja de numeros, esquinas de visor en fotos, fichas de Fabricacion como planilla, Como trabajamos como linea de proceso
+- archivos_permitidos: assets/css/styles.css
+- criterio_de_aceptacion: sin desborde 390/820/1440, nada roto, reduced-motion respetado
+- HECHO el 02/10/2026 (seccion 31 del CSS): 55 reglas :hover pasan a (hover:hover) and (pointer:fine) en el mismo lugar, campos a 16px en celular tactil, sin destello de toque, titulos con text-wrap:balance, regla de medir en la franja de numeros, esquinas de visor en fotos de la entrada y de Trabajos, fichas de Fabricacion como planilla de lineas finas (sin borde rojo lateral), Como trabajamos como linea de proceso (horizontal desde 1100 px, vertical debajo). Sin desborde en 390, 820 y 1440. SIN PUSHEAR. NO tocado: titulo del hero (decide Leandro).
+
 ### [G-028] Portada: efectos visuales discretos (skill animate)
 - objetivo: 3 efectos con proposito: fotos de la entrada por situacion que se asientan, pasos de Como trabajamos que aparecen en orden, filete rojo bajo los titulos
 - archivos_permitidos: assets/css/styles.css
