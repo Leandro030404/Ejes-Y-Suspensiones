@@ -34,6 +34,9 @@ Formato de ticket:
 
 ## HECHO
 
+### [G-030] Frase del hero con las cuatro fortalezas
+- HECHO el 02/10/2026: Leandro dijo que las cuatro son importantes; el titulo queda (Ejes y Suspensiones ya dice el rubro) y la frase de abajo pasa a: Fabricamos ejes y suspensiones propios, modificamos tu unidad y la homologamos. Todo en un mismo taller. Solo texto ya publicado en el sitio. SIN PUSHEAR.
+
 ### [G-029] Portada: rediseno con recursos de las skills (base movil, regla, visor, ficha tecnica, linea de proceso)
 - objetivo: mejorar el diseno sin cambiar la identidad: hover solo con mouse, campos a 16px en celular, titulos balanceados, regla de medir en la franja de numeros, esquinas de visor en fotos, fichas de Fabricacion como planilla, Como trabajamos como linea de proceso
 - archivos_permitidos: assets/css/styles.css

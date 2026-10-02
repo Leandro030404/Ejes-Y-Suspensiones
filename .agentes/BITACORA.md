@@ -118,3 +118,5 @@ Formato: [YYYY-MM-DD HH:MM] [CLAUDE|GEMINI] G-00X que se hizo | archivos tocados
 [2026-10-02 13:30] [CLAUDE] G-028 (pedido de Leandro: efectos visuales sin perder seriedad, con la skill animate): seccion 29 del CSS con 3 efectos de entrada, solo transform/opacity, dentro de prefers-reduced-motion:no-preference. El sitio ya tenia hero con zoom lento y parallax, lineas del titulo, contadores y reveal, asi que no se sumo mas. Commit local, sin push.
 
 [2026-10-02 15:10] [CLAUDE] G-029 (pedido de Leandro: mejorar el diseno lo mas posible, con las skills): leidas de verdad mobile-native, redesign-existing-projects, high-end-visual-design, emil-design-eng, prototype y el comienzo de las demas. Se tomaron recursos, no estilos ajenos (varias skills prohiben Inter o piden GSAP/imagenes generadas, incompatible con el sitio). Cambios en la seccion 31 del CSS. Commit local, sin push.
+
+[2026-10-02 15:40] [CLAUDE] G-030: frase del hero reescrita para cargar fabricacion propia, modificacion, homologacion en una linea ("desde 2005" ya esta en la etiqueta de arriba). Commit local, sin push.
