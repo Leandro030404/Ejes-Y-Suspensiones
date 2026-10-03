@@ -12,6 +12,35 @@
   var MAIL       = 'info@ejesysuspensiones.com.ar';
   var reduced    = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ── Marca de origen (G-036) ───────────────────────────────────────────────────────
+     Quien llega desde un anuncio de Google trae un codigo en la direccion (gclid, gbraid,
+     wbraid o gad_source). Se recuerda mientras dura la visita (sessionStorage, sin cookies) y
+     el mensaje de WhatsApp lleva la palabra (anuncio) al final. Asi se ve en WhatsApp que
+     consultas vienen de la publicidad. Quien llega por otro camino no ve ningun cambio. */
+  var TAG_ORIGEN = '(anuncio)';
+  var ES_ANUNCIO = false;
+  try {
+    if (/[?&](gclid|gbraid|wbraid|gad_source)=/.test(location.search)) sessionStorage.setItem('eys-origen', 'anuncio');
+    ES_ANUNCIO = sessionStorage.getItem('eys-origen') === 'anuncio';
+  } catch (e) {
+    ES_ANUNCIO = /[?&](gclid|gbraid|wbraid|gad_source)=/.test(location.search);
+  }
+  function marcarEnlace(a) {
+    if (!ES_ANUNCIO || !a || !a.getAttribute) return;
+    var h = a.getAttribute('href') || '';
+    if (h.indexOf('wa.me/' + WSP_NUMBER + '?text=') === -1) return;      // solo chats con mensaje; no el catalogo
+    var etiqueta = encodeURIComponent(' ' + TAG_ORIGEN);
+    if (h.indexOf(etiqueta) !== -1) return;                               // ya marcado
+    a.setAttribute('href', h + etiqueta);
+  }
+  if (ES_ANUNCIO) {
+    Array.prototype.forEach.call(document.querySelectorAll('a[href*="wa.me/"]'), marcarEnlace);
+    // Enlaces que se crean despues (el del asistente): se marcan al tocarlos
+    document.addEventListener('click', function (e) {
+      marcarEnlace(e.target && e.target.closest ? e.target.closest('a[href*="wa.me/"]') : null);
+    }, true);
+  }
+
   /* Safari en iPhone no aplica :active a un boton tocado salvo que la pagina escuche
      el toque. Este oyente vacio alcanza para que la reaccion al apretar (G-017) exista
      tambien en iOS. Pasivo: no frena el scroll. */
@@ -385,7 +414,7 @@
       e.preventDefault();
       if (!validate()) { fail(); return; }
 
-      var url = 'https://wa.me/' + WSP_NUMBER + '?text=' + encodeURIComponent(buildMessage());
+      var url = 'https://wa.me/' + WSP_NUMBER + '?text=' + encodeURIComponent(buildMessage() + (ES_ANUNCIO ? ' ' + TAG_ORIGEN : ''));
       window.open(url, '_blank', 'noopener');
       if (window.eysConversion) window.eysConversion('formulario');
       if (status) { status.style.color = '#12813f'; status.textContent = '¡Listo! Se abrió WhatsApp con tu consulta. Confirmá el envío allí.'; }
