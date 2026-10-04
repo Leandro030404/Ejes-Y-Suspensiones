@@ -38,6 +38,7 @@ Write-Host "  main.js    -> v=$vJs"  -ForegroundColor Cyan
 Write-Host ""
 
 $paginas = @(Get-ChildItem -Path $raiz -Filter 'index.html' -File) +
+           @(Get-ChildItem -Path $raiz -Filter '404.html' -File) +
            @(Get-ChildItem -Path $raiz -Directory |
              Where-Object { $_.Name -notmatch '^(assets|_originales|\.|node_modules)' } |
              ForEach-Object { Get-ChildItem -Path $_.FullName -Filter 'index.html' -File -ErrorAction SilentlyContinue })
