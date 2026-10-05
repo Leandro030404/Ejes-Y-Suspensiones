@@ -662,21 +662,35 @@ p:last-child{ margin-bottom:0; }
 
 /* ── 15. Empresa ──────────────────────────────────── */
 .about{ display:grid; grid-template-columns:.85fr 1.15fr; gap:3.2rem; align-items:start; margin-bottom:4.5rem; }
-.about__media{ position:relative; border-radius:var(--radius); overflow:hidden; position:sticky; top:110px; }
-.about__media img{
-  width:100%; aspect-ratio:4/3.4; object-fit:cover;
+.about__media{ position:sticky; top:110px; }
+.about__foto{ display:block; border-radius:var(--radius); overflow:hidden; }
+/* height:auto es necesario: el atributo height de la foto la estiraba a lo alto y anulaba aspect-ratio */
+.about__foto img{
+  display:block; width:100%; height:auto; aspect-ratio:3/4; object-fit:cover;
   transition:transform .9s var(--ease-out);
 }
-@media (hover:hover) and (pointer:fine){ .about__media:hover img{ transform:scale(1.05); } }
-.about__badge{
-  position:absolute; left:1.2rem; bottom:1.2rem;
-  padding:1rem 1.4rem; border-radius:var(--radius-sm);
-  background:var(--red); color:#fff;
-  box-shadow:0 12px 30px rgba(217,38,28,.4);
+@media (hover:hover) and (pointer:fine){ .about__media:hover .about__foto img{ transform:scale(1.04); } }
+/* El frente del taller, chico y montado sobre la esquina de la foto grande; al lado, la direccion */
+.about__sede{
+  position:relative; display:grid; grid-template-columns:1fr 46%; align-items:start; gap:1.2rem;
+  margin:-3.6rem -.9rem 0 0;
 }
-.about__badge strong{ display:block; font-family:var(--font-head); font-size:2.1rem; line-height:1; }
-.about__badge span{ font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; opacity:.9; }
-.about__text p{ color:var(--txt-invert-soft); line-height:1.85; font-size:1rem; margin-bottom:1.3rem; }
+.about__sede picture{
+  grid-column:2; grid-row:1; display:block; overflow:hidden;
+  border:5px solid var(--ink); border-radius:calc(var(--radius-sm) + 5px);
+  box-shadow:0 18px 36px rgba(0,0,0,.45);
+}
+.about__sede img{ display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+/* el relleno de arriba es el tramo que se monta sobre la foto grande: el texto siempre arranca debajo de ella */
+.about__sede figcaption{ grid-column:1; grid-row:1; align-self:end; padding:4.5rem 0 .35rem; }
+.about__sede figcaption::before{ content:''; display:block; width:30px; height:3px; margin-bottom:.7rem; background:var(--red); border-radius:2px; }
+.about__sede figcaption strong{
+  display:block; font-family:var(--font-head); font-size:1.25rem; line-height:1.1;
+  text-transform:uppercase; letter-spacing:.01em; color:#fff;
+}
+.about__sede figcaption span{ display:block; margin-top:.3rem; font-size:.86rem; line-height:1.5; color:var(--txt-invert-soft); }
+.about__text p{ max-width:68ch; color:var(--txt-invert-soft); line-height:1.85; font-size:1rem; margin-bottom:1.3rem; }
+.about__text > p:first-child{ font-size:1.14rem; line-height:1.72; color:var(--txt-invert); }
 .about__text strong{ color:#fff; }
 
 .timeline{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.5rem; position:relative; padding-top:2rem; }
@@ -964,8 +978,9 @@ html:not(.js) .preloader{ display:none; }
 @media (max-width:1080px){
   .certs__inner{ grid-template-columns:1fr; gap:2.5rem; }
   .about{ grid-template-columns:1fr; gap:2.2rem; }
-  .about__media{ position:relative; top:auto; }
-  .about__media img{ aspect-ratio:16/10; }
+  .about__media{ position:relative; top:auto; max-width:520px; margin-inline:auto; }
+  .about__foto img{ aspect-ratio:4/5; object-position:50% 75%; }
+  .about__sede{ margin-right:0; }
   .contact{ grid-template-columns:1fr; }
   .footer__grid{ grid-template-columns:1fr 1fr; gap:2.2rem; }
 }
