@@ -46,24 +46,9 @@
      tambien en iOS. Pasivo: no frena el scroll. */
   document.addEventListener('touchstart', function () {}, { passive: true });
 
-  /* ── 1. Preloader ──────────────────────────────── */
-  var preloader = $('#preloader');
-  function hidePreloader() {
-    if (!preloader) return;
-    preloader.classList.add('is-done');
-    setTimeout(function () { preloader.remove(); }, 700);
-  }
-  window.addEventListener('load', function () { setTimeout(hidePreloader, 320); });
-  // Red de seguridad: si algún recurso queda colgado, se oculta igual.
-  /* Antes esto colgaba de window.load, que espera a las 21 fotos de la portada: hasta
-     4,5 segundos de pantalla en blanco para alguien con datos moviles en la ruta, que es
-     el visitante tipico. La foto del hero tiene prioridad alta y esta lista mucho antes. */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', hidePreloader);
-  } else {
-    hidePreloader();
-  }
-  setTimeout(hidePreloader, 1500);
+  /* ── 1. (Sin preloader) ────────────────────────── */
+  /* La pantalla de carga se saco el 05/10/2026 (G-049): aun esperando solo a DOMContentLoaded,
+     con datos moviles el texto del hero tardaba 6-7 s en verse. Ver la nota en styles.css. */
 
   /* ── 2. Año en el footer ───────────────────────── */
   var yearEl = $('#year');
@@ -371,7 +356,10 @@
     if (v('nombre').length < 2) { setError('nombre', 'Ingresá tu nombre.'); ok = false; }
     else setError('nombre', '');
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v('email'))) { setError('email', 'Ingresá un email válido.'); ok = false; }
+    // El email es opcional (G-049): por WhatsApp no hace falta y por correo sale del propio cliente
+    // de correo. Antes era obligatorio y frenaba al que solo queria mandar el WhatsApp.
+    var mail = v('email');
+    if (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) { setError('email', 'Revisá el email.'); ok = false; }
     else setError('email', '');
 
     var tel = v('telefono');
@@ -389,9 +377,9 @@
     var lines = [
       'Consulta desde la web de EyS',
       '',
-      'Nombre: ' + v('nombre'),
-      'Email: ' + v('email')
+      'Nombre: ' + v('nombre')
     ];
+    if (v('email')) lines.push('Email: ' + v('email'));
     if (v('telefono')) lines.push('Teléfono: ' + v('telefono'));
     lines.push('Motivo: ' + v('motivo'));
     if (v('unidad')) lines.push('Unidad: ' + v('unidad'));

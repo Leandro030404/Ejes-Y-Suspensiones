@@ -19,39 +19,15 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Inter es una fuente variable: los cuatro archivos Inter-400/500/600/700 eran el mismo
+   archivo (mismo SHA-256) y el navegador lo bajaba hasta cuatro veces. Un solo @font-face
+   con rango de pesos cubre del 400 al 700 con una sola descarga (revision del 05/10/2026). */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400 700;
   font-display: swap;
   src: url(/assets/fonts/Inter-400-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(/assets/fonts/Inter-500-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(/assets/fonts/Inter-600-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(/assets/fonts/Inter-700-latin.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -144,27 +120,10 @@ p:last-child{ margin-bottom:0; }
 ::-webkit-scrollbar-thumb{ background:var(--steel-2); border-radius:99px; border:3px solid var(--paper-2); }
 @media (hover:hover) and (pointer:fine){ ::-webkit-scrollbar-thumb:hover{ background:var(--red); } }
 
-/* ── 3. Preloader ─────────────────────────────────── */
-.preloader{
-  position:fixed; inset:0; z-index:10000;
-  display:grid; place-content:center; gap:1.5rem; justify-items:center;
-  background:var(--ink);
-  transition:opacity .6s var(--ease), visibility .6s;
-}
-.preloader.is-done{ opacity:0; visibility:hidden; }
-.preloader__mark{ display:flex; gap:.9rem; align-items:center; }
-.preloader__wheel{
-  width:34px; height:34px; border-radius:50%;
-  border:4px solid rgba(255,255,255,.16);
-  border-top-color:var(--red);
-  animation:spin .9s linear infinite;
-}
-.preloader__wheel:last-child{ animation-delay:-.45s; }
-.preloader__text{
-  margin:0; font-family:var(--font-head); font-size:1.25rem;
-  letter-spacing:.42em; color:var(--txt-invert-soft); text-indent:.42em;
-}
-@keyframes spin{ to{ transform:rotate(360deg); } }
+/* ── 3. (Sin pantalla de carga) ───────────────────── */
+/* Hasta el 05/10/2026 habia un preloader negro con el logo que tapaba la portada hasta
+   DOMContentLoaded (o 1,5 s): con datos moviles el texto del hero aparecia a los 6-7 s.
+   Se saco junto con la animacion de entrada del hero (G-049). No volver a ponerlo. */
 
 /* ── 4. Progreso de scroll ────────────────────────── */
 .scroll-progress{
@@ -500,6 +459,7 @@ p:last-child{ margin-bottom:0; }
 .certs{ position:relative; padding:clamp(4rem,8vw,6.5rem) 0; overflow:hidden; color:#fff; }
 .certs__bg{
   position:absolute; inset:0;
+  background-image:url(/assets/img/taller-chasis.webp);
   background-size:cover; background-position:center; background-attachment:fixed;
   filter:grayscale(.55) brightness(.32);
 }
@@ -970,9 +930,8 @@ img.is-wide{
 }
 .js .reveal.is-in{ opacity:1; transform:none; }
 
-/* Ídem para el título del hero y el preloader */
+/* Ídem para el título del hero */
 html:not(.js) .hero__title .line > span{ transform:none; animation:none; }
-html:not(.js) .preloader{ display:none; }
 
 /* ── 24. Responsive ───────────────────────────────── */
 @media (max-width:1080px){
@@ -1028,15 +987,25 @@ html:not(.js) .preloader{ display:none; }
   .product, .product--rev{ grid-template-columns:1fr; gap:1.5rem; }
   .product--rev .product__media{ order:0; }
 
-  .certs__bg{ background-attachment:scroll; }
+  .certs__bg{ background-attachment:scroll; background-image:url(/assets/img/taller-chasis-800.webp); }
 
   .footer__grid{ grid-template-columns:1fr; gap:2rem; }
 
-  .wsp-float{ opacity:1; visibility:visible; transform:translateY(0) scale(1); }
+  /* Los flotantes aparecen al bajar 420 px, igual que en la compu (el JS pone .is-visible en el de
+     WhatsApp). Desde A-002 (27/08) el de WhatsApp estaba siempre visible en celular, pero desde G-013
+     el hero ya tiene su boton verde de WhatsApp y, con el alto real de un celular (640-700 px), el
+     flotante y "¿Dudas?" le tapaban la mitad (G-049). "¿Dudas?" espera al de WhatsApp. */
+  .wsp-float:not(.is-visible) ~ .chat-lanzador{ opacity:0; visibility:hidden; pointer-events:none; }
 }
 
 @media (max-width:640px){
-  body{ font-size:15px; }
+  /* Letra mas grande en celular (05/10/2026, pedido de Leandro: muchos clientes son gente grande).
+     1rem pasa de 16 a 17 px: todo lo que se mide en rem crece un 6% parejo y se mantiene la jerarquia.
+     El texto corrido va a 16 px (antes 15) y las etiquetas mas chicas (11 px) suben a 12,6-13,6 px. */
+  html{ font-size:106.25%; }
+  body{ font-size:16px; }
+  .hero__badges li{ font-size:.8rem; }
+  .sec-head__kicker, .clients__kicker, .work__client, .specs span{ font-size:.74rem; }
   .container{ width:min(100% - 2rem, var(--container)); }
 
   .hero{ padding:calc(var(--header-h) + 2.5rem) 0 6rem; min-height:92svh; }
@@ -1076,7 +1045,7 @@ html:not(.js) .preloader{ display:none; }
   .map-wrap{ border:0; box-shadow:none; }
   .map{ border-radius:var(--radius); border:1px solid var(--line); }
 
-  .cta-final__inner, .cta-final__actions{ width:100%; }
+  .cta-final__actions{ width:100%; }   /* .cta-final__inner al 100% pisaba el margen del .container (G-049) */
   .cta-final__actions .btn{ flex:1 1 100%; }
 
   .wsp-float{ right:1rem; bottom:1rem; height:54px; padding:0 .95rem; }
@@ -1257,7 +1226,7 @@ html:not(.js) .preloader{ display:none; }
 }
 
 @media print{
-  .header,.wsp-float,.hero__scroll,.scroll-progress,.preloader,.lightbox,.filters,.marquee{ display:none !important; }
+  .header,.wsp-float,.hero__scroll,.scroll-progress,.lightbox,.filters,.marquee{ display:none !important; }
   .section--dark,.certs,.cta-final,.footer{ background:#fff !important; color:#000 !important; }
   .js .reveal{ opacity:1 !important; transform:none !important; }
 }
@@ -1331,7 +1300,7 @@ html:not(.js) .preloader{ display:none; }
   font-family:var(--font-body); font-size:.86rem; font-weight:600;
   color:var(--txt-invert); background:var(--ink-3);
   box-shadow:0 8px 22px rgba(14,19,25,.28);
-  transition:transform .16s ease, background .16s ease;
+  transition:transform .16s ease, background .16s ease, opacity .25s var(--ease-out), visibility .25s;
 }
 @media (hover:hover) and (pointer:fine){ .chat-lanzador:hover{ background:var(--ink); transform:translateY(-2px); } }
 .chat-lanzador[aria-expanded="true"]{ opacity:0; pointer-events:none; }
@@ -1522,7 +1491,7 @@ h2[id]{ scroll-margin-top:calc(var(--header-h) + 1rem); }
   .situ__img{ flex:0 0 108px; aspect-ratio:auto; }
   .situ__body{ align-self:center; padding:.8rem 1rem; }
   .situ__body strong{ font-size:1.05rem; margin-bottom:.2rem; }
-  .situ__body span{ font-size:.8rem; line-height:1.4; }
+  .situ__body span{ font-size:.86rem; line-height:1.4; }   /* 14,6 px con la letra grande de celular */
   /* El asistente pasa al lado del boton de WhatsApp (una fila, no una torre): tapa menos contenido */
   .chat-lanzador{ bottom:calc(1rem + 5px); right:4.9rem; }
 }
@@ -1788,7 +1757,11 @@ p, li{ text-wrap:pretty; }
   .aviso-cookies.is-in{ opacity:1; transform:none; }
 }
 @media (max-width:640px){
-  .aviso-cookies{ left:.75rem; right:.75rem; bottom:.75rem; max-width:none; }
+  /* Texto y boton lado a lado: de ~155 a ~100 px de alto, para no tapar los botones del hero (G-049) */
+  .aviso-cookies{ left:.75rem; right:.75rem; bottom:.75rem; max-width:none;
+                  grid-template-columns:1fr auto; align-items:center; gap:.75rem; padding:.7rem .8rem .7rem 1rem;
+                  font-size:.82rem; line-height:1.45; }
+  .aviso-cookies button{ align-self:center; padding:.6rem 1rem; }
   .con-aviso .wsp-float{ bottom:calc(1rem + var(--aviso-h,0px)); }
   .con-aviso .chat-lanzador{ bottom:calc(1rem + 5px + var(--aviso-h,0px)); }
 }
