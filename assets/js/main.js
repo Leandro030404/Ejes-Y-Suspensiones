@@ -677,4 +677,97 @@
     }, 1400);
   })();
 
+  /* ── Comparador antes/después (G-041) ──────────────
+     Sin JS quedan las dos fotos lado a lado. Con JS se superponen y la barra se mueve
+     arrastrando, tocando la foto o con las flechas del teclado (un <input type="range">
+     invisible, que es lo que leen los lectores de pantalla). */
+  var sinMovimiento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  Array.prototype.forEach.call(document.querySelectorAll('[data-cmp]'), function (cmp) {
+    var despues = cmp.querySelector('.cmp__fig--despues');
+    if (!despues) return;
+    // Arranca en 40 para que se lea entera la marca EyS estampada en el travesano.
+    var MIN = 8, MAX = 92, INICIO = 40, pos = INICIO, cuadro = 0, usado = false;
+
+    var rango = document.createElement('input');
+    rango.type = 'range'; rango.min = MIN; rango.max = MAX; rango.step = 1; rango.value = INICIO;
+    rango.className = 'cmp__rango';
+    rango.setAttribute('aria-label', 'Comparar antes y después');
+    var asa = document.createElement('span');
+    asa.className = 'cmp__asa';
+    asa.setAttribute('aria-hidden', 'true');
+    asa.innerHTML = '<span class="cmp__perilla"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg></span>';
+    cmp.appendChild(rango);
+    cmp.appendChild(asa);
+    cmp.classList.add('cmp--on');
+
+    function pintar() {
+      cuadro = 0;
+      var recorte = 'inset(0 0 0 ' + pos + '%)';
+      despues.style.webkitClipPath = recorte;
+      despues.style.clipPath = recorte;
+      asa.style.transform = 'translate3d(' + pos + '%,0,0)';
+    }
+    function poner(p, suave) {
+      pos = Math.max(MIN, Math.min(MAX, p));
+      cmp.classList.toggle('cmp--suave', !!suave);
+      var n = Math.round(pos);
+      rango.value = n;
+      rango.setAttribute('aria-valuetext', 'Antes ' + n + ' %, después ' + (100 - n) + ' %');
+      if (!cuadro) cuadro = requestAnimationFrame(pintar);
+    }
+    function enPorciento(x) {
+      var r = cmp.getBoundingClientRect();
+      return (x - r.left) / r.width * 100;
+    }
+
+    // Con el dedo no se mueve nada hasta que el gesto es claramente horizontal:
+    // asi pasar la pagina hacia abajo por encima de la foto no corre la barra.
+    var activo = false, movio = false, x0 = 0;
+    cmp.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      activo = true; movio = false; x0 = e.clientX;
+      if (e.pointerType === 'mouse') {
+        e.preventDefault();
+        movio = true; usado = true;
+        try { cmp.setPointerCapture(e.pointerId); } catch (err) {}
+        cmp.classList.add('cmp--arrastra');
+        poner(enPorciento(e.clientX), false);
+      }
+    });
+    cmp.addEventListener('pointermove', function (e) {
+      if (!activo) return;
+      if (!movio) {
+        if (Math.abs(e.clientX - x0) < 6) return;
+        movio = true; usado = true;
+        try { cmp.setPointerCapture(e.pointerId); } catch (err) {}
+        cmp.classList.add('cmp--arrastra');
+      }
+      poner(enPorciento(e.clientX), false);
+    });
+    function soltar(e) {
+      if (!activo) return;
+      activo = false;
+      cmp.classList.remove('cmp--arrastra');
+      // Un toque sin arrastrar lleva la barra hasta ahi.
+      if (!movio && e.type === 'pointerup') { usado = true; poner(enPorciento(e.clientX), true); }
+    }
+    cmp.addEventListener('pointerup', soltar);
+    cmp.addEventListener('pointercancel', soltar);
+    rango.addEventListener('input', function () { usado = true; poner(+rango.value, true); });
+
+    pintar();
+
+    // Una sola vez, al entrar en pantalla: la barra va y vuelve para mostrar que se mueve.
+    if (!sinMovimiento && 'IntersectionObserver' in window) {
+      var aviso = new IntersectionObserver(function (en) {
+        if (!en[0].isIntersecting) return;
+        aviso.disconnect();
+        [[450, 68], [1250, 22], [2050, INICIO]].forEach(function (paso) {
+          setTimeout(function () { if (!usado) poner(paso[1], true); }, paso[0]);
+        });
+      }, { threshold: 0.35 });
+      aviso.observe(cmp);
+    }
+  });
+
 })();

@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/BarlowCondensed-700-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400-latin.woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/styles.css?v=686a2006">
+<link rel="stylesheet" href="../assets/css/styles.css?v=c669339c">
 <script>document.documentElement.className += ' js';</script>
 
 <script type="application/ld+json">
@@ -317,21 +317,24 @@
 
       <h3>Antes y después: tercer eje en unidad tractora</h3>
       <p>Alargue de chasis y colocación del tercer eje neumático. La unidad salió del taller lista para trabajar con su semirremolque tanque.</p>
-      <div class="antes-despues">
-        <figure>
-          <picture>
-            <source type="image/webp" srcset="../assets/img/alargue-largueros-800.webp">
-            <img src="../assets/img/alargue-largueros-800.jpg" width="800" height="1067" decoding="async" alt="Chasis abierto con los largueros nuevos del alargue, en el taller" loading="lazy">
-          </picture>
-          <figcaption>Antes</figcaption>
-        </figure>
-        <figure>
-          <picture>
-            <source type="image/webp" srcset="../assets/img/unidad80-cisterna-terminada-800.webp">
-            <img src="../assets/img/unidad80-cisterna-terminada-800.jpg" width="800" height="600" decoding="async" alt="La misma unidad terminada, con su semirremolque tanque" loading="lazy">
-          </picture>
-          <figcaption>Después</figcaption>
-        </figure>
+      <div class="cmp-caja">
+        <div class="cmp" data-cmp>
+          <figure class="cmp__fig cmp__fig--antes">
+            <picture>
+              <source type="image/webp" srcset="../assets/img/comparador-antes.webp">
+              <img src="../assets/img/comparador-antes.jpg" width="720" height="960" decoding="async" loading="lazy" alt="Antes: el chasis abierto en el taller, con los dos largueros nuevos del alargue">
+            </picture>
+            <figcaption>Antes</figcaption>
+          </figure>
+          <figure class="cmp__fig cmp__fig--despues">
+            <picture>
+              <source type="image/webp" srcset="../assets/img/comparador-despues.webp">
+              <img src="../assets/img/comparador-despues.jpg" width="720" height="960" decoding="async" loading="lazy" alt="Después: el chasis terminado, con el tercer eje neumático colocado y el travesaño con la marca EyS">
+            </picture>
+            <figcaption>Después</figcaption>
+          </figure>
+        </div>
+        <p class="cmp__ayuda">Mové la barra para comparar. Fotos tomadas en nuestro taller.</p>
       </div>
       <video class="page-video" controls preload="none" playsinline poster="../assets/img/unidad80-cisterna-terminada-800.jpg">
         <source src="../assets/video/antes-despues-16x9.mp4?v=3" type="video/mp4">
@@ -570,6 +573,6 @@
   </figure>
 </div>
 
-<script src="../assets/js/main.js?v=39247b1b"></script>
+<script src="../assets/js/main.js?v=bc8fffdb"></script>
 </body>
 </html>
