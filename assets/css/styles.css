@@ -1780,9 +1780,78 @@ p, li{ text-wrap:pretty; }
 @media print{ .aviso-cookies{ display:none; } }
 
 /* G-039: antes y despues de una misma unidad, y video propio en las paginas de servicio */
-.antes-despues{ display:grid; grid-template-columns:1fr 1fr; gap:.9rem; margin:1.2rem 0 1rem; }
-.antes-despues figure{ position:relative; margin:0; border-radius:var(--radius-sm); overflow:hidden; aspect-ratio:4/5; background:var(--paper-2); }
-.antes-despues img{ width:100%; height:100%; object-fit:cover; display:block; }
-.antes-despues figcaption{ position:absolute; top:.7rem; left:.7rem; padding:.3rem .75rem; background:var(--ink); color:#fff; font-family:"Barlow Condensed",sans-serif; font-weight:700; letter-spacing:.06em; text-transform:uppercase; font-size:.95rem; border-radius:3px; }
-.antes-despues figure + figure figcaption{ background:var(--red, #d9261c); }
 .page-video{ display:block; width:100%; height:auto; aspect-ratio:16/9; border-radius:var(--radius-sm); background:#000; margin:0 0 2rem; }
+
+/* G-041: antes y despues con comparador para deslizar (portada y /tercer-eje/).
+   Sin JS quedan las dos fotos lado a lado; el JS las superpone y agrega la barra. */
+.cmp{ display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
+.cmp__fig{ position:relative; margin:0; aspect-ratio:3/4; border-radius:var(--radius); overflow:hidden; background:var(--ink-3); }
+.cmp__fig img{ display:block; width:100%; height:100%; object-fit:cover; }
+.cmp__fig figcaption{
+  position:absolute; top:.85rem; left:.85rem; padding:.36rem .85rem .32rem; border-radius:99px;
+  background:var(--ink); color:#fff; font:700 1rem/1 var(--font-head); letter-spacing:.07em; text-transform:uppercase;
+}
+.cmp__fig--despues figcaption{ left:auto; right:.85rem; background:var(--red); }
+p.cmp__ayuda{ display:none; margin:.9rem 0 0; font-size:.9rem; line-height:1.55; color:var(--txt-soft); text-align:center; text-wrap:balance; }
+.cmp--on + .cmp__ayuda{ display:block; }
+.section--dark .cmp__ayuda{ color:var(--txt-invert-soft); }
+
+.cmp--on{
+  display:block; position:relative; isolation:isolate; aspect-ratio:3/4;
+  border-radius:var(--radius); overflow:hidden; background:var(--ink-3);
+  touch-action:pan-y pinch-zoom; cursor:ew-resize;
+  -webkit-user-select:none; user-select:none; -webkit-tap-highlight-color:transparent;
+}
+.cmp--on .cmp__fig{ position:absolute; inset:0; aspect-ratio:auto; border-radius:0; }
+.cmp--on .cmp__fig--despues{ -webkit-clip-path:inset(0 0 0 40%); clip-path:inset(0 0 0 40%); }
+.cmp--on img{ pointer-events:none; -webkit-user-drag:none; -webkit-touch-callout:none; }
+.cmp__rango{ position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; pointer-events:none; }
+/* La capa del asa mide lo mismo que la foto: asi se mueve con translate en % y no hay que medir nada. */
+.cmp__asa{ position:absolute; inset:0; z-index:2; pointer-events:none; transform:translate3d(40%,0,0); }
+.cmp__asa::before{ content:''; position:absolute; top:0; bottom:0; left:-1px; width:2px; background:#fff; box-shadow:0 0 0 1px rgba(14,19,25,.3); }
+.cmp__perilla{
+  position:absolute; top:50%; left:0; width:52px; height:52px; margin:-26px 0 0 -26px;
+  display:grid; place-items:center; border-radius:50%;
+  background:var(--red); color:#fff; border:2px solid #fff; box-shadow:0 8px 20px rgba(14,19,25,.45);
+}
+.cmp__perilla svg{ display:block; }
+.cmp--arrastra .cmp__perilla{ transform:scale(1.08); }
+.cmp__rango:focus-visible + .cmp__asa .cmp__perilla{ outline:3px solid #fff; outline-offset:3px; }
+/* Esquinas de visor abajo, la misma marca de encuadre que llevan las fotos de trabajos */
+.cmp--on::after{
+  --m:rgba(255,255,255,.9); --l:16px; --g:2px;
+  content:''; position:absolute; inset:10px; z-index:3; pointer-events:none; opacity:.6;
+  background:
+    linear-gradient(var(--m),var(--m)) bottom left / var(--l) var(--g) no-repeat,
+    linear-gradient(var(--m),var(--m)) bottom left / var(--g) var(--l) no-repeat,
+    linear-gradient(var(--m),var(--m)) bottom right / var(--l) var(--g) no-repeat,
+    linear-gradient(var(--m),var(--m)) bottom right / var(--g) var(--l) no-repeat;
+}
+@media (prefers-reduced-motion:no-preference){
+  .cmp--suave .cmp__fig--despues{ transition:clip-path .6s var(--ease-out), -webkit-clip-path .6s var(--ease-out); }
+  .cmp--suave .cmp__asa{ transition:transform .6s var(--ease-out); }
+  .cmp__perilla{ transition:transform .2s var(--ease-out); }
+}
+
+/* Portada: el caso completo */
+.caso__grid{ display:grid; gap:clamp(1.8rem,4.5vw,3.4rem); align-items:center; }
+.caso__cmp{ width:100%; max-width:min(520px,66vh); margin-inline:auto; }
+.caso__final{ margin:0 0 1.6rem; }
+.caso__final img{ display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; border-radius:var(--radius); background:var(--ink-3); }
+.caso__final figcaption{ margin-top:.75rem; font-size:.95rem; line-height:1.55; color:var(--txt-invert-soft); }
+.caso__ficha{ margin:0 0 1.8rem; border-top:1px solid rgba(255,255,255,.16); }
+.caso__ficha > div{ display:grid; grid-template-columns:6.2rem 1fr; gap:1rem; padding:.8rem .15rem; border-bottom:1px solid rgba(255,255,255,.16); }
+.caso__ficha dt{ padding-top:.16rem; font:700 .78rem/1.5 var(--font-body); letter-spacing:.1em; text-transform:uppercase; color:var(--txt-invert-soft); }
+.caso__ficha dd{ margin:0; line-height:1.5; color:var(--txt-invert); }
+.caso__cta{ display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.7rem; }
+.caso__link{ color:#fff; font-weight:600; text-decoration:underline; text-decoration-color:rgba(255,255,255,.45); text-underline-offset:4px; }
+.caso__link:active{ opacity:.75; }
+@media (hover:hover) and (pointer:fine){ .caso__link:hover{ text-decoration-color:var(--red-on-dark); } }
+@media (min-width:900px){
+  .caso__grid{ grid-template-columns:minmax(0,5fr) minmax(0,6fr); }
+  .caso__cmp{ max-width:none; }
+}
+@media (max-width:640px){ .caso__cta{ justify-content:center; } .caso__cta .btn{ width:100%; } }
+
+/* Paginas de servicio: el comparador dentro del texto */
+.cmp-caja{ max-width:440px; margin:1.4rem auto 1.8rem; }
