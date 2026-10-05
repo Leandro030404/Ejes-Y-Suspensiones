@@ -1779,9 +1779,6 @@ p, li{ text-wrap:pretty; }
 }
 @media print{ .aviso-cookies{ display:none; } }
 
-/* Texto que leen los lectores de pantalla y Google pero no se ve (G-037: H1 de la portada) */
-.visually-hidden{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
-
 /* G-039: antes y despues de una misma unidad, y video propio en las paginas de servicio */
 .antes-despues{ display:grid; grid-template-columns:1fr 1fr; gap:.9rem; margin:1.2rem 0 1rem; }
 .antes-despues figure{ position:relative; margin:0; border-radius:var(--radius-sm); overflow:hidden; aspect-ratio:4/5; background:var(--paper-2); }
