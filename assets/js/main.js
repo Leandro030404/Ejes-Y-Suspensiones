@@ -16,15 +16,31 @@
      Quien llega desde un anuncio de Google trae un codigo en la direccion (gclid, gbraid,
      wbraid o gad_source). Se recuerda mientras dura la visita (sessionStorage, sin cookies) y
      el mensaje de WhatsApp lleva la palabra (anuncio) al final. Asi se ve en WhatsApp que
-     consultas vienen de la publicidad. Quien llega por otro camino no ve ningun cambio. */
+     consultas vienen de la publicidad. Quien llega por otro camino no ve ningun cambio.
+     A-024: cada campana de Google Ads agrega un codigo corto con el "sufijo de URL final"
+     (eys=b1 a b4 para Busqueda, eys=m para Maximo rendimiento) y el mensaje dice, por ejemplo,
+     (anuncio B1). Solo se aceptan esos 5 codigos: cualquier otro queda como (anuncio). */
   var TAG_ORIGEN = '(anuncio)';
   var ES_ANUNCIO = false;
+  var CODIGOS_CAMPANA = { b1: 'B1', b2: 'B2', b3: 'B3', b4: 'B4', m: 'M' };
+  function codigoCampana(valor) {
+    return Object.prototype.hasOwnProperty.call(CODIGOS_CAMPANA, valor) ? CODIGOS_CAMPANA[valor] : '';
+  }
+  var mCodigo = /[?&]eys=([a-z0-9]{1,3})(?:&|$)/i.exec(location.search);
+  var CODIGO_URL = mCodigo ? codigoCampana(mCodigo[1].toLowerCase()) : '';
+  var CODIGO = '';
   try {
-    if (/[?&](gclid|gbraid|wbraid|gad_source)=/.test(location.search)) sessionStorage.setItem('eys-origen', 'anuncio');
+    if (/[?&](gclid|gbraid|wbraid|gad_source)=/.test(location.search)) {
+      sessionStorage.setItem('eys-origen', 'anuncio');
+      if (CODIGO_URL) sessionStorage.setItem('eys-campana', CODIGO_URL);
+    }
     ES_ANUNCIO = sessionStorage.getItem('eys-origen') === 'anuncio';
+    CODIGO = codigoCampana(String(sessionStorage.getItem('eys-campana') || '').toLowerCase());
   } catch (e) {
     ES_ANUNCIO = /[?&](gclid|gbraid|wbraid|gad_source)=/.test(location.search);
+    CODIGO = ES_ANUNCIO ? CODIGO_URL : '';
   }
+  if (ES_ANUNCIO && CODIGO) TAG_ORIGEN = '(anuncio ' + CODIGO + ')';
   function marcarEnlace(a) {
     if (!ES_ANUNCIO || !a || !a.getAttribute) return;
     var h = a.getAttribute('href') || '';
