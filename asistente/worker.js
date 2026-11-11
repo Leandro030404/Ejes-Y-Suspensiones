@@ -14,6 +14,11 @@
    4. Settings → Variables and Secrets → Add → tipo Secret
       Nombre: GEMINI_API_KEY   Valor: la clave de Google → Deploy
    5. Copiar la dirección que queda (eys-asistente.<algo>.workers.dev)
+   6. (A-028, códigos de referencia de los anuncios) Storage & Databases →
+      Workers KV → Create → nombre: eys-refs. Después, en el Worker:
+      Settings → Bindings → Add → KV namespace → Variable name: REFS,
+      KV namespace: eys-refs → Deploy. Sin esto el asistente anda igual;
+      solo no se guardan los códigos.
 
    NO se toca el DNS del dominio. El sitio sigue en GitHub Pages.
    ═══════════════════════════════════════════════════════════════════ */
@@ -135,6 +140,41 @@ export default {
           'Vary': 'Origin'
         }
       });
+    }
+
+    /* ── Codigos de referencia de los anuncios (A-028) ──────────────────
+       El sitio manda {ref, tipo, id, campana} cuando alguien que vino de un
+       anuncio abre WhatsApp. Se guarda 90 dias en el espacio REFS (KV) y NO
+       se guarda nombre, telefono ni IP. Para consultar: abrir en el navegador
+       .../ref?c=4F7K,9XQ2 y devuelve el identificador de clic de cada codigo,
+       que es lo que se le sube a Google Ads como "Consulta calificada".
+       Necesita el espacio KV vinculado con el nombre REFS (ver arriba). */
+    const ruta = new URL(request.url).pathname.replace(/\/+$/, '');
+    if (ruta === '/ref') {
+      if (!env.REFS) return respuesta({ ok: false, error: 'sin-espacio-REFS' }, 200, permitido ? origen : '');
+      if (request.method === 'GET') {
+        const pedidos = (new URL(request.url).searchParams.get('c') || '')
+          .toUpperCase().split(/[\s,]+/).filter(c => /^[A-Z2-9]{4}$/.test(c)).slice(0, 50);
+        const salida = {};
+        for (const c of pedidos) {
+          const v = await env.REFS.get('ref:' + c);
+          salida[c] = v ? JSON.parse(v) : null;
+        }
+        return respuesta(salida, 200);
+      }
+      if (request.method !== 'POST' || !permitido) return respuesta({ ok: false }, 403);
+      const ipRef = request.headers.get('CF-Connecting-IP') || 'sin-ip';
+      if (!contar('r:' + ipRef, DIA, 20)) return respuesta({ ok: false, error: 'tope' }, 429, origen);
+      let d;
+      try { d = JSON.parse(await request.text()); } catch (e) { d = null; }
+      if (!d || !/^[A-Z2-9]{4}$/.test(d.ref || '') || !/^(gclid|gbraid|wbraid)$/.test(d.tipo || '') ||
+          !/^[A-Za-z0-9_\-]{10,200}$/.test(d.id || '') || !/^(B[1-4]|M)?$/.test(d.campana || '')) {
+        return respuesta({ ok: false, error: 'datos' }, 400, origen);
+      }
+      await env.REFS.put('ref:' + d.ref, JSON.stringify({
+        tipo: d.tipo, id: d.id, campana: d.campana, fecha: new Date().toISOString()
+      }), { expirationTtl: 90 * 86400 });
+      return respuesta({ ok: true }, 200, origen);
     }
 
     if (!permitido) return respuesta({ error: 'origen' }, 403);

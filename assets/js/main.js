@@ -41,6 +41,42 @@
     CODIGO = ES_ANUNCIO ? CODIGO_URL : '';
   }
   if (ES_ANUNCIO && CODIGO) TAG_ORIGEN = '(anuncio ' + CODIGO + ')';
+
+  /* ── Codigo de referencia (A-028) ──────────────────────────────────────────────────
+     Si el anuncio trae el identificador de clic de Google (gclid, gbraid o wbraid), se arma un
+     codigo corto (ref 4F7K) que va dentro de la marca: "(anuncio B1 · ref 4F7K)". Al abrir
+     WhatsApp, el codigo y el identificador se mandan al intermediario de Cloudflare, que los
+     guarda 90 dias (sin nombre ni telefono). Cuando Leandro marca un chat como cliente de
+     verdad, con ese codigo se le avisa a Google Ads ("Consulta calificada") que ese clic sirvio.
+     Esta en la politica de privacidad. Si algo falla, el mensaje sale igual, sin codigo. */
+  var REF = '', CLIC = '';
+  try {
+    var mClic = /[?&](gclid|gbraid|wbraid)=([A-Za-z0-9_\-]{10,200})(?:&|$)/.exec(location.search);
+    if (mClic) {
+      sessionStorage.setItem('eys-clic', mClic[1] + ':' + mClic[2]);
+      if (!sessionStorage.getItem('eys-ref') && window.crypto && crypto.getRandomValues) {
+        var LETRAS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', nums = new Uint8Array(4), r = '';
+        crypto.getRandomValues(nums);
+        for (var i = 0; i < 4; i++) r += LETRAS.charAt(nums[i] % LETRAS.length);
+        sessionStorage.setItem('eys-ref', r);
+      }
+    }
+    CLIC = sessionStorage.getItem('eys-clic') || '';
+    REF = CLIC ? (sessionStorage.getItem('eys-ref') || '') : '';
+  } catch (e) { REF = ''; }
+  if (ES_ANUNCIO && REF) TAG_ORIGEN = TAG_ORIGEN.replace(')', ' · ref ' + REF + ')');
+  // Una sola vez por visita, en el momento en que se abre WhatsApp (lo llama eysConversion)
+  window.eysEnviarRef = function () {
+    if (!REF || !CLIC || !navigator.sendBeacon) return;
+    try {
+      if (sessionStorage.getItem('eys-ref-enviado') === REF) return;
+      var p = CLIC.indexOf(':');
+      navigator.sendBeacon('https://eys-asistente.leandrobertainariver.workers.dev/ref', JSON.stringify({
+        ref: REF, tipo: CLIC.slice(0, p), id: CLIC.slice(p + 1), campana: CODIGO || ''
+      }));
+      sessionStorage.setItem('eys-ref-enviado', REF);
+    } catch (e) {}
+  };
   function marcarEnlace(a) {
     if (!ES_ANUNCIO || !a || !a.getAttribute) return;
     var h = a.getAttribute('href') || '';
@@ -820,6 +856,7 @@
 
   // Lo usa el formulario, que abre WhatsApp sin pasar por un enlace
   window.eysConversion = function (tipo) {
+    if (tipo !== 'telefono' && window.eysEnviarRef) window.eysEnviarRef();
     if (tipo === 'telefono') enviar(TEL, { value: 1.0, currency: 'ARS' });
     else if (tipo === 'formulario') enviar(FORM, { value: 1.0, currency: 'ARS' });
     else enviar(WSP);
