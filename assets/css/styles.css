@@ -1401,11 +1401,91 @@ html:not(.js) .hero__title .line > span{ transform:none; animation:none; }
   .chat__msg--pensando span{ animation:none; opacity:.55; }
 }
 
+/* ── Paso previo a WhatsApp, solo Maximo rendimiento (A-027) ───────────
+   Panel corto que pide trabajo y unidad antes de abrir el chat. Lo arma main.js
+   (seccion 12) y solo para visitas con eys=m: no hay marcado en los HTML.     */
+.guia{
+  position:fixed; inset:0; z-index:2100;   /* sobre el flotante (900), la barra (1200), el chat (1900) y el visor (2000) */
+  display:flex; align-items:center; justify-content:center;
+  padding:1.1rem;
+  opacity:0; transition:opacity .18s cubic-bezier(.7,0,.84,0);
+}
+.guia.is-open{ opacity:1; transition:opacity .2s var(--ease-out); }
+.guia__fondo{ position:absolute; inset:0; background:rgba(14,19,25,.62); }
+.guia__caja{
+  position:relative; width:min(430px,100%);
+  max-height:calc(100vh - 2.2rem); max-height:calc(100dvh - 2.2rem); overflow-y:auto;
+  background:var(--paper); color:var(--txt);
+  border-radius:var(--radius); box-shadow:var(--sh-lg);
+  padding:1.6rem 1.4rem 1.4rem;
+  /* Entra con ease-out y sale con la curva inversa en 180ms; el JS lo quita a los 200ms (G-017). */
+  transform:translateY(14px) scale(.98); transform-origin:50% 100%;
+  transition:transform .18s cubic-bezier(.7,0,.84,0);
+}
+.guia.is-open .guia__caja{ transform:none; transition:transform .24s var(--ease-out); }
+
+.guia__x{
+  position:absolute; top:.4rem; right:.4rem;
+  width:44px; height:44px; padding:0 0 4px;
+  border:0; background:transparent; cursor:pointer;
+  font-size:1.7rem; line-height:1; color:var(--steel);
+  border-radius:50%;
+}
+@media (hover:hover) and (pointer:fine){ .guia__x:hover{ background:var(--paper-2); color:var(--txt); } }
+.guia__x:focus-visible{ outline:2px solid var(--red); outline-offset:2px; }
+
+.guia__titulo{
+  margin:0 2.4rem .35rem 0;
+  font-family:var(--font-head); font-weight:700; text-transform:none;
+  font-size:1.6rem; line-height:1.1; letter-spacing:-.01em; color:var(--txt);
+}
+.guia__bajada{ margin:0 0 1.15rem; font-size:.92rem; line-height:1.5; color:var(--txt-soft); }
+
+.guia__campo{ display:block; margin-bottom:.85rem; }
+.guia__campo > span{
+  display:block; margin-bottom:.32rem;
+  font-size:.85rem; font-weight:600; color:var(--txt);
+}
+.guia__campo input,
+.guia__campo select{
+  width:100%; min-height:48px; padding:.6rem .75rem;
+  font-family:var(--font-body); font-size:16px;   /* 16px: el iPhone no hace zoom al tocar el campo */
+  color:var(--txt); background:var(--paper);
+  border:1px solid var(--line); border-radius:var(--radius-sm);
+}
+.guia__campo input:focus,
+.guia__campo select:focus{
+  outline:none; border-color:var(--red); box-shadow:0 0 0 3px var(--red-soft);
+}
+.guia__campo [aria-invalid="true"]{ border-color:var(--red); }
+
+.guia__error{ margin:-.4rem 0 .75rem; font-size:.85rem; color:var(--red-dark); }
+.guia__enviar{ width:100%; min-height:48px; justify-content:center; margin-top:.25rem; }
+
+.guia__rescate p{ margin:0 0 .8rem; font-size:.9rem; color:var(--txt-soft); }
+.guia__rescate .guia__enviar{ margin-top:0; }
+
+/* En celular es una hoja que sube desde abajo, al alcance del pulgar */
+@media (max-width:640px){
+  .guia{ align-items:flex-end; padding:0; }
+  .guia__caja{
+    width:100%; max-height:92vh; max-height:92dvh;
+    border-radius:var(--radius) var(--radius) 0 0;
+    padding:1.4rem 1.1rem calc(1.2rem + env(safe-area-inset-bottom, 0px));
+    transform:translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .guia, .guia.is-open, .guia__caja, .guia.is-open .guia__caja{ transition:none; }
+  .guia__caja{ transform:none; }
+}
+
 /* ── 26. Respuesta al apretar y preferencias de transparencia (G-017) ──
    La reaccion va en el pointer-down, no en el click: en el celular no hay hover
    y sin esto el boton parece muerto hasta que se abre el panel. Va al final para
    ganar en cascada a los :hover de cada boton. */
-.btn:active, .chat-lanzador:active, .wsp-float:active{
+.btn:active, .chat-lanzador:active, .wsp-float:active, .guia__enviar:active{
   transform:scale(.97); transition-duration:.08s;
 }
 @media (prefers-reduced-transparency:reduce){
