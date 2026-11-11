@@ -459,6 +459,188 @@
     });
   });
 
+  /* ── 12. Paso previo a WhatsApp, SOLO para Maximo rendimiento (A-027) ── */
+  /* Los que llegan desde Maximo rendimiento (eys=m) tocan el boton de WhatsApp sin querer y
+     mandan el mensaje armado sin una consulta real. Google cuenta cada toque como conversion
+     y aprende a traer mas gente asi. Para ESAS visitas, antes de abrir WhatsApp se piden el
+     trabajo y la unidad, y la conversion se cuenta recien cuando WhatsApp se abre de verdad.
+     Busqueda (B1-B4), organico y quien no tiene JavaScript siguen igual: un toque y a WhatsApp.
+     Base: el panel de G-007 (commits 5d64cc0 y 61602c9), sin la parte de horario. */
+  if (ES_ANUNCIO && CODIGO === 'M') (function () {
+    /* Los mismos 11 motivos del desplegable "Motivo" del formulario (#contactForm). */
+    var TRABAJOS = [
+      'Consulta general',
+      'Colocación de 3er eje',
+      'Escalabilidad / modificación de chasis',
+      'Cambio de chasis a tractor',
+      'Carrocerías y semirremolques',
+      'Sistema de freno ABS',
+      'Fabricación de ejes autodireccionales',
+      'Ejes trunnion / carretones',
+      'Suspensiones neumáticas',
+      'Trenes rodantes agrícolas',
+      'Repuestos y componentes'
+    ];
+    var SALUDO_GENERICO = 'Hola, quiero consultar por un trabajo en mi unidad.';
+    var panel = null, previo = null;
+
+    function esChat(href) {
+      if (href.indexOf('wa.me/c/') !== -1) return false;           // el catalogo es una vidriera, no un chat
+      return href.indexOf('wa.me/') !== -1 || href.indexOf('api.whatsapp.com/') !== -1;
+    }
+
+    /* Primer renglon del mensaje del enlace, sin la marca (anuncio M) que le pego marcarEnlace:
+       la marca se vuelve a poner una sola vez al final del mensaje completo. */
+    function saludoDe(href) {
+      var m = /[?&]text=([^&]*)/.exec(href), t = '';
+      if (m) { try { t = decodeURIComponent(m[1].replace(/\+/g, ' ')); } catch (err) { t = ''; } }
+      t = (t.split('\n')[0] || '').replace(' ' + TAG_ORIGEN, '').trim();
+      return t || SALUDO_GENERICO;
+    }
+    /* Las paginas internas ya nombran el servicio ("...consultar por la colocacion de un tercer
+       eje."): ahi no se pregunta el trabajo. El generico, la visita o un enlace sin texto, si. */
+    function pideTrabajo(saludo) {
+      return !/consultar por/i.test(saludo) || /un trabajo en mi unidad/i.test(saludo);
+    }
+
+    function cerrar() {
+      if (!panel) return;
+      var p = panel;
+      panel = null;
+      p.classList.remove('is-open');
+      document.body.classList.remove('no-scroll');
+      setTimeout(function () { if (p.parentNode) p.parentNode.removeChild(p); }, reduced ? 0 : 200);
+      if (previo && previo.focus) previo.focus();
+    }
+
+    /* Si el navegador bloquea la ventana (pasa entrando desde apps), el panel queda abierto con
+       un enlace de verdad. Ese enlace lo cuenta el oyente de medicion de abajo, una sola vez. */
+    function abrirWhatsapp(mensaje) {
+      var url = 'https://wa.me/' + WSP_NUMBER + '?text=' + encodeURIComponent(mensaje);
+      var v = window.open(url, '_blank', 'noopener');
+      if (v) {
+        if (window.eysConversion) window.eysConversion('whatsapp');
+        cerrar();
+        return;
+      }
+      $('.guia__form', panel).hidden = true;
+      var rescate = document.createElement('div');
+      rescate.className = 'guia__rescate';
+      var p = document.createElement('p');
+      p.textContent = 'Tu navegador no dejó abrir WhatsApp solo. Tocá acá y se abre con el mensaje ya escrito:';
+      var a = document.createElement('a');
+      a.className = 'btn btn--wsp guia__enviar';
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'Abrir WhatsApp';
+      a.addEventListener('click', function () { setTimeout(cerrar, 400); });
+      rescate.appendChild(p);
+      rescate.appendChild(a);
+      $('.guia__caja', panel).appendChild(rescate);
+      a.focus();
+    }
+
+    function abrirPanel(a) {
+      if (panel) return;
+      previo = a;
+      var saludo = saludoDe(a.getAttribute('href') || '');
+      var conSel = pideTrabajo(saludo);
+
+      var opciones = '<option value="" selected disabled>Elegí una opción</option>';
+      for (var i = 0; i < TRABAJOS.length; i++) {
+        opciones += '<option value="' + TRABAJOS[i] + '">' + TRABAJOS[i] + '</option>';
+      }
+
+      panel = document.createElement('div');
+      panel.className = 'guia';
+      panel.setAttribute('role', 'dialog');
+      panel.setAttribute('aria-modal', 'true');
+      panel.setAttribute('aria-labelledby', 'guia-titulo');
+      panel.setAttribute('aria-describedby', 'guia-bajada');
+      panel.innerHTML =
+        '<div class="guia__fondo" data-cerrar></div>' +
+        '<div class="guia__caja">' +
+          '<button type="button" class="guia__x" data-cerrar aria-label="Cerrar">&times;</button>' +
+          '<h2 class="guia__titulo" id="guia-titulo">Contanos qué necesitás</h2>' +
+          '<p class="guia__bajada" id="guia-bajada">Así te respondemos con lo que buscás. ' +
+            'El plazo y el presupuesto te los confirmamos viendo la unidad.</p>' +
+          '<form class="guia__form" novalidate>' +
+            (conSel
+              ? '<label class="guia__campo"><span>Trabajo</span>' +
+                  '<select name="trabajo" required aria-describedby="guia-error-trabajo">' + opciones + '</select></label>' +
+                '<p class="guia__error" id="guia-error-trabajo" hidden>Elegí el trabajo que necesitás.</p>'
+              : '') +
+            '<label class="guia__campo"><span>Tu unidad (marca, modelo y año)</span>' +
+              '<input name="unidad" type="text" autocomplete="off" required minlength="3" ' +
+              'placeholder="Ej.: Scania R450 2019" aria-describedby="guia-error-unidad"></label>' +
+            '<p class="guia__error" id="guia-error-unidad" hidden>Escribinos al menos la marca y el modelo.</p>' +
+            '<button type="submit" class="btn btn--wsp guia__enviar">Abrir WhatsApp</button>' +
+          '</form>' +
+        '</div>';
+
+      document.body.appendChild(panel);
+      document.body.classList.add('no-scroll');
+      requestAnimationFrame(function () { if (panel) panel.classList.add('is-open'); });
+
+      var form  = $('.guia__form', panel);
+      var sel   = $('[name="trabajo"]', panel);
+      var campo = $('[name="unidad"]', panel);
+      var errSel = $('#guia-error-trabajo', panel);
+      var errUni = $('#guia-error-unidad', panel);
+      var primero = sel || campo;
+      // Sin esperar a la animacion: el foco entra apenas se abre (el panel ya esta en el DOM)
+      primero.focus({ preventScroll: true });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var unidad = (campo.value || '').trim();
+        var malSel = sel && !sel.value;
+        var malUni = unidad.length < 3;
+        if (errSel) errSel.hidden = !malSel;
+        errUni.hidden = !malUni;
+        if (sel) sel.setAttribute('aria-invalid', malSel ? 'true' : 'false');
+        campo.setAttribute('aria-invalid', malUni ? 'true' : 'false');
+        if (malSel) { sel.focus(); return; }
+        if (malUni) { campo.focus(); return; }
+
+        var lineas = [saludo];
+        if (sel) lineas.push('Trabajo: ' + sel.value);
+        lineas.push('Unidad: ' + unidad);
+        abrirWhatsapp(lineas.join('\n') + ' ' + TAG_ORIGEN);
+      });
+      if (sel) sel.addEventListener('change', function () { errSel.hidden = true; sel.removeAttribute('aria-invalid'); });
+      campo.addEventListener('input', function () { errUni.hidden = true; campo.removeAttribute('aria-invalid'); });
+
+      $$('[data-cerrar]', panel).forEach(function (el) { el.addEventListener('click', cerrar); });
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (!panel) return;
+      if (e.key === 'Escape') { e.preventDefault(); cerrar(); return; }
+      if (e.key !== 'Tab') return;
+      // El foco no se escapa del panel mientras esta abierto (aria-modal)
+      var f = $$('button, select, input, a[href]', panel).filter(function (el) {
+        return !el.disabled && el.offsetParent !== null;
+      });
+      if (!f.length) return;
+      var ini = f[0], fin = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === ini) { e.preventDefault(); fin.focus(); }
+      else if (!e.shiftKey && document.activeElement === fin) { e.preventDefault(); ini.focus(); }
+    });
+
+    /* Se registra ANTES que el oyente de medicion (al final del archivo), asi que
+       stopImmediatePropagation lo frena: el toque que abre el panel NO cuenta conversion. */
+    document.addEventListener('click', function (e) {
+      var a = (e.target && e.target.closest) ? e.target.closest('a[href]') : null;
+      if (!a || a.closest('.guia')) return;
+      if (!esChat(a.getAttribute('href') || '')) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      abrirPanel(a);
+    }, true);
+  })();
+
   /* ── 13. Asistente del sitio ───────────────────── */
   /* El taller atiende lunes a viernes de 8 a 15. Todas las tardes, las noches y
      los fines de semana el sitio recibe visitas y no hay nadie del otro lado.
