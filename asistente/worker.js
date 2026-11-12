@@ -211,6 +211,27 @@ export default {
     const mensaje = String(cuerpo.message || '').slice(0, 1000).trim();
     if (!mensaje) return respuesta({ error: 'vacio' }, 400, origen);
 
+    /* Tope de 5 preguntas por visita (A-029), del lado de Cloudflare. El sitio manda
+       un numero de visita al azar (sesion) y aca se cuenta en el espacio REFS (KV):
+       5 por visita (12 h) y, para quien invente visitas nuevas, 25 por dia por IP.
+       Se guarda solo el contador, nunca el texto. Sin REFS, quedan los topes de arriba. */
+    if (env.REFS && !cuerpoDiag) {
+      const sesion = /^[A-Za-z0-9]{8,32}$/.test(String(cuerpo.sesion || '')) ? cuerpo.sesion : '';
+      const kS = 'chat:s:' + sesion, kI = 'chat:ip:' + ip;
+      const [vS, vI] = await Promise.all([sesion ? env.REFS.get(kS) : null, env.REFS.get(kI)]);
+      const nS = parseInt(vS, 10) || 0, nI = parseInt(vI, 10) || 0;
+      if ((sesion && nS >= 5) || nI >= 25) {
+        return respuesta({
+          reply: 'Llegaste al máximo de 5 preguntas por visita. Para seguir, escribinos por ' +
+                 'WhatsApp y te respondemos apenas abrimos (lunes a viernes de 8 a 15).',
+          tope: true
+        }, 200, origen);
+      }
+      const escrituras = [env.REFS.put(kI, String(nI + 1), { expirationTtl: 86400 })];
+      if (sesion) escrituras.push(env.REFS.put(kS, String(nS + 1), { expirationTtl: 43200 }));
+      await Promise.all(escrituras);
+    }
+
     /* Solo los ultimos 6 turnos: alcanza para que siga el hilo y no infla el gasto. */
     const historia = Array.isArray(cuerpo.history) ? cuerpo.history.slice(-6) : [];
     const contents = historia
