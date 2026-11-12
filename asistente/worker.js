@@ -150,6 +150,11 @@ export default {
        que es lo que se le sube a Google Ads como "Consulta calificada".
        Necesita el espacio KV vinculado con el nombre REFS (ver arriba). */
     const ruta = new URL(request.url).pathname.replace(/\/+$/, '');
+    /* Ultimas fallas del asistente (fecha y motivo de cada modelo, sin textos). */
+    if (ruta === '/fallas' && request.method === 'GET') {
+      const v = env.REFS ? await env.REFS.get('fallas') : null;
+      return respuesta(v ? JSON.parse(v) : [], 200);
+    }
     if (ruta === '/ref') {
       if (!env.REFS) return respuesta({ ok: false, error: 'sin-espacio-REFS' }, 200, permitido ? origen : '');
       if (request.method === 'GET') {
@@ -338,27 +343,68 @@ export default {
     /* Cuanto esta dispuesto a esperar el visitante, en total. */
     const limite = Date.now() + 20000;
 
-    for (const modelo of MODELOS) {
-      if (Date.now() >= limite) break;
+    /* Por que fallo cada modelo (estado y segundos), para poder depurar desde afuera.
+       No lleva la clave ni el texto del visitante. */
+    const motivos = [];
+
+    async function intentar(modelo) {
+      let r = await pedirle(modelo, true);
+      if (r.status === 400) r = await pedirle(modelo, false);
+      if (!r.ok) throw String(r.status);
+      const data = await r.json();
+      const texto = data &&
+        data.candidates && data.candidates[0] &&
+        data.candidates[0].content && data.candidates[0].content.parts &&
+        data.candidates[0].content.parts[0] &&
+        data.candidates[0].content.parts[0].text;
+      if (texto) return String(texto).trim();
+      throw 'sin texto (' + ((data && data.candidates && data.candidates[0] && data.candidates[0].finishReason) ||
+        (data && data.promptFeedback && data.promptFeedback.blockReason) || '?') + ')';
+    }
+
+    /* A-030: cuando Google se pone lento, el primer modelo podia comerse los 20 s
+       enteros y el visitante quedaba sin respuesta. Ahora, si un modelo no contesto en
+       7 s, se larga el siguiente EN PARALELO (sin cortar al primero) y gana el que
+       conteste antes. Si uno falla, se pasa al siguiente en el acto. */
+    const ESPERA_ANTES_DEL_SIGUIENTE = 7000;
+    const texto = await new Promise(resolve => {
+      let idx = 0, pendientes = 0, listo = false;
+      const terminar = t => { if (!listo) { listo = true; resolve(t); } };
+      const agotado = () => idx >= MODELOS.length || Date.now() >= limite;
+      function lanzar() {
+        if (listo) return;
+        if (agotado()) { if (!pendientes) terminar(null); return; }
+        const modelo = MODELOS[idx++], t0 = Date.now();
+        pendientes++;
+        const reloj = setTimeout(lanzar, ESPERA_ANTES_DEL_SIGUIENTE);
+        intentar(modelo).then(terminar, e => {
+          clearTimeout(reloj);
+          motivos.push(modelo + ': ' + String(e && e.name || e).slice(0, 40) + ' en ' + (Date.now() - t0) + ' ms');
+        }).finally(() => {
+          pendientes--;
+          if (!listo) lanzar();
+        });
+      }
+      lanzar();
+    });
+    if (texto) return respuesta({ reply: texto }, 200, origen);
+
+    /* Se anotan las ultimas 30 fallas (solo fecha y motivos) para revisarlas en
+       .../fallas. Nunca el texto del visitante. */
+    if (env.REFS) {
       try {
-        let r = await pedirle(modelo, true);
-        if (r.status === 400) r = await pedirle(modelo, false);
-        if (!r.ok) continue;
-        const data = await r.json();
-        const texto = data &&
-          data.candidates && data.candidates[0] &&
-          data.candidates[0].content && data.candidates[0].content.parts &&
-          data.candidates[0].content.parts[0] &&
-          data.candidates[0].content.parts[0].text;
-        if (texto) return respuesta({ reply: String(texto).trim() }, 200, origen);
-      } catch (e) { /* probamos el siguiente modelo */ }
+        const previas = JSON.parse((await env.REFS.get('fallas')) || '[]');
+        previas.unshift({ fecha: new Date().toISOString(), motivos: motivos });
+        await env.REFS.put('fallas', JSON.stringify(previas.slice(0, 30)), { expirationTtl: 30 * 86400 });
+      } catch (e) {}
     }
 
     /* Nunca mostramos el error crudo: mensaje humano y camino alternativo. */
     return respuesta({
       reply: 'Ahora mismo no puedo contestarte. Escribinos por WhatsApp al ' +
              '0341 685-5469 y te respondemos en cuanto abrimos (lunes a viernes de 8 a 15).',
-      falla: true
+      falla: true,
+      motivos: motivos
     }, 200, origen);
   }
 };
