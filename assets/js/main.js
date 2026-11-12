@@ -723,6 +723,17 @@
       usadasMem = usadas() + 1;
       try { sessionStorage.setItem('eys-chat-n', String(usadasMem)); } catch (e) {}
     }
+    /* Numero de visita al azar: Cloudflare cuenta con el las 5 preguntas (A-029). */
+    var SESION = '';
+    try {
+      SESION = sessionStorage.getItem('eys-chat-id') || '';
+      if (!SESION && window.crypto && crypto.getRandomValues) {
+        var bytes = new Uint8Array(8);
+        crypto.getRandomValues(bytes);
+        for (var j = 0; j < 8; j++) SESION += ('0' + bytes[j].toString(16)).slice(-2);
+        sessionStorage.setItem('eys-chat-id', SESION);
+      }
+    } catch (e) {}
     function cerrarEntrada() {
       if (!caja) return;
       var f = $('.chat__form', caja), s = $('.chat__sugeridas', caja);
@@ -771,11 +782,16 @@
       fetch(CEREBRO, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: texto, history: historia.slice(0, -1) })
+        body: JSON.stringify({ message: texto, history: historia.slice(0, -1), sesion: SESION })
       })
         .then(function (r) { return r.json(); })
         .then(function (d) {
           espera.remove();
+          if (d && d.tope) {            // Cloudflare dice que ya llego al tope: el aviso lo pone cerrarEntrada
+            usadasMem = TOPE;
+            try { sessionStorage.setItem('eys-chat-n', String(TOPE)); } catch (e) {}
+            return;
+          }
           var t = (d && d.reply) ||
                   'No pude contestarte ahora. Escribinos por WhatsApp y te respondemos ' +
                   'apenas abrimos (lunes a viernes de 8 a 15).';
