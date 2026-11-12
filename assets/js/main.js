@@ -707,6 +707,30 @@
 
     var caja = null, lista = null, entrada = null, historia = [], esperando = false;
 
+    /* Tope de 5 preguntas por visita (A-029, pedido de Leandro). Se cuenta en
+       sessionStorage, asi que vale para toda la visita aunque se cierre el chat o se
+       cambie de pagina; al cerrar el navegador vuelve a cero. Al llegar al tope, el
+       chat deja de aceptar preguntas y queda el enlace de WhatsApp. */
+    var TOPE = 5, usadasMem = 0;
+    var AVISO_TOPE = 'Llegaste al máximo de 5 preguntas por visita. Para seguir, ' +
+                     'escribinos por WhatsApp y te respondemos apenas abrimos ' +
+                     '(lunes a viernes de 8 a 15).';
+    function usadas() {
+      try { return parseInt(sessionStorage.getItem('eys-chat-n'), 10) || 0; }
+      catch (e) { return usadasMem; }
+    }
+    function sumarUsada() {
+      usadasMem = usadas() + 1;
+      try { sessionStorage.setItem('eys-chat-n', String(usadasMem)); } catch (e) {}
+    }
+    function cerrarEntrada() {
+      if (!caja) return;
+      var f = $('.chat__form', caja), s = $('.chat__sugeridas', caja);
+      if (f) f.remove();
+      if (s) s.remove();
+      burbuja('asistente', AVISO_TOPE);
+    }
+
     function nodoTexto(t) { return document.createTextNode(t); }
 
     function burbuja(quien, texto) {
@@ -734,6 +758,8 @@
 
     function preguntar(texto) {
       if (esperando || !texto) return;
+      if (usadas() >= TOPE) { cerrarEntrada(); return; }
+      sumarUsada();
       esperando = true;
       var sug = $('.chat__sugeridas', caja);
       if (sug) sug.remove();
@@ -762,7 +788,12 @@
             'Se me cortó la conexión. Escribinos por WhatsApp al 0341 685-5469 y ' +
             'te contestamos apenas abrimos.');
         })
-        .then(function () { esperando = false; entrada.focus(); });
+        .then(function () {
+          esperando = false;
+          if (!caja) return;
+          if (usadas() >= TOPE) cerrarEntrada();
+          else entrada.focus();
+        });
     }
 
     function cerrarChat() {
@@ -822,7 +853,8 @@
 
       var lanz = $('.chat-lanzador');
       if (lanz) lanz.setAttribute('aria-expanded', 'true');
-      setTimeout(function () { entrada.focus(); }, reduced ? 0 : 220);
+      if (usadas() >= TOPE) { cerrarEntrada(); return; }
+      setTimeout(function () { if (caja) entrada.focus(); }, reduced ? 0 : 220);
     }
 
     /* El boton flotante se arma desde aca: los 11 HTML no se tocan. */
