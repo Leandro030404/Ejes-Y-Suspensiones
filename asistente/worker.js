@@ -19,6 +19,12 @@
       Settings → Bindings → Add → KV namespace → Variable name: REFS,
       KV namespace: eys-refs → Deploy. Sin esto el asistente anda igual;
       solo no se guardan los códigos.
+   7. (A-032, seguridad) Settings → Variables and Secrets → Add → tipo Secret
+      Nombre: CLAVE_ADMIN   Valor: una frase larga inventada (12 letras o más)
+      → Deploy. Esa clave es la que deja consultar los códigos de referencia
+      (.../ref?c=AAAA&k=LA-CLAVE), las fallas (.../fallas?k=LA-CLAVE) y el modo
+      diagnóstico. SIN esta clave cargada, esas tres cosas quedan cerradas para
+      todo el mundo (a propósito); el asistente anda igual.
 
    NO se toca el DNS del dominio. El sitio sigue en GitHub Pages.
    ═══════════════════════════════════════════════════════════════════ */
@@ -124,6 +130,29 @@ function respuesta(obj, estado, origen) {
   });
 }
 
+/* ── Clave de administracion (A-032) ─────────────────────────────────
+   El encabezado Origin lo puede inventar cualquiera que no use un navegador,
+   asi que NO sirve para proteger nada privado. Lo que es solo para el taller
+   (consultar codigos de referencia, ver fallas, modo diagnostico) pide esta
+   clave, que vive como secreto en Cloudflare. Sin clave cargada: cerrado. */
+function iguales(a, b) {
+  if (a.length !== b.length) return false;
+  let d = 0;
+  for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return d === 0;
+}
+
+function esAdmin(request, env, enCuerpo) {
+  const clave = String(env.CLAVE_ADMIN || '');
+  if (clave.length < 12) return false;
+  const dada = String(request.headers.get('X-Clave') ||
+    new URL(request.url).searchParams.get('k') || enCuerpo || '');
+  return iguales(dada, clave);
+}
+
+/* Tope de tamano de lo que se acepta leer: un mensaje real no pasa de unos KB. */
+const MAX_CUERPO = 20000;
+
 export default {
   async fetch(request, env) {
     const origen = request.headers.get('Origin') || '';
@@ -151,8 +180,18 @@ export default {
        Necesita el espacio KV vinculado con el nombre REFS (ver arriba). */
     const ruta = new URL(request.url).pathname.replace(/\/+$/, '');
     /* Ultimas fallas del asistente (fecha y motivo de cada modelo, sin textos). */
+    const ipAdm = request.headers.get('CF-Connecting-IP') || 'sin-ip';
+    /* Lo que sigue es solo para el taller: pide la clave (A-032). Antes estaba
+       abierto, y cualquiera podia recorrer todos los codigos o gastar el cupo
+       diario de lecturas hasta dejar mudo al asistente. */
+    const pideAdmin = request.method === 'GET' && (ruta === '/fallas' || ruta === '/ref');
+    if (pideAdmin) {
+      if (!contar('adm:' + ipAdm, MINUTO, 10)) return respuesta({ error: 'tope' }, 429);
+      if (!esAdmin(request, env)) return respuesta({ error: 'clave' }, 403);
+    }
     if (ruta === '/fallas' && request.method === 'GET') {
-      const v = env.REFS ? await env.REFS.get('fallas') : null;
+      let v = null;
+      try { v = env.REFS ? await env.REFS.get('fallas') : null; } catch (e) {}
       return respuesta(v ? JSON.parse(v) : [], 200);
     }
     if (ruta === '/ref') {
@@ -161,24 +200,35 @@ export default {
         const pedidos = (new URL(request.url).searchParams.get('c') || '')
           .toUpperCase().split(/[\s,]+/).filter(c => /^[A-Z2-9]{4}$/.test(c)).slice(0, 50);
         const salida = {};
-        for (const c of pedidos) {
-          const v = await env.REFS.get('ref:' + c);
-          salida[c] = v ? JSON.parse(v) : null;
-        }
+        try {
+          for (const c of pedidos) {
+            const v = await env.REFS.get('ref:' + c);
+            salida[c] = v ? JSON.parse(v) : null;
+          }
+        } catch (e) { return respuesta({ error: 'almacen' }, 503); }
         return respuesta(salida, 200);
       }
       if (request.method !== 'POST' || !permitido) return respuesta({ ok: false }, 403);
-      const ipRef = request.headers.get('CF-Connecting-IP') || 'sin-ip';
-      if (!contar('r:' + ipRef, DIA, 20)) return respuesta({ ok: false, error: 'tope' }, 429, origen);
+      if (!contar('r:' + ipAdm, DIA, 20)) return respuesta({ ok: false, error: 'tope' }, 429, origen);
       let d;
-      try { d = JSON.parse(await request.text()); } catch (e) { d = null; }
-      if (!d || !/^[A-Z2-9]{4}$/.test(d.ref || '') || !/^(gclid|gbraid|wbraid)$/.test(d.tipo || '') ||
-          !/^[A-Za-z0-9_\-]{10,200}$/.test(d.id || '') || !/^(B[1-4]|M)?$/.test(d.campana || '')) {
+      try {
+        const crudo = await request.text();
+        d = crudo.length <= 1000 ? JSON.parse(crudo) : null;
+      } catch (e) { d = null; }
+      if (!d || typeof d !== 'object' ||
+          !/^[A-Z2-9]{4}$/.test(String(d.ref || '')) || !/^(gclid|gbraid|wbraid)$/.test(String(d.tipo || '')) ||
+          !/^[A-Za-z0-9_\-]{10,200}$/.test(String(d.id || '')) || !/^(B[1-4]|M)?$/.test(String(d.campana || ''))) {
         return respuesta({ ok: false, error: 'datos' }, 400, origen);
       }
-      await env.REFS.put('ref:' + d.ref, JSON.stringify({
-        tipo: d.tipo, id: d.id, campana: d.campana, fecha: new Date().toISOString()
-      }), { expirationTtl: 90 * 86400 });
+      /* El primero que llega, queda: un pedido falso no puede pisar el codigo de
+         un cliente real. Y si el almacen falla (cupo diario agotado), no se rompe nada. */
+      try {
+        if (!(await env.REFS.get('ref:' + d.ref))) {
+          await env.REFS.put('ref:' + d.ref, JSON.stringify({
+            tipo: String(d.tipo), id: String(d.id), campana: String(d.campana || ''), fecha: new Date().toISOString()
+          }), { expirationTtl: 90 * 86400 });
+        }
+      } catch (e) { return respuesta({ ok: false, error: 'almacen' }, 200, origen); }
       return respuesta({ ok: true }, 200, origen);
     }
 
@@ -208,11 +258,25 @@ export default {
       }, 200, origen);
     }
 
+    if (parseInt(request.headers.get('Content-Length') || '0', 10) > MAX_CUERPO) {
+      return respuesta({ error: 'largo' }, 413, origen);
+    }
     let cuerpo;
-    try { cuerpo = await request.json(); }
-    catch (e) { return respuesta({ error: 'json' }, 400, origen); }
+    try {
+      const crudo = await request.text();
+      if (crudo.length > MAX_CUERPO) return respuesta({ error: 'largo' }, 413, origen);
+      cuerpo = JSON.parse(crudo);
+    } catch (e) { return respuesta({ error: 'json' }, 400, origen); }
+    if (!cuerpo || typeof cuerpo !== 'object' || Array.isArray(cuerpo)) {
+      return respuesta({ error: 'json' }, 400, origen);
+    }
 
-    const cuerpoDiag = cuerpo && cuerpo.diagnostico === true;
+    /* El modo diagnostico hace 5 pedidos a Google por cada llamada y se saltea el
+       tope por visita: solo con la clave de administracion (A-032). */
+    const cuerpoDiag = cuerpo.diagnostico === true;
+    if (cuerpoDiag && !esAdmin(request, env, cuerpo.clave)) {
+      return respuesta({ error: 'clave' }, 403, origen);
+    }
     const mensaje = String(cuerpo.message || '').slice(0, 1000).trim();
     if (!mensaje) return respuesta({ error: 'vacio' }, 400, origen);
 
@@ -221,20 +285,29 @@ export default {
        5 por visita (12 h) y, para quien invente visitas nuevas, 25 por dia por IP.
        Se guarda solo el contador, nunca el texto. Sin REFS, quedan los topes de arriba. */
     if (env.REFS && !cuerpoDiag) {
-      const sesion = /^[A-Za-z0-9]{8,32}$/.test(String(cuerpo.sesion || '')) ? cuerpo.sesion : '';
+      const sesion = /^[A-Za-z0-9]{8,32}$/.test(String(cuerpo.sesion || '')) ? String(cuerpo.sesion) : '';
       const kS = 'chat:s:' + sesion, kI = 'chat:ip:' + ip;
-      const [vS, vI] = await Promise.all([sesion ? env.REFS.get(kS) : null, env.REFS.get(kI)]);
-      const nS = parseInt(vS, 10) || 0, nI = parseInt(vI, 10) || 0;
-      if ((sesion && nS >= 5) || nI >= 25) {
+      let llego = false;
+      /* Si el almacen falla (por ejemplo, alguien agoto el cupo diario de escrituras),
+         el asistente NO se cae: siguen valiendo los topes en memoria de mas arriba. */
+      try {
+        const [vS, vI] = await Promise.all([sesion ? env.REFS.get(kS) : null, env.REFS.get(kI)]);
+        const nS = parseInt(vS, 10) || 0, nI = parseInt(vI, 10) || 0;
+        if ((sesion && nS >= 5) || nI >= 25) {
+          llego = true;
+        } else {
+          const escrituras = [env.REFS.put(kI, String(nI + 1), { expirationTtl: 86400 })];
+          if (sesion) escrituras.push(env.REFS.put(kS, String(nS + 1), { expirationTtl: 43200 }));
+          await Promise.all(escrituras);
+        }
+      } catch (e) {}
+      if (llego) {
         return respuesta({
           reply: 'Llegaste al máximo de 5 preguntas por visita. Para seguir, escribinos por ' +
                  'WhatsApp y te respondemos apenas abrimos (lunes a viernes de 8 a 15).',
           tope: true
         }, 200, origen);
       }
-      const escrituras = [env.REFS.put(kI, String(nI + 1), { expirationTtl: 86400 })];
-      if (sesion) escrituras.push(env.REFS.put(kS, String(nS + 1), { expirationTtl: 43200 }));
-      await Promise.all(escrituras);
     }
 
     /* Solo los ultimos 6 turnos: alcanza para que siga el hilo y no infla el gasto. */
@@ -267,7 +340,8 @@ export default {
 
     /* Modo diagnostico: le pregunta a Google que modelos tiene disponibles esta
        clave y devuelve el error tal cual si algo falla. NUNCA devuelve la clave.
-       Se usa solo para depurar desde afuera; un visitante nunca pasa por aca. */
+       Se usa solo para depurar desde afuera, y pide la clave de administracion:
+       {"message":"x","diagnostico":true,"clave":"LA-CLAVE"}. */
     if (cuerpoDiag) {
       const salida = { modelos: null, errores: [] };
       try {
@@ -403,8 +477,7 @@ export default {
     return respuesta({
       reply: 'Ahora mismo no puedo contestarte. Escribinos por WhatsApp al ' +
              '0341 685-5469 y te respondemos en cuanto abrimos (lunes a viernes de 8 a 15).',
-      falla: true,
-      motivos: motivos
+      falla: true      /* los motivos quedan solo en /fallas (con clave), no a la vista */
     }, 200, origen);
   }
 };
