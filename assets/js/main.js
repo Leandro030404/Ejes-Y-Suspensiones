@@ -495,7 +495,7 @@
     });
   });
 
-  /* ── 12. Paso previo a WhatsApp, SOLO para Maximo rendimiento (A-027) ── */
+  /* ── 12. Paso previo a WhatsApp, SOLO para Maximo rendimiento (A-027; opcional desde A-033) ── */
   /* Los que llegan desde Maximo rendimiento (eys=m) tocan el boton de WhatsApp sin querer y
      mandan el mensaje armado sin una consulta real. Google cuenta cada toque como conversion
      y aprende a traer mas gente asi. Para ESAS visitas, antes de abrir WhatsApp se piden el
@@ -612,6 +612,10 @@
               'placeholder="Ej.: Scania R450 2019" aria-describedby="guia-error-unidad"></label>' +
             '<p class="guia__error" id="guia-error-unidad" hidden>Escribinos al menos la marca y el modelo.</p>' +
             '<button type="submit" class="btn btn--wsp guia__enviar">Abrir WhatsApp</button>' +
+            /* A-033: el panel es OPCIONAL. En 5 dias (11-15/11) hubo 1.031 clics y solo 3
+               paneles completos: frenaba tambien a gente real. Quien no quiere completar
+               nada, escribe directo. Es un enlace de verdad: lo cuenta el oyente de medicion. */
+            '<a class="guia__directo" target="_blank" rel="noopener">Prefiero escribir directo por WhatsApp</a>' +
           '</form>' +
         '</div>';
 
@@ -625,6 +629,9 @@
       var errSel = $('#guia-error-trabajo', panel);
       var errUni = $('#guia-error-unidad', panel);
       var primero = sel || campo;
+      var directo = $('.guia__directo', panel);
+      directo.href = 'https://wa.me/' + WSP_NUMBER + '?text=' + encodeURIComponent(saludo + ' ' + TAG_ORIGEN);
+      directo.addEventListener('click', function () { setTimeout(cerrar, 400); });
       // Sin esperar a la animacion: el foco entra apenas se abre (el panel ya esta en el DOM)
       primero.focus({ preventScroll: true });
 

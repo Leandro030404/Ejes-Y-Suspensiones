@@ -1476,6 +1476,16 @@ html:not(.js) .hero__title .line > span{ transform:none; animation:none; }
 .guia__error{ margin:-.4rem 0 .75rem; font-size:.85rem; color:var(--red-dark); }
 .guia__enviar{ width:100%; min-height:48px; justify-content:center; margin-top:.25rem; }
 
+/* A-033: salida directa a WhatsApp sin completar el panel. Enlace de texto, con alto de toque comodo. */
+.guia__directo{
+  display:flex; align-items:center; justify-content:center;
+  min-height:48px; margin-top:.35rem;
+  font-size:.95rem; font-weight:600; color:var(--txt-soft);
+  text-decoration:underline; text-underline-offset:3px;
+}
+@media (hover:hover) and (pointer:fine){ .guia__directo:hover{ color:var(--txt); } }
+.guia__directo:focus-visible{ outline:2px solid var(--red); outline-offset:2px; border-radius:4px; }
+
 .guia__rescate p{ margin:0 0 .8rem; font-size:.9rem; color:var(--txt-soft); }
 .guia__rescate .guia__enviar{ margin-top:0; }
 
